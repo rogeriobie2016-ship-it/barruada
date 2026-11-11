@@ -1,0 +1,19 @@
+---
+// Endereço antigo: leva para Quem somos, respeitando BASE_PATH.
+import { rota } from '../lib/dados.ts';
+const destino = rota('/quem-somos/');
+const atraso = '0;url=' + destino;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <title>Quem somos | Barruada</title>
+    <meta http-equiv="refresh" content={atraso} />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p><a href={destino}>Esta página mudou para Quem somos.</a></p>
+  </body>
+</html>
