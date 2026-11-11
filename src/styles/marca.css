@@ -1,0 +1,278 @@
+/*
+  Riqueza da marca: texturas, faixas de cor, capas ilustradas, medalhões, recortes de papel.
+  Tudo com as variáveis de tokens.css. Nenhuma cor fixa aqui.
+*/
+
+/* Grão: textura de impressão sobre cor chapada. */
+.grao {
+  position: relative;
+  isolation: isolate;
+}
+.grao::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: var(--forca-grao, 0.5);
+}
+
+/* Retícula: pontos de meio-tom. */
+.reticula {
+  background-image: radial-gradient(currentColor 1.1px, transparent 1.5px);
+  background-size: 8px 8px;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/* Faixas de cor: cada trilho e cada cabeçalho escolhe um tom. */
+.faixa {
+  background: var(--faixa-fundo, transparent);
+  color: var(--texto);
+}
+.faixa--noite { --faixa-fundo: var(--anil-noite); --il-m: var(--sol); --il-a: var(--barro); --il-p: var(--anil-noite); }
+.faixa--anil { --faixa-fundo: var(--anil); --texto-suave: var(--papel); --fundo-alto: var(--anil-noite); --il-m: var(--sol); --il-a: var(--papel); --il-p: var(--anil); }
+.faixa--barro { --faixa-fundo: var(--barro); --texto-suave: var(--papel); --linha: var(--papel); --fundo-alto: var(--barro-escuro); --destaque: var(--sol); --il-m: var(--sol); --il-a: var(--papel); --il-p: var(--barro); }
+.faixa--nanquim { --faixa-fundo: var(--nanquim); --il-m: var(--sol); --il-a: var(--barro); --il-p: var(--nanquim); }
+.faixa--papel, .faixa--areia, .faixa--sol {
+  --texto: var(--nanquim);
+  --texto-suave: var(--cinza-quente);
+  --linha: var(--nanquim);
+  --foco: var(--nanquim);
+  --destaque: var(--barro-escuro);
+  --fundo-alto: var(--papel);
+}
+.faixa--papel { --faixa-fundo: var(--papel); --fundo-alto: var(--areia); --il-m: var(--anil); --il-a: var(--barro); --il-p: var(--papel); }
+.faixa--areia { --faixa-fundo: var(--areia); --il-m: var(--nanquim); --il-a: var(--barro); --il-p: var(--areia); }
+.faixa--sol { --faixa-fundo: var(--sol); --il-m: var(--nanquim); --il-a: var(--barro); --il-p: var(--sol); }
+.cor-destaque { color: var(--destaque); }
+
+/* Borda de papel rasgado no topo da faixa. */
+.rasgo {
+  margin-top: -14px;
+  padding-top: 14px;
+  clip-path: polygon(
+    0 9px, 3% 3px, 7% 11px, 11% 5px, 16% 12px, 21% 4px, 26% 10px, 31% 2px, 37% 9px, 42% 5px, 48% 13px,
+    53% 6px, 58% 11px, 63% 3px, 69% 10px, 74% 5px, 79% 12px, 84% 4px, 89% 9px, 94% 2px, 100% 8px,
+    100% 100%, 0 100%
+  );
+}
+
+/* Capa ilustrada */
+.capa { --forca-grao: 0.45; }
+.capa-moldura {
+  position: absolute;
+  inset: 3.2%;
+  border: 1px solid currentColor;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.capa-arte {
+  position: absolute;
+  width: 62%;
+  right: 8%;
+  top: 17%;
+  overflow: visible;
+}
+.capa-raios {
+  position: absolute;
+  width: 150%;
+  left: 14%;
+  top: -8%;
+  --il-m: var(--sol);
+  opacity: 0.9;
+}
+.capa-larga .capa-arte { width: 30%; right: 6%; top: 12%; }
+.capa-larga .capa-raios { width: 70%; left: 48%; top: -60%; }
+.capa--barro { --il-m: var(--papel); --il-a: var(--sol); --il-p: var(--barro); }
+.capa--anil { --il-m: var(--papel); --il-a: var(--barro); --il-p: var(--anil); }
+.capa--sol { --il-m: var(--nanquim); --il-a: var(--barro); --il-p: var(--sol); }
+.capa--papel { --il-m: var(--anil); --il-a: var(--barro); --il-p: var(--papel); }
+.capa--areia { --il-m: var(--nanquim); --il-a: var(--barro); --il-p: var(--areia); }
+.capa--nanquim { --il-m: var(--sol); --il-a: var(--barro); --il-p: var(--nanquim); }
+.cartao-link:hover .capa-arte { transform: rotate(-6deg) scale(1.06); }
+.capa-arte { transition: transform 0.25s ease; transform-origin: 50% 60%; }
+
+/* Etiqueta de papel: tarja de texto levemente torta, como na colagem recortada. */
+.etiqueta {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  background: var(--papel);
+  color: var(--nanquim);
+  font-family: var(--fonte-titulo);
+  font-weight: var(--peso-titulo);
+  letter-spacing: -0.03em;
+  transform: rotate(-2deg);
+  box-shadow: 3px 3px 0 var(--nanquim);
+}
+.etiqueta-sol { background: var(--sol); }
+.etiqueta-barro { background: var(--barro); color: var(--papel); }
+
+/* Medalhão: destaque redondo com anel, como no kit de rede social. */
+.medalhao {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--fonte-titulo);
+  font-weight: 700;
+  font-size: 0.8125rem;
+  line-height: 1.1;
+  text-align: center;
+  width: 5.5rem;
+}
+.medalhao-disco {
+  display: grid;
+  place-items: center;
+  width: 4.75rem;
+  height: 4.75rem;
+  border-radius: 50%;
+  background: var(--med-fundo);
+  box-shadow: inset 0 0 0 4px var(--med-fundo), inset 0 0 0 5.5px var(--med-anel);
+  transition: transform 0.2s ease;
+}
+.medalhao-disco svg { width: 56%; }
+.medalhao:hover .medalhao-disco { transform: rotate(-8deg) scale(1.08); }
+
+/* Estrelas e formas soltas de enfeite */
+.solta {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* Giro lento do selo */
+.giro-selo { animation: giro 120s linear infinite; }
+
+/* Chuva de estrelas quando a pessoa acerta ou fecha uma linha */
+.festa {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.festa svg {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 1.75rem;
+  --il-m: var(--sol);
+  animation: estouro 0.9s ease-out forwards;
+}
+@keyframes estouro {
+  from { transform: translate(-50%, -50%) scale(0.2) rotate(0deg); opacity: 1; }
+  to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2) rotate(200deg); opacity: 0; }
+}
+
+/* Carta que vira (A jornada desmontada) */
+.carta {
+  perspective: 900px;
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+.carta-miolo {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+.carta[aria-pressed='true'] .carta-miolo { transform: rotateY(180deg); }
+.carta-face {
+  grid-area: 1 / 1;
+  backface-visibility: hidden;
+  min-height: 11rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.carta-verso { transform: rotateY(180deg); }
+
+/* Mapa vivo */
+.mapa-vivo path.estado {
+  fill: var(--mapa-preenchimento, var(--papel));
+  stroke: var(--mapa-divisa, var(--barro));
+  stroke-width: var(--traco-mapa);
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: fill 0.2s ease, transform 0.25s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+  outline: none;
+}
+.mapa-vivo path.estado:hover,
+.mapa-vivo path.estado:focus-visible { fill: var(--sol); transform: scale(1.04); }
+.mapa-vivo path.estado:focus-visible { stroke: var(--nanquim); stroke-width: 4px; }
+.mapa-vivo path.estado[aria-pressed='true'] { fill: var(--sol); transform: scale(1.06); stroke: var(--nanquim); stroke-width: 2.5px; }
+.mapa-vivo text {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  fill: var(--nanquim);
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carta-miolo { transition: none; }
+  .festa { display: none; }
+}
+
+/* Cena do mapa: raios que se desfazem nas bordas, disco de barro e o mapa por cima. Só sobre azul. */
+.cena-mapa {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  width: 100%;
+  max-width: 34rem;
+  margin-inline: auto;
+  --px: 0px;
+  --py: 0px;
+}
+.cena-raios {
+  position: absolute;
+  width: 210%;
+  max-width: none;
+  --il-m: var(--raios);
+  translate: var(--px) var(--py);
+  -webkit-mask-image: radial-gradient(circle, black 26%, transparent 60%);
+  mask-image: radial-gradient(circle, black 26%, transparent 60%);
+  pointer-events: none;
+}
+.cena-disco {
+  position: absolute;
+  width: 76%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--barro);
+  box-shadow: 0 0 0 7px var(--anil), 0 0 0 8.5px var(--papel);
+  overflow: hidden;
+  translate: calc(var(--px) * -0.4) calc(var(--py) * -0.4);
+}
+.cena-desenho {
+  position: relative;
+  height: 68%;
+  overflow: visible;
+}
+.cena-cartao {
+  position: absolute;
+  left: 0;
+  bottom: 3%;
+  z-index: 2;
+}
+
+.cena-mapa[data-mapa="completo"] .cena-raios { width: 150%; }
+
+/* No papel o grão pesa mais: alivia para o claro não virar cinza. */
+.faixa--papel, .faixa--areia, .capa--papel, .capa--areia { --forca-grao: 0.26; }
+
+@media (max-width: 767px) {
+  .cena-cartao { position: relative; bottom: auto; margin-top: -1.5rem; }
+  .cena-mapa { max-width: 24rem; }
+}

@@ -41,6 +41,9 @@
   --aperto-titulo: -0.05em;
   --aperto-rotulo: 0.2em;
 
+  /* Textura */
+  --forca-grao: 0.5;
+
   /* Forma */
   --raio: 0px;
   --traco: 1px;

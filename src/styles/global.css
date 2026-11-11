@@ -2,6 +2,7 @@
 @import '@fontsource-variable/archivo/wght.css';
 @import '@fontsource/covered-by-your-grace/latin-400.css';
 @import './tokens.css';
+@import './marca.css';
 
 /* O Tailwind só conhece as cores e fontes de tokens.css. */
 @theme inline {
@@ -167,20 +168,12 @@
     overflow-wrap: break-word;
     hyphens: auto;
   }
-  .capa-forma {
-    position: absolute;
-    width: 78%;
-    right: -20%;
-    top: 12%;
-    fill: var(--capa-forma);
-  }
-  .capa-larga .capa-forma { width: 44%; right: -8%; top: -18%; }
-  .capa--barro { --capa-fundo: var(--barro); --capa-texto: var(--papel); --capa-forma: var(--barro-escuro); }
-  .capa--anil { --capa-fundo: var(--anil); --capa-texto: var(--papel); --capa-forma: var(--sol); }
-  .capa--sol { --capa-fundo: var(--sol); --capa-texto: var(--nanquim); --capa-forma: var(--barro); }
-  .capa--papel { --capa-fundo: var(--papel); --capa-texto: var(--nanquim); --capa-forma: var(--sol); }
-  .capa--areia { --capa-fundo: var(--areia); --capa-texto: var(--nanquim); --capa-forma: var(--anil); }
-  .capa--nanquim { --capa-fundo: var(--nanquim); --capa-texto: var(--papel); --capa-forma: var(--barro); }
+  .capa--barro { --capa-fundo: var(--barro); --capa-texto: var(--papel); }
+  .capa--anil { --capa-fundo: var(--anil); --capa-texto: var(--papel); }
+  .capa--sol { --capa-fundo: var(--sol); --capa-texto: var(--nanquim); }
+  .capa--papel { --capa-fundo: var(--papel); --capa-texto: var(--nanquim); }
+  .capa--areia { --capa-fundo: var(--areia); --capa-texto: var(--nanquim); }
+  .capa--nanquim { --capa-fundo: var(--nanquim); --capa-texto: var(--papel); }
 
   /* Trilho horizontal */
   .trilho {

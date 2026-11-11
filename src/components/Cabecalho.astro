@@ -1,16 +1,26 @@
 ---
-// Cabeçalho de página interna: rótulo, título e texto de apoio.
+// Cabeçalho de página interna: faixa de cor com grão, ilustração do acervo e estrelas soltas.
+import { Ilustra } from './marca/Ilustra.tsx';
+
 interface Props {
   rotulo?: string;
   titulo: string;
   texto?: string;
+  tom?: 'noite' | 'anil' | 'barro' | 'nanquim' | 'papel' | 'areia' | 'sol';
+  arte?: string;
 }
-const { rotulo, titulo, texto } = Astro.props;
+const { rotulo, titulo, texto, tom = 'anil', arte = 'sol' } = Astro.props;
+const claro = ['papel', 'areia', 'sol'].includes(tom);
 ---
 
-<header class="mx-auto max-w-6xl px-4 pt-10 md:px-8 md:pt-14">
-  {rotulo && <p class="rotulo m-0 text-sol">{rotulo}</p>}
-  <h1 class="mt-3 text-5xl md:text-7xl">{titulo}</h1>
-  {texto && <p class="mt-4 max-w-2xl text-lg text-texto-suave">{texto}</p>}
-  <slot />
+<header class:list={['faixa grao relative overflow-hidden', `faixa--${tom}`, claro && 'sobre-claro']}>
+  <Ilustra nome={arte} className="solta right-[-2rem] top-4 w-40 rotate-6 md:right-[8%] md:top-6 md:w-64" />
+  <Ilustra nome="estrela" className="solta left-[58%] top-5 hidden w-8 -rotate-12 md:block" />
+  <Ilustra nome="estrela" className="solta bottom-6 right-[36%] hidden w-5 rotate-12 md:block" />
+  <div class="relative mx-auto max-w-6xl px-4 pb-10 pt-10 md:px-8 md:pb-14 md:pt-14">
+    {rotulo && <p class="etiqueta etiqueta-sol m-0 text-sm">{rotulo}</p>}
+    <h1 class="mt-4 max-w-[13ch] text-5xl md:text-7xl">{titulo}</h1>
+    {texto && <p class="mt-4 max-w-xl text-lg">{texto}</p>}
+    <slot />
+  </div>
 </header>
