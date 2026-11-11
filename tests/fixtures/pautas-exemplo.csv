@@ -1,0 +1,4 @@
+id,titulo,serie_id,serie,pilar,formato,gancho,esforco,status,responsavel,quem_faz_sugestao,roteiro_id,roteiro_url,post_url,data_alvo
+S01E1,Cisterna e wi-fi,S01,"Tem, mas também tem",Resposta,Vídeo,"Ô Globo, lá em casa tem cisterna, sim.",Baixo,Postado,Pessoa de exemplo,Quem tem a memória grava. Só vale memória verdadeira.,R01,https://example.com/roteiro,https://example.com/post,2026-11-20
+S01E2,O altar da minha vó,S01,"Tem, mas também tem",Resposta,Vídeo,Esse é o altar de santo da minha vó. Agora olha o que fica do lado.,Baixo,Pronto,,Quem tem a memória grava. Só vale memória verdadeira.,,,,
+S05E1,Exemplo de afirmação,S05,Não faz só forró,Afirmação,Carrossel,"Um gancho com ""aspas"" dentro.",Baixo,Ideia,,,,,,
