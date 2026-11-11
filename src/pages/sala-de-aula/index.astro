@@ -1,0 +1,80 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import { Capa } from '../../components/marca/Capa.tsx';
+import Base from '../../layouts/Base.astro';
+import { kit, rota, site } from '../../lib/dados.ts';
+import { JOGOS } from '../../lib/lista-jogos.ts';
+import { slug } from '../../lib/texto.ts';
+---
+
+<Base titulo="Sala de aula" descricao="Atividades do kit educacional Leva pra sala e jogos para usar com a turma.">
+  <Cabecalho
+    rotulo="Leva pra sala"
+    titulo="Material para usar com a turma"
+    texto="Cada atividade cabe em uma ou duas aulas de 50 minutos. Nenhuma pede que o aluno assista à novela."
+    tom="anil"
+    arte="cadeira"
+  />
+
+  <section class="faixa faixa--sol grao rasgo sobre-claro relative" aria-labelledby="titulo-projetar">
+    <div class="mx-auto grid max-w-6xl items-center gap-6 px-4 py-10 md:grid-cols-[1fr_22rem] md:px-8">
+      <div>
+        <p class="rotulo m-0">Para projetar</p>
+        <h2 id="titulo-projetar" class="mt-2 text-4xl md:text-6xl">Novela ou Nordeste? em tela cheia</h2>
+        <p class="mt-3 max-w-xl text-lg">Uma afirmação por vez, sem placar individual. A turma levanta o cartão azul ou o vermelho e a professora revela a resposta, com a fonte.</p>
+        <a href={rota('/sala-de-aula/projetar/')} class="botao botao-tinta mt-5" data-abrir-projetor>Abrir a versão para projetar</a>
+      </div>
+      <Capa titulo="Novela ou Nordeste?" rotulo="Para a turma" esquema="anil" arte="predio" larga />
+    </div>
+  </section>
+
+  <section class="faixa faixa--papel grao rasgo sobre-claro relative" aria-labelledby="titulo-atividades">
+    <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+      <h2 id="titulo-atividades" class="text-3xl md:text-5xl">Atividades do kit</h2>
+      <ul class="m-0 mt-6 grid list-none gap-4 p-0 md:grid-cols-2">
+        {
+          kit.map((a, n) => (
+            <li id={slug(a.titulo)} class="grid grid-cols-[6.5rem_1fr] gap-4 border border-nanquim p-3" data-atividade>
+              <Capa titulo={a.titulo} rotulo={`Atividade ${n + 1}`} esquema={(['barro', 'anil', 'nanquim', 'sol'] as const)[n % 4]} />
+              <div>
+                <h3 class="text-2xl">{a.titulo}</h3>
+                <dl class="m-0 mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-sm">
+                  {a.area && (<><dt class="rotulo self-center">Área</dt><dd class="m-0">{a.area}</dd></>)}
+                  {a.ano && (<><dt class="rotulo self-center">Ano</dt><dd class="m-0">{a.ano}</dd></>)}
+                  {a.tempo && (<><dt class="rotulo self-center">Tempo</dt><dd class="m-0">{a.tempo}</dd></>)}
+                </dl>
+                {a.objetivo && <p class="m-0 mt-2">{a.objetivo}</p>}
+                {
+                  site.drive.kit && (
+                    <a href={site.drive.kit} target="_blank" rel="noopener noreferrer" class="mt-1 inline-flex min-h-11 items-center font-bold text-anil">
+                      Abrir o documento no Drive<span class="so-leitor">: {a.titulo} (abre em nova aba)</span>
+                    </a>
+                  )
+                }
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="faixa faixa--barro grao rasgo relative" aria-labelledby="titulo-jogos-sala">
+    <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+      <h2 id="titulo-jogos-sala" class="text-3xl md:text-5xl">Jogos para a aula</h2>
+      <p class="mt-2 max-w-xl">Funcionam no celular do aluno, no computador da escola e só com o teclado.</p>
+      <ul class="m-0 mt-6 grid list-none gap-5 p-0 md:grid-cols-3">
+        {
+          JOGOS.filter((j) => j.pronto).map((j) => (
+            <li>
+              <a href={rota(`/jogos/${j.id}/`)} class="cartao-link">
+                <Capa titulo={j.nome} rotulo={j.prototipo ? 'Protótipo' : 'Jogo'} esquema={j.esquema === 'barro' ? 'nanquim' : j.esquema} arte={j.arte} larga />
+                <span class="mt-2 block">{j.descricao}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>

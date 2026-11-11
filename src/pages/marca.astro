@@ -1,0 +1,164 @@
+---
+// Hub de marca: porta de entrada para quem vai produzir conteúdo.
+// Os hubs são as ferramentas do design system (pasta public/hub, vinda do projeto no Claude Design).
+import Cabecalho from '../components/Cabecalho.astro';
+import { Capa } from '../components/marca/Capa.tsx';
+import { ACERVO, Ilustra } from '../components/marca/Ilustra.tsx';
+import { Selo } from '../components/marca/Selo.tsx';
+import { ARTE } from '../components/marca/arte.ts';
+import Base from '../layouts/Base.astro';
+import { rota, site } from '../lib/dados.ts';
+
+const hub = (arquivo: string) => rota(`/hub/${encodeURIComponent(arquivo)}`);
+
+const ferramentas = [
+  {
+    nome: 'Hub de Design',
+    texto: 'Peças estáticas para feed e story. Escolha uma base, troque palavras, cor e ilustração.',
+    arquivo: 'Coletivo Nordeste - Hub de Design.dc.html',
+    esquema: 'anil',
+    arte: 'sol',
+  },
+  {
+    nome: 'Hub de Vídeo',
+    texto: 'Stings, vinhetas e GCs com nome, tema e lugar, em horizontal e vertical.',
+    arquivo: 'Coletivo Nordeste - Hub de Vídeo.dc.html',
+    esquema: 'barro',
+    arte: 'mic',
+  },
+  {
+    nome: 'Kit Rede Social',
+    texto: 'Foto de perfil, destaques e capas no mesmo sistema das peças.',
+    arquivo: 'Coletivo Nordeste - Kit Rede Social.dc.html',
+    esquema: 'sol',
+    arte: 'estrela',
+  },
+  {
+    nome: 'Propostas de logo',
+    texto: 'As propostas em estudo. O logo ainda não foi escolhido.',
+    arquivo: 'Barruada - Propostas de Logo.dc.html',
+    esquema: 'nanquim',
+    arte: 'azulejo',
+  },
+  {
+    nome: 'Lab de estilos',
+    texto: 'Os estudos de técnica: colagem, foto em preto e branco, ilustração chapada, papel cortado.',
+    arquivo: 'Coletivo Nordeste - Lab de Estilos.dc.html',
+    esquema: 'papel',
+    arte: 'garrafa',
+  },
+] as const;
+
+const paleta = [
+  { nome: 'Barro', var: 'barro', claro: false },
+  { nome: 'Anil', var: 'anil', claro: false },
+  { nome: 'Sol', var: 'sol', claro: true },
+  { nome: 'Nanquim', var: 'nanquim', claro: false },
+  { nome: 'Papel', var: 'papel', claro: true },
+  { nome: 'Areia', var: 'areia', claro: true },
+];
+
+const regrasSim = [
+  'Archivo 800, firme e apertado, nos títulos.',
+  'Mapa sempre com a geometria real dos nove estados e as divisas à mostra.',
+  'Vermelho corrige, azul afirma. Raios amarelos só sobre azul, atrás do mapa.',
+  'Colchetes marcam o que depende de fato, memória de membro ou autorização.',
+];
+const regrasNao = [
+  'Tipo condensado e pincel em caixa alta nos títulos.',
+  'Contorno grosso no mapa e o número 9 grande como elemento.',
+  'Frame de filme, trecho de música ou de livro sem autorização.',
+  'Cacto como enfeite, chita, letra de cordel e sépia.',
+];
+---
+
+<Base titulo="Hub de marca" descricao="Ferramentas da marca Barruada para quem produz conteúdo sobre o Nordeste.">
+  <Cabecalho
+    rotulo="Hub de marca"
+    titulo="Pegue a marca e produza."
+    texto="Livro aberto, de uso livre para quem cria conteúdo sobre o Nordeste. As ferramentas rodam no navegador e exportam a peça pronta."
+    tom="sol"
+    arte="garrafa"
+  />
+
+  <section class="faixa faixa--noite grao rasgo relative" aria-labelledby="titulo-ferramentas">
+    <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+      <h2 id="titulo-ferramentas" class="text-3xl md:text-5xl">Ferramentas</h2>
+      <ul class="m-0 mt-6 grid list-none gap-5 p-0 md:grid-cols-3">
+        {
+          ferramentas.map((f) => (
+            <li>
+              <a href={hub(f.arquivo)} class="cartao-link" data-hub>
+                <Capa titulo={f.nome} rotulo="Abrir" esquema={f.esquema} arte={f.arte} larga />
+                <span class="mt-2 block text-texto-suave">{f.texto}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="faixa faixa--papel grao rasgo sobre-claro relative" aria-labelledby="titulo-sistema">
+    <div class="mx-auto grid max-w-6xl gap-10 px-4 py-10 md:grid-cols-[1fr_20rem] md:px-8 md:py-14">
+      <div>
+        <h2 id="titulo-sistema" class="text-3xl md:text-5xl">O sistema em uma tela</h2>
+
+        <h3 class="mt-8 text-xl">Paleta</h3>
+        <ul class="m-0 mt-3 grid list-none grid-cols-3 gap-2 p-0 md:grid-cols-6">
+          {
+            paleta.map((c) => (
+              <li class:list={['grao flex aspect-square flex-col justify-end border border-nanquim p-2', c.claro ? 'text-nanquim' : 'text-papel']} style={`background: var(--${c.var})`}>
+                <span class="font-titulo font-extrabold">{c.nome}</span>
+                <span class="text-xs" data-cor={c.var} />
+              </li>
+            ))
+          }
+        </ul>
+
+        <h3 class="mt-8 text-xl">Tipo</h3>
+        <p class="m-0 mt-2 font-titulo text-5xl font-extrabold leading-[0.92] tracking-[-0.05em] md:text-7xl">quem cresceu lá conta melhor</p>
+        <p class="caneta m-0 mt-3 -rotate-1 text-4xl text-barro">a caneta risca e corrige</p>
+
+        <h3 class="mt-8 text-xl">Acervo de ilustrações</h3>
+        <ul class="m-0 mt-3 grid list-none grid-cols-4 gap-2 p-0 md:grid-cols-8" style="--il-m: var(--nanquim); --il-a: var(--barro); --il-p: var(--papel);">
+          {
+            ACERVO.map((nome) => (
+              <li class="grid justify-items-center gap-1 border border-nanquim bg-areia p-2 text-center text-xs font-bold">
+                <Ilustra nome={nome} className="w-full max-w-14" />
+                {ARTE[nome].n}
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div>
+            <h3 class="text-xl">Pode</h3>
+            <ul class="m-0 mt-2 grid list-none gap-2 p-0">
+              {regrasSim.map((r) => <li class="border-l-4 border-anil pl-3">{r}</li>)}
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl">Fora da marca</h3>
+            <ul class="m-0 mt-2 grid list-none gap-2 p-0">
+              {regrasNao.map((r) => <li class="border-l-4 border-barro pl-3">{r}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div>
+        <Selo topo={site.nome} base="O Nordeste por conta própria" esquerda="Nove estados" direita="Sem figurino" className="w-full" />
+        <p class="m-0 mt-2 text-sm text-cinza-quente">Cartaz-selo: a base principal. As variações saem dela.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Mostra o valor de cada cor direto de tokens.css, para não repetir número em outro arquivo.
+  const estilo = getComputedStyle(document.documentElement);
+  document.querySelectorAll<HTMLElement>('[data-cor]').forEach((el) => {
+    el.textContent = estilo.getPropertyValue(`--${el.dataset.cor}`).trim().toUpperCase();
+  });
+</script>

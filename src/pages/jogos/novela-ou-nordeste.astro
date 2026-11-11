@@ -6,7 +6,7 @@ import { jogos, rota } from '../../lib/dados.ts';
 ---
 
 <Base titulo="Novela ou Nordeste?" descricao="Uma afirmação por vez: é Nordeste de verdade ou coisa de novela?">
-  <Cabecalho rotulo="Jogo" titulo="Novela ou Nordeste?" texto="Leia a afirmação e escolha. Depois de cada resposta vem a explicação, com fonte." />
+  <Cabecalho tom="anil" arte="predio" rotulo="Jogo" titulo="Novela ou Nordeste?" texto="Leia a afirmação e escolha. Depois de cada resposta vem a explicação, com fonte." />
   <div class="mx-auto max-w-3xl px-4 pt-8 md:px-8">
     <Quiz itens={jogos.quiz} client:load />
     <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>

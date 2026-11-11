@@ -32,7 +32,9 @@ Na primeira vez que rodar os testes de ponta a ponta: `npx playwright install ch
 seed/data/            dados-semente originais (referência)
 src/data/             dados que o site lê (cópia do seed, mais o mapa)
 src/styles/tokens.css todas as cores e fontes
-src/components/marca/ logo, capa tipográfica, formas, mapa
+src/components/marca/ logo, capa, selo, ilustrações (arte.ts), mapa
+src/styles/marca.css  texturas, faixas de cor, medalhões (só com variáveis de tokens.css)
+public/hub/           ferramentas do design system (Hub de Design, Vídeo, Kit Rede Social)
 src/islands/          partes interativas (React)
 src/lib/              tipos, validação, CSV, lógica dos jogos
 src/pages/            páginas
@@ -78,9 +80,25 @@ SHEET_CSV_URL=tests/fixtures/pautas-exemplo.csv npm run sync
 1. Abra `src/styles/tokens.css`. É o único arquivo com cor e fonte fixas. Troque os valores e o site inteiro muda.
 2. Se a fonte mudar, troque também os dois `@import` de fonte no topo de `src/styles/global.css` (e instale o pacote `@fontsource` novo).
 3. Se a forma da marca mudar (logo, formas, mapa), edite só `src/components/marca/`.
-4. O ícone da aba (`public/favicon.svg`) é um arquivo solto: redesenhe junto.
+4. As ilustrações ficam em `src/components/marca/arte.ts`, gerado a partir do `cn-art.js` do design system. As texturas e faixas ficam em `src/styles/marca.css`.
+5. O ícone da aba (`public/favicon.svg`) é um arquivo solto: redesenhe junto.
 
 Os valores atuais vêm do projeto "Sistema visual coletivo nordestino" no Claude Design: barro, anil, sol, nanquim, papel e areia, com Archivo 800 apertado. O logo é provisório (linha da proposta "Registro"), até o coletivo escolher o definitivo.
+
+## Hub de marca
+
+A página `/marca` é a porta de entrada para quem produz conteúdo. As ferramentas ficam em `public/hub/` e são os arquivos do projeto "Sistema visual coletivo nordestino" no Claude Design, publicados como estão.
+
+Para atualizar: exporte o projeto no Claude Design, copie para `public/hub/` os arquivos `.dc.html` dos hubs e os `.js` e `.jsx` que eles usam, e troque qualquer travessão por hífen (o teste de travessão varre essa pasta também). A pasta `uploads/` do projeto não entra: são referências de terceiros.
+
+Ficaram de fora, de propósito: o Hub de Animações (a frase da animação 1 ainda depende de autorização, segundo o README do design system) e o Hub de marca v2 (nomes e logos antigos).
+
+## Jogos e sala de aula
+
+- Todo jogo tem tela de resultado e gera um cartão 1080x1350 em PNG (`src/lib/cartao.ts`), com as cores e fontes de `tokens.css`.
+- `/sala-de-aula/projetar/` é o Novela ou Nordeste? para projetar: tela cheia, uma afirmação por vez, sem placar.
+- As atividades de `/sala-de-aula` vêm de `src/data/kit.json`, copiado do documento 05 Kit educacional no Drive.
+- Aprendendo inglês com forró é um protótipo. O conteúdo está em `src/data/forro-ingles.json` e as traduções precisam da revisão das professoras de inglês do grupo. Não entra letra de música, nem traduzida: só palavra solta e título.
 
 ## Regras do projeto
 
@@ -88,6 +106,7 @@ Os valores atuais vêm do projeto "Sistema visual coletivo nordestino" no Claude
 - Nada de dado inventado: tudo vem de `src/data/`. Campo vazio fica vazio.
 - Item da biblioteca com `checagem: "conferir"` só aparece em `/bastidores`. Há teste para isso.
 - Nenhuma imagem de terceiros: as capas são tipográficas, feitas em CSS e SVG.
+- Nada de letra de música, trecho de livro ou fala de novela.
 - `/bastidores` fica fora do menu e do sitemap e tem `noindex`. Não é segurança de verdade: quem tiver o endereço abre. Os roteiros ficam no Drive, com permissão própria.
 
 ## Dados
@@ -102,11 +121,13 @@ Os valores atuais vêm do projeto "Sistema visual coletivo nordestino" no Claude
 | `jogos.json` | Conteúdo dos jogos |
 | `membros.json` | Membros do coletivo. Formato: `{"nome": "", "estado": "CE", "area": "", "topa": ["vídeo", "texto"], "link": ""}` |
 | `ne-map.json` | Geometria dos nove estados |
+| `kit.json` | Atividades do kit educacional |
+| `forro-ingles.json` | Pares de palavras do protótipo de inglês |
 
 ## Fases
 
 - Fase 1 (entregue): estrutura, tokens, início com trilhos, biblioteca, dicionário, bastidores, Novela ou Nordeste?, Monte sua novela, sync da planilha, prévia.
-- Fase 2: Bingo, Dicionário em modo jogo, A jornada desmontada, mapa dos nove, sala de aula, cartões de compartilhamento.
+- Fase 2 (entregue): Bingo, Dicionário em modo jogo, A jornada desmontada, mapa vivo dos nove em Quem somos, sala de aula, cartões de compartilhamento. Entraram junto: hub de marca, visual com as ilustrações e texturas do design system e o protótipo Aprendendo inglês com forró.
 - Fase 3: mural Me mostra na novela, páginas por estado, imagens de compartilhamento por página.
 
 ## Créditos

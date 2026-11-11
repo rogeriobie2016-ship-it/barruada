@@ -1,0 +1,16 @@
+---
+import Projetor from '../../islands/Projetor.tsx';
+import Base from '../../layouts/Base.astro';
+import { jogos, rota } from '../../lib/dados.ts';
+---
+
+<Base titulo="Novela ou Nordeste? para projetar" descricao="Versão de sala de aula: tela cheia, uma afirmação por vez, sem placar individual.">
+  <div class="mx-auto max-w-6xl px-4 pt-6 md:px-8">
+    <h1 class="text-3xl md:text-4xl">Novela ou Nordeste? para a turma</h1>
+    <p class="mt-2 text-texto-suave">Seta para a direita avança, seta para a esquerda volta.</p>
+    <div class="mt-4">
+      <Projetor itens={jogos.quiz} client:load />
+    </div>
+    <p class="mt-4"><a href={rota('/sala-de-aula/')} class="inline-flex min-h-11 items-center text-sol">Voltar para Sala de aula</a></p>
+  </div>
+</Base>

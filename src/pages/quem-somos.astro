@@ -1,0 +1,71 @@
+---
+import Cabecalho from '../components/Cabecalho.astro';
+import { Ilustra } from '../components/marca/Ilustra.tsx';
+import MapaVivo from '../islands/MapaVivo.tsx';
+import Base from '../layouts/Base.astro';
+import { biblioteca, membros, rota, site } from '../lib/dados.ts';
+import { resumoPorEstado } from '../lib/estados.ts';
+
+const estados = resumoPorEstado(biblioteca, membros);
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+const tons = ['barro', 'papel', 'sol', 'nanquim', 'areia'] as const;
+---
+
+<Base titulo="Quem somos" descricao={site.manifesto[0]}>
+  <Cabecalho
+    rotulo="Quem somos"
+    titulo={site.assinatura}
+    texto="Um coletivo de comunicadores, professores e educadores nordestinos."
+    tom="barro"
+    arte="jangada"
+  />
+
+  <section class="faixa faixa--anil grao rasgo relative overflow-hidden" aria-labelledby="titulo-nove">
+    <div class="relative mx-auto max-w-6xl px-4 py-10 md:px-8 md:py-14">
+      <p class="etiqueta m-0 text-sm">Os nove</p>
+      <h2 id="titulo-nove" class="mt-4 text-4xl md:text-6xl">Gente de cada estado</h2>
+      <p class="mt-3 max-w-xl text-lg">Toque num estado para ver quem é do coletivo por lá, os dados checados e o que a biblioteca guarda daquele lugar.</p>
+      <div class="mt-8">
+        <MapaVivo estados={estados} modo="completo" base={rota('')} client:load />
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="titulo-manifesto" id="manifesto">
+    <h2 id="titulo-manifesto" class="so-leitor">Manifesto</h2>
+    {
+      site.manifesto.map((frase, n) => (
+        <div class:list={['faixa grao rasgo relative overflow-hidden', `faixa--${tons[n % tons.length]}`, ['papel', 'sol', 'areia'].includes(tons[n % tons.length]) && 'sobre-claro']}>
+          <Ilustra nome={['sol', 'filtro', 'predio', 'estrela', 'casa'][n % 5]} className="solta right-[-1rem] top-1/2 w-28 -translate-y-1/2 rotate-6 md:right-[10%] md:w-40" />
+          <div class="relative mx-auto max-w-6xl px-4 py-10 md:px-8 md:py-14">
+            <p class="rotulo m-0 cor-destaque">Manifesto, parte {n + 1}</p>
+            <p class="m-0 mt-3 max-w-[20ch] font-titulo text-3xl font-extrabold leading-[1] tracking-[-0.05em] md:max-w-[24ch] md:text-5xl">{frase}</p>
+          </div>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="faixa faixa--noite grao rasgo relative">
+    <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+      <p class="caneta m-0 -rotate-1 text-4xl text-sol">{site.significado}</p>
+      {
+        redes.length > 0 && (
+          <>
+            <h2 class="mt-8 text-3xl">Redes e contato</h2>
+            <ul class="m-0 mt-3 flex list-none flex-wrap gap-3 p-0">
+              {redes.map(([nome, url]) => (
+                <li><a href={url} rel="noopener" class="botao botao-linha capitalize">{nome}</a></li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={rota('/jogos/')} class="botao botao-sol sobre-claro">Jogar</a>
+        <a href={rota('/biblioteca/')} class="botao botao-linha">Abrir a biblioteca</a>
+        <a href={rota('/marca/')} class="botao botao-linha">Produzir com a marca</a>
+      </div>
+    </div>
+  </section>
+</Base>

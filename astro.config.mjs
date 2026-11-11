@@ -11,6 +11,7 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'always',
+  redirects: { '/manifesto': '/quem-somos/', '/nove': '/quem-somos/' },
   integrations: [
     react(),
     // /bastidores fica fora do sitemap (área de trabalho, ver src/pages/bastidores.astro).

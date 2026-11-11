@@ -6,7 +6,7 @@ import { jogos, rota } from '../../lib/dados.ts';
 ---
 
 <Base titulo="Monte sua novela" descricao="Escolha lugar, protagonista e conflito e monte a sinopse de uma novela no Nordeste de hoje.">
-  <Cabecalho rotulo="Jogo" titulo="Monte sua novela" texto="Escolha ou sorteie lugar, protagonista e conflito. A sinopse sai em três frases." />
+  <Cabecalho tom="sol" arte="cadeira" rotulo="Jogo" titulo="Monte sua novela" texto="Escolha ou sorteie lugar, protagonista e conflito. A sinopse sai em três frases." />
   <div class="mx-auto max-w-3xl px-4 pt-8 md:px-8">
     <Gerador dados={jogos.gerador} client:load />
     <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>

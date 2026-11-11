@@ -1,49 +1,99 @@
 ---
 import Trilho from '../components/Trilho.astro';
 import { Capa } from '../components/marca/Capa.tsx';
-import { Forma } from '../components/marca/Formas.tsx';
-import { MapaNE } from '../components/marca/MapaNE.tsx';
+import { Ilustra } from '../components/marca/Ilustra.tsx';
+import MapaVivo from '../islands/MapaVivo.tsx';
 import Base from '../layouts/Base.astro';
-import { biblioteca, glossario, pautas, rota, site } from '../lib/dados.ts';
+import { biblioteca, glossario, kit, membros, pautas, rota, site } from '../lib/dados.ts';
+import { resumoPorEstado } from '../lib/estados.ts';
 import { JOGOS } from '../lib/lista-jogos.ts';
 import { slug } from '../lib/texto.ts';
 import { montarTrilhos } from '../lib/trilhos.ts';
 
 const t = montarTrilhos(pautas, biblioteca, glossario);
 const jogosProntos = JOGOS.filter((j) => j.pronto);
+const estados = resumoPorEstado(biblioteca, membros);
 
 // Frase de abertura: primeira linha do manifesto, com a caneta riscando o fim.
 const frase = site.manifesto[0];
 const trechoRiscado = 'um jeito só.';
 const temRisco = frase.endsWith(trechoRiscado);
 const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
+
+// Medalhões: atalhos redondos, como os destaques do kit de rede social.
+const medalhoes = [
+  { nome: 'Em cartaz', href: '/em-cartaz/', arte: 'mic', fundo: 'anil', m: 'papel', a: 'sol' },
+  { nome: 'Jogos', href: '/jogos/', arte: 'estrela', fundo: 'sol', m: 'nanquim', a: 'barro' },
+  { nome: 'Biblioteca', href: '/biblioteca/', arte: 'livro', fundo: 'barro', m: 'papel', a: 'sol' },
+  { nome: 'Dicionário', href: '/glossario/', arte: 'caju', fundo: 'papel', m: 'barro', a: 'anil' },
+  { nome: 'Os nove', href: '/quem-somos/', arte: 'jangada', fundo: 'nanquim', m: 'papel', a: 'sol' },
+  { nome: 'Sala de aula', href: '/sala-de-aula/', arte: 'cadeira', fundo: 'areia', m: 'nanquim', a: 'barro' },
+  { nome: 'Hub de marca', href: '/marca/', arte: 'sol', fundo: 'anil', m: 'sol', a: 'barro' },
+];
+
+const ARTE_DA_SECAO: Record<string, string> = { Som: 'mic', Tela: 'predio' };
+const CORES_NO_PAPEL = ['anil', 'barro', 'nanquim', 'sol'] as const;
+const CORES_NO_SOL = ['nanquim', 'barro', 'anil', 'papel'] as const;
+const CORES_NO_ANIL = ['papel', 'sol', 'areia'] as const;
+const CORES_NA_AREIA = ['barro', 'anil', 'nanquim', 'sol'] as const;
+
+const trilhosDaBiblioteca = [
+  { id: 'ler', titulo: 'Pra ler', itens: t.ler, tom: 'papel', arte: 'livro' },
+  { id: 'ver', titulo: 'Pra ver', itens: t.ver, tom: 'nanquim', arte: 'predio' },
+  { id: 'ouvir', titulo: 'Pra ouvir', itens: t.ouvir, tom: 'sol', arte: 'mic' },
+] as const;
+
+function corDaCapa(tom: string, n: number) {
+  if (tom === 'papel') return CORES_NO_PAPEL[n % 4];
+  if (tom === 'sol') return CORES_NO_SOL[n % 4];
+  return undefined;
+}
 ---
 
 <Base>
-  <section class="hero">
-    <div class="mx-auto grid max-w-6xl items-center gap-6 px-4 py-10 md:grid-cols-[1.15fr_1fr] md:px-8 md:py-16">
-      <div>
-        <p class="rotulo m-0 text-papel">{site.significado}</p>
-        <h1 class="mt-4 text-[2.6rem] md:text-6xl">
+  <section class="faixa faixa--anil grao relative overflow-hidden">
+    <Ilustra nome="estrela" className="solta left-[46%] top-8 hidden w-9 -rotate-12 md:block" />
+    <Ilustra nome="estrela" className="solta bottom-10 left-[4%] hidden w-6 rotate-12 md:block" />
+    <div class="relative mx-auto grid max-w-6xl items-center gap-4 px-4 pb-6 pt-8 md:grid-cols-[1.05fr_1fr] md:px-8 md:py-12">
+      <div class="relative z-10">
+        <p class="etiqueta etiqueta-sol m-0 text-sm">{site.significado}</p>
+        <h1 class="mt-5 text-[2.7rem] md:text-7xl">
           {inicio}{temRisco && <span class="riscado">{trechoRiscado}</span>}
         </h1>
-        {temRisco && <p class="caneta m-0 mt-3 -rotate-2 text-4xl text-sol md:text-5xl">nove jeitos, no mínimo</p>}
-        <p class="mt-5 max-w-md text-lg text-texto">{site.manifesto[3]}</p>
+        {temRisco && <p class="caneta m-0 mt-3 -rotate-2 text-4xl text-sol md:text-6xl">nove jeitos, no mínimo</p>}
+        <p class="mt-5 max-w-md text-lg">{site.manifesto[3]}</p>
         <div class="mt-6 flex flex-wrap gap-3">
           <a href={rota('/em-cartaz/')} class="botao botao-sol sobre-claro">Ver o que está em cartaz</a>
           <a href={rota('/jogos/')} class="botao botao-linha">Jogar</a>
         </div>
       </div>
-      <div class="hero-arte" aria-hidden="true">
-        <Forma nome="raios" className="hero-raios giro" />
-        <MapaNE className="hero-mapa" />
-      </div>
+      <MapaVivo estados={estados} modo="abertura" base={rota('')} client:load />
     </div>
   </section>
 
+  <nav aria-label="Atalhos" class="faixa faixa--noite grao rasgo relative">
+    <ul class="m-0 mx-auto flex max-w-6xl list-none gap-2 overflow-x-auto px-4 py-6 md:justify-between md:px-8">
+      {
+        medalhoes.map((m) => (
+          <li class="flex-none">
+            <a href={rota(m.href)} class="medalhao">
+              <span
+                class="medalhao-disco"
+                style={`--med-fundo: var(--${m.fundo}); --med-anel: var(--${m.m}); --il-m: var(--${m.m}); --il-a: var(--${m.a}); --il-p: var(--${m.fundo});`}
+              >
+                <Ilustra nome={m.arte} />
+              </span>
+              {m.nome}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+
   {
     t.emCartaz.length > 0 && (
-      <Trilho titulo="Em cartaz" id="em-cartaz" verTudo={{ href: rota('/em-cartaz/'), texto: 'Ver tudo' }}>
+      <Trilho titulo="Em cartaz" id="em-cartaz" tom="nanquim" arte="mic" verTudo={{ href: rota('/em-cartaz/'), texto: 'Ver tudo' }}>
         {t.emCartaz.map((p) => (
           <li>
             <a href={rota(`/em-cartaz/${slug(p.id)}/`)} class="cartao-link">
@@ -58,7 +108,7 @@ const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
 
   {
     t.emBreve.length > 0 && (
-      <Trilho titulo="Em breve" id="em-breve">
+      <Trilho titulo="Em breve" id="em-breve" tom="areia" arte="lua">
         {t.emBreve.map((p) => (
           <li>
             <Capa titulo={p.titulo} rotulo={p.serie} pilar={p.pilar} />
@@ -71,11 +121,11 @@ const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
 
   {
     jogosProntos.length > 0 && (
-      <Trilho titulo="Pra jogar" id="jogar" verTudo={{ href: rota('/jogos/'), texto: 'Todos os jogos' }}>
+      <Trilho titulo="Pra jogar" id="jogar" tom="barro" arte="estrela" verTudo={{ href: rota('/jogos/'), texto: 'Todos os jogos' }}>
         {jogosProntos.map((j) => (
           <li>
             <a href={rota(`/jogos/${j.id}/`)} class="cartao-link">
-              <Capa titulo={j.nome} rotulo="Jogo" esquema={j.esquema} forma={j.forma} />
+              <Capa titulo={j.nome} rotulo={j.prototipo ? 'Protótipo' : 'Jogo'} esquema={j.esquema === 'barro' ? 'nanquim' : j.esquema} arte={j.arte} />
               <span class="mt-2 block text-sm text-texto-suave">{j.descricao}</span>
             </a>
           </li>
@@ -85,20 +135,14 @@ const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
   }
 
   {
-    (
-      [
-        { id: 'ler', titulo: 'Pra ler', itens: t.ler },
-        { id: 'ver', titulo: 'Pra ver', itens: t.ver },
-        { id: 'ouvir', titulo: 'Pra ouvir', itens: t.ouvir },
-      ] as const
-    ).map(
+    trilhosDaBiblioteca.map(
       (trilho) =>
         trilho.itens.length > 0 && (
-          <Trilho titulo={trilho.titulo} id={trilho.id} verTudo={{ href: rota('/biblioteca/'), texto: 'Biblioteca' }}>
-            {trilho.itens.map((i) => (
+          <Trilho titulo={trilho.titulo} id={trilho.id} tom={trilho.tom} arte={trilho.arte} verTudo={{ href: rota('/biblioteca/'), texto: 'Biblioteca' }}>
+            {trilho.itens.map((i, n) => (
               <li>
                 <a href={rota(`/biblioteca/#${slug(i.titulo)}`)} class="cartao-link">
-                  <Capa titulo={i.titulo} rotulo={i.secao} />
+                  <Capa titulo={i.titulo} rotulo={i.secao} arte={ARTE_DA_SECAO[i.secao]} esquema={corDaCapa(trilho.tom, n)} />
                   <span class="mt-2 block text-sm text-texto-suave">{[i.autoria, i.ano].filter(Boolean).join(', ')}</span>
                 </a>
               </li>
@@ -108,15 +152,28 @@ const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
     )
   }
 
-  {/* Pra sala de aula: entra na fase 2, quando as atividades do kit chegarem aos dados. */}
+  {
+    kit.length > 0 && (
+      <Trilho titulo="Pra sala de aula" id="sala" tom="anil" arte="cadeira" verTudo={{ href: rota('/sala-de-aula/'), texto: 'Ver o kit' }}>
+        {kit.map((a, n) => (
+          <li>
+            <a href={rota(`/sala-de-aula/#${slug(a.titulo)}`)} class="cartao-link">
+              <Capa titulo={a.titulo} rotulo={a.area || a.ano} esquema={CORES_NO_ANIL[n % 3]} />
+              <span class="mt-2 block text-sm text-texto-suave">{[a.ano, a.tempo].filter(Boolean).join(' · ')}</span>
+            </a>
+          </li>
+        ))}
+      </Trilho>
+    )
+  }
 
   {
     t.dicionario.length > 0 && (
-      <Trilho titulo="Dicionário da Barruada" id="dicionario" verTudo={{ href: rota('/glossario/'), texto: 'Ver o dicionário' }}>
+      <Trilho titulo="Dicionário da Barruada" id="dicionario" tom="areia" arte="caju" verTudo={{ href: rota('/glossario/'), texto: 'Ver o dicionário' }}>
         {t.dicionario.map((termo, n) => (
           <li>
             <a href={rota(`/glossario/#${slug(termo.termo)}`)} class="cartao-link">
-              <Capa titulo={termo.termo} rotulo={termo.onde} esquema={n % 2 === 0 ? 'sol' : 'papel'} forma="disco" />
+              <Capa titulo={termo.termo} rotulo={termo.onde} esquema={CORES_NA_AREIA[n % 4]} />
               <span class="mt-2 block text-sm text-texto-suave">{termo.significado}</span>
             </a>
           </li>
@@ -125,38 +182,3 @@ const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
     )
   }
 </Base>
-
-<style>
-  .hero {
-    background: var(--anil);
-    border-bottom: var(--traco) solid var(--linha);
-    overflow: hidden;
-  }
-  .hero-arte {
-    position: relative;
-    display: grid;
-    place-items: center;
-    aspect-ratio: 1;
-    justify-self: center;
-    width: min(100%, 26rem);
-    overflow: hidden;
-    padding: 1.25rem;
-  }
-  .hero-arte :global(.hero-raios) {
-    position: absolute;
-    width: 150%;
-    max-width: none;
-    fill: var(--raios);
-  }
-  .hero-arte :global(.hero-mapa) {
-    position: absolute;
-    inset: 1.25rem;
-    width: calc(100% - 2.5rem);
-    height: calc(100% - 2.5rem);
-    --mapa-preenchimento: var(--papel);
-    --mapa-divisa: var(--nanquim);
-  }
-  @media (max-width: 767px) {
-    .hero-arte { width: 100%; aspect-ratio: 16 / 11; }
-  }
-</style>

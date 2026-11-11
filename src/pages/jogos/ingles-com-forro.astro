@@ -1,0 +1,14 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import ParesIngles from '../../islands/ParesIngles.tsx';
+import Base from '../../layouts/Base.astro';
+import { forroIngles, rota } from '../../lib/dados.ts';
+---
+
+<Base titulo="Aprendendo inglês com forró" descricao="Jogo de pares para aprender inglês com o vocabulário do forró e do dicionário nordestino.">
+  <Cabecalho rotulo="Jogo" titulo="Aprendendo inglês com forró" texto="Ligue cada palavra à tradução em inglês. Três baralhos: palavras do forró, títulos e o dicionário." tom="areia" arte="mic" />
+  <div class="mx-auto max-w-4xl px-4 pt-8 md:px-8">
+    <ParesIngles dados={forroIngles} client:load />
+    <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>
+  </div>
+</Base>

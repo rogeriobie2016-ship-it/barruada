@@ -1,0 +1,14 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import DicionarioJogo from '../../islands/DicionarioJogo.tsx';
+import Base from '../../layouts/Base.astro';
+import { glossario, rota } from '../../lib/dados.ts';
+---
+
+<Base titulo="Dicionário da Barruada" descricao="Jogo de palavras do Nordeste: uma palavra, quatro significados, uma resposta certa.">
+  <Cabecalho rotulo="Jogo" titulo="Dicionário da Barruada" texto="Aparece a palavra, você escolhe o significado. Oito palavras por rodada." tom="papel" arte="livro" />
+  <div class="mx-auto max-w-4xl px-4 pt-8 md:px-8">
+    <DicionarioJogo termos={glossario} client:load />
+    <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>
+  </div>
+</Base>

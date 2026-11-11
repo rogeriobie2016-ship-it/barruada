@@ -1,0 +1,14 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import Bingo from '../../islands/Bingo.tsx';
+import Base from '../../layouts/Base.astro';
+import { jogos, rota } from '../../lib/dados.ts';
+---
+
+<Base titulo="Bingo do estereótipo" descricao="Cartela de bingo para marcar os clichês sobre o Nordeste em qualquer obra.">
+  <Cabecalho rotulo="Jogo" titulo="Bingo do estereótipo" texto="Vale para qualquer novela, filme ou série. Marque o que aparecer e veja quanto tempo leva para fechar uma linha." tom="barro" arte="filtro" />
+  <div class="mx-auto max-w-4xl px-4 pt-8 md:px-8">
+    <Bingo itens={jogos.bingo} client:load />
+    <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>
+  </div>
+</Base>
