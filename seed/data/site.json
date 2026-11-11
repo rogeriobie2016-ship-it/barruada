@@ -1,0 +1,59 @@
+{
+ "nome": "Barruada",
+ "assinatura": "O Nordeste que a novela não mostra",
+ "significado": "Barruada: batida, trombada. Do verbo barruar.",
+ "manifesto": [
+  "A gente é do Nordeste e cansou de se ver na TV de um jeito só.",
+  "O Nordeste tem seca, tem pobreza e tem problema, como todo lugar.",
+  "Também tem universidade, startup, escola nota dez, rock, pop, cinema premiado e gente indo trabalhar numa terça-feira qualquer.",
+  "A Barruada existe para mostrar o resto da história, com fonte, com humor e sem pedir licença.",
+  "A gente não quer derrubar novela nenhuma. Quer que a próxima seja feita com quem vive aqui."
+ ],
+ "tokens": {
+  "azul": "#2A4BA0",
+  "vermelho": "#CC3519",
+  "amarelo": "#F2B441",
+  "creme": "#F4EAD5",
+  "tinta": "#1D1A16",
+  "barro": "#8A1F12",
+  "azul_noite": "#172A5E",
+  "fonte_titulo": "Archivo",
+  "fonte_caneta": "Covered By Your Grace"
+ },
+ "design_system_v1": "https://claude.ai/artifact/J1TxWJ29X2FaZCYx4xgnge",
+ "mapa_credito": "@svg-maps/brazil, CC BY 4.0",
+ "novela": {
+  "titulo": "Lá na Minha Terra",
+  "emissora": "TV Globo",
+  "faixa": "18h",
+  "estreia": "2026-11-09",
+  "autor_citado": "Mário Teixeira",
+  "fontes": [
+   "https://www.cnnbrasil.com.br/pop/tv/publico-critica-estreia-de-novela-la-na-minha-terra-quer-estereotipar/",
+   "https://brasilemfolhas.com.br/2026/11/novela-da-globo-gera-criticas-por-estereotipos-sobre-o-nordeste/",
+   "https://www.otempo.com.br/entretenimento/novelas/la-na-minha-terra/2026/11/10/rachel-sheherazade-critica-nova-novela-da-globo-visoes-ultrapassadas-do-nordeste",
+   "https://www.terra.com.br/vida-e-estilo/la-na-minha-terra-o-nordeste-ainda-precisa-vencer-os-estereotipos-da-televisao,dc799f570833dce67c64b34c52bb44bfwv1pi1v5.html"
+  ]
+ },
+ "status": [
+  "Ideia",
+  "Roteiro pré-pronto",
+  "Em revisão",
+  "Em produção",
+  "Pronto",
+  "Postado"
+ ],
+ "drive": {
+  "roteiros": "https://drive.google.com/drive/folders/1YO-K9_XVFtbT1vvxlLyp_bIPMu5CQn73",
+  "pasta": "https://drive.google.com/drive/folders/1HTZIR6ifqq_qMZiVLFM7Z_87WdHLE7RV",
+  "biblioteca": "https://docs.google.com/document/d/1-vtrMEIk9jZffXJexc9xPMudTvPCc-AFbDb7HecwACY/edit",
+  "series": "https://docs.google.com/document/d/1_p4gshVoDczgkWtzfaZSWFEHvtjQEYvASRqE_FBRkts/edit",
+  "planilha": "https://docs.google.com/spreadsheets/d/1RQcrtzpsjPWeqp9YGEXVJW4X-iEme7BDti4TZhn7eOU/edit",
+  "kit": "https://docs.google.com/document/d/1umAVU10fus9m1Ealpf6mne-T0GP1WZ13XF9_e0LHsho/edit",
+  "jogos": "https://docs.google.com/document/d/1mmAmaYHW2PzyFk-WrVsjRwyjnhbs9RwN_M-WVSYHWyQ/edit"
+ },
+ "redes": {
+  "instagram": "",
+  "tiktok": ""
+ }
+}

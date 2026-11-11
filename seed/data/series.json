@@ -1,0 +1,213 @@
+[
+ {
+  "id": "S01",
+  "nome": "Tem, mas também tem",
+  "pilar": "Resposta",
+  "esforco": "Baixo",
+  "premissa": "Um membro mostra algo real da sua casa que a novela usaria como símbolo de atraso e completa a história com o que a câmera deixou de fora.",
+  "quem_faz": "Quem tem a memória grava. Só vale memória verdadeira.",
+  "episodios": [
+   "S01E1",
+   "S01E2",
+   "S01E3",
+   "S01E4",
+   "S01E5",
+   "S01E6"
+  ]
+ },
+ {
+  "id": "S02",
+  "nome": "Ei Globo, toma essa sinopse",
+  "pilar": "Resposta",
+  "esforco": "Médio",
+  "premissa": "Premissas de novelas ambientadas no Nordeste de hoje, sem coronel, sem retirante e sem seca como vilã.",
+  "quem_faz": "Roteirista do grupo escreve, quem topa aparecer grava.",
+  "episodios": [
+   "S02E1",
+   "S02E2",
+   "S02E3",
+   "S02E4",
+   "S02E5"
+  ]
+ },
+ {
+  "id": "S03",
+  "nome": "Dever de casa pra roteirista",
+  "pilar": "Resposta",
+  "esforco": "Baixo",
+  "premissa": "Indicações de livros de autores nordestinos para quem for escrever a próxima novela sobre a região.",
+  "quem_faz": "Quem lê indica. Uma pessoa confere ano e autoria.",
+  "episodios": [
+   "S03E1",
+   "S03E2",
+   "S03E3",
+   "S03E4",
+   "S03E5"
+  ]
+ },
+ {
+  "id": "S04",
+  "nome": "Me mostra na novela (o Nordeste de terça-feira)",
+  "pilar": "Resposta",
+  "esforco": "Baixo",
+  "premissa": "Chamada aberta: cada pessoa grava o seu Nordeste num dia comum e marca o coletivo.",
+  "quem_faz": "Um membro por semana abre, o público continua.",
+  "episodios": [
+   "S04E1",
+   "S04E2",
+   "S04E3",
+   "S04E4",
+   "S04E5"
+  ]
+ },
+ {
+  "id": "S05",
+  "nome": "Não faz só forró",
+  "pilar": "Afirmação",
+  "esforco": "Baixo",
+  "premissa": "Artistas nordestinos de rock, pop, rap, jazz e eletrônica, apresentados para quem é de fora.",
+  "quem_faz": "Quem é fã apresenta. Marcar o artista sempre.",
+  "episodios": [
+   "S05E1",
+   "S05E2",
+   "S05E3",
+   "S05E4",
+   "S05E5"
+  ]
+ },
+ {
+  "id": "S06",
+  "nome": "Filmaram melhor",
+  "pilar": "Afirmação",
+  "esforco": "Baixo",
+  "premissa": "Filmes e séries feitos na região que mostram o que a novela não mostra, com uma explicação de por que funcionam.",
+  "quem_faz": "Cinéfilo do grupo. Conferir ficha técnica.",
+  "episodios": [
+   "S06E1",
+   "S06E2",
+   "S06E3",
+   "S06E4",
+   "S06E5"
+  ]
+ },
+ {
+  "id": "S07",
+  "nome": "Me perguntaram isso",
+  "pilar": "Resposta",
+  "esforco": "Baixo",
+  "premissa": "Perguntas absurdas que os membros já ouviram, respondidas com humor e um dado.",
+  "quem_faz": "Quem ouviu a pergunta grava.",
+  "episodios": [
+   "S07E1",
+   "S07E2",
+   "S07E3",
+   "S07E4",
+   "S07E5"
+  ]
+ },
+ {
+  "id": "S08",
+  "nome": "Feito aqui",
+  "pilar": "Afirmação",
+  "esforco": "Médio",
+  "premissa": "Ciência, tecnologia, educação e economia do Nordeste em dados checados, um por peça.",
+  "quem_faz": "Pesquisa confere a fonte antes do design.",
+  "episodios": [
+   "S08E1",
+   "S08E2",
+   "S08E3",
+   "S08E4",
+   "S08E5"
+  ]
+ },
+ {
+  "id": "S09",
+  "nome": "Nove não é um",
+  "pilar": "Afirmação",
+  "esforco": "Médio",
+  "premissa": "O Nordeste são nove estados, com capital e interior, litoral e sertão. Cada peça mostra uma diferença.",
+  "quem_faz": "Um membro por estado.",
+  "episodios": [
+   "S09E1",
+   "S09E2",
+   "S09E3",
+   "S09E4",
+   "S09E5"
+  ]
+ },
+ {
+  "id": "S10",
+  "nome": "Dicionário da Barruada",
+  "pilar": "Afirmação",
+  "esforco": "Baixo",
+  "premissa": "Palavras que a gente usa de verdade, com a diferença entre os estados, sem tratar sotaque como piada.",
+  "quem_faz": "Um membro por estado valida.",
+  "episodios": [
+   "S10E1",
+   "S10E2",
+   "S10E3",
+   "S10E4",
+   "S10E5"
+  ]
+ },
+ {
+  "id": "S11",
+  "nome": "Leva pra sala",
+  "pilar": "Afirmação",
+  "esforco": "Alto",
+  "premissa": "Atividades prontas para professores usarem as peças do coletivo em aula.",
+  "quem_faz": "Professoras do grupo testam antes de publicar.",
+  "episodios": [
+   "S11E1",
+   "S11E2",
+   "S11E3",
+   "S11E4",
+   "S11E5"
+  ]
+ },
+ {
+  "id": "S12",
+  "nome": "Isso tem nome",
+  "pilar": "Resposta",
+  "esforco": "Médio",
+  "premissa": "Xenofobia e saúde mental explicadas pela psicóloga do grupo, com estudo citado.",
+  "quem_faz": "Psicóloga do grupo. Nada de diagnóstico, só leitura de pesquisa.",
+  "episodios": [
+   "S12E1",
+   "S12E2",
+   "S12E3",
+   "S12E4",
+   "S12E5"
+  ]
+ },
+ {
+  "id": "S13",
+  "nome": "Vaga aberta",
+  "pilar": "Afirmação",
+  "esforco": "Médio",
+  "premissa": "Profissionais nordestinos de roteiro, direção e música apresentados como oferta, nunca como acusação.",
+  "quem_faz": "Conferir cada nome e marcar com respeito.",
+  "episodios": [
+   "S13E1",
+   "S13E2",
+   "S13E3",
+   "S13E4",
+   "S13E5"
+  ]
+ },
+ {
+  "id": "S14",
+  "nome": "Mudaram a conversa",
+  "pilar": "Afirmação",
+  "esforco": "Médio",
+  "premissa": "Perfis rápidos de nordestinos que mudaram a ciência, a educação e o pensamento.",
+  "quem_faz": "Pesquisa confere, quem tem ligação com a área grava.",
+  "episodios": [
+   "S14E1",
+   "S14E2",
+   "S14E3",
+   "S14E4",
+   "S14E5"
+  ]
+ }
+]
