@@ -1,0 +1,216 @@
+{
+ "quiz": [
+  {
+   "afirmacao": "As 100 escolas públicas mais bem colocadas no Ideb 2023 dos anos iniciais ficam todas no Nordeste.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade. Das 100, 67 são do Ceará.",
+   "fonte": "https://www.correiodamanha.com.br/nacional/nordeste/2024/08/amp/150501-nordeste-lidera-desempenho-escolar-nas-series-iniciais.html"
+  },
+  {
+   "afirmacao": "A maioria dos nordestinos vive na zona rural.",
+   "resposta": "novela",
+   "explicacao": "Coisa de novela. Pelo Censo 2022, 77,6% vivem em área urbana.",
+   "fonte": "https://www.ocafezinho.com/2024/11/14/censo-2022-87-da-populacao-brasileira-vive-em-areas-urbanas/amp/"
+  },
+  {
+   "afirmacao": "O Nordeste gera mais de 90% da energia eólica do Brasil.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade. Em 2025 foram 93%, segundo a ABEEólica.",
+   "fonte": "https://abeeolica.org.br/wp-content/uploads/2026/07/424_ABEEOLICA_BOLETIM-ANUAL-2026_PT_DIGITAL_V3.pdf"
+  },
+  {
+   "afirmacao": "Existe no Recife um parque tecnológico com mais de 500 empresas.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade. O Porto Digital fechou 2025 com 541.",
+   "fonte": "https://movimentoeconomico.com.br/geral/redacao/2026/03/27/porto-digital-cresce-19-e-atinge-r-74-bilhoes-em-2025/"
+  },
+  {
+   "afirmacao": "O Nordeste tem menos habitantes que a região Sul.",
+   "resposta": "novela",
+   "explicacao": "Coisa de novela. São 54,6 milhões contra 29,9 milhões no Sul.",
+   "fonte": "https://www.gov.br/fundaj/pt-br/composicao/dipes-1/publicacoes/relatorios-de-pesquisas/censo-demografico-2022-reflexoes-iniciais-sobre-a-regiao-nordeste.pdf"
+  },
+  {
+   "afirmacao": "Nordeste é um estado.",
+   "resposta": "novela",
+   "explicacao": "São nove: Alagoas, Bahia, Ceará, Maranhão, Paraíba, Pernambuco, Piauí, Rio Grande do Norte e Sergipe.",
+   "fonte": ""
+  },
+  {
+   "afirmacao": "Existe um gênero musical chamado rock de favela, criado em Fortaleza.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade. É a linguagem de Mateus Fazeno Rock, cria da Sapiranga.",
+   "fonte": "https://www.folhape.com.br/cultura/mateus-fazeno-rock-tiny-desk/522091/"
+  },
+  {
+   "afirmacao": "O disco Nordeste Ficção, de Juliana Linhares, é um álbum de forró tradicional.",
+   "resposta": "novela",
+   "explicacao": "É um disco de 2021 que discute como a imagem do Nordeste foi inventada.",
+   "fonte": "https://www.brasildefato.com.br/2021/05/04/nordeste-e-ficcao/"
+  },
+  {
+   "afirmacao": "Em 2025, só dois estados tinham escolas nota 10 no Ideb dos anos iniciais, e os dois são do Nordeste.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade: Ceará e Alagoas.",
+   "fonte": "https://www.opovo.com.br/noticias/ceara/2026/08/05/numero-de-escolas-cearenses-com-ideb-10-nos-anos-iniciais-cresce-240.html"
+  },
+  {
+   "afirmacao": "Mais de um em cada quatro brasileiros é do Nordeste.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade. A região tem 26,9% da população do país.",
+   "fonte": "https://www.cartacapital.com.br/?p=354292"
+  },
+  {
+   "afirmacao": "O livro A Invenção do Nordeste defende que a região sempre foi atrasada por causa do clima.",
+   "resposta": "novela",
+   "explicacao": "É o contrário: o livro mostra que essa imagem foi construída no século 20.",
+   "fonte": "https://www.cartacapital.com.br/?p=262043"
+  },
+  {
+   "afirmacao": "O Porto Digital foi fundado no ano 2000.",
+   "resposta": "nordeste",
+   "explicacao": "Verdade. Tem mais de 25 anos.",
+   "fonte": "https://movimentoeconomico.com.br/geral/redacao/2026/03/27/porto-digital-cresce-19-e-atinge-r-74-bilhoes-em-2025/"
+  }
+ ],
+ "bingo": [
+  "Calango no primeiro minuto",
+  "Sol rachando com filtro amarelo",
+  "Pau de arara",
+  "Chão rachado",
+  "Um sotaque só para nove estados",
+  "Coronel",
+  "Jagunço",
+  "Casa sem energia",
+  "Lamparina",
+  "Lata d'água na cabeça",
+  "Personagem que sonha em ir para São Paulo",
+  "Beata",
+  "Cangaceiro",
+  "Jegue como transporte principal",
+  "Ninguém tem celular",
+  "Roupa de couro em quem não é vaqueiro",
+  "Oxente a cada frase",
+  "Seca como vilã",
+  "Cidade fictícia com nome engraçado",
+  "Trilha só de sanfona",
+  "Retirante",
+  "Banho no quintal",
+  "Imagem em tom sépia",
+  "Forró em toda cena de festa"
+ ],
+ "gerador": {
+  "lugar": [
+   "Salvador num mês sem Carnaval",
+   "Maceió, num prédio da orla",
+   "Recife, no Porto Digital",
+   "Campina Grande",
+   "Sobral, cidade de escola nota 10",
+   "Teresina",
+   "São Luís",
+   "Aracaju",
+   "Natal",
+   "Juazeiro do Norte",
+   "Petrolina",
+   "Feira de Santana",
+   "Mossoró",
+   "Caruaru",
+   "Imperatriz"
+  ],
+  "protagonista": [
+   "uma programadora",
+   "uma professora de escola pública nota 10",
+   "um engenheiro de parque eólico",
+   "uma psicóloga",
+   "uma cineasta",
+   "uma cantora pop",
+   "uma pesquisadora de universidade federal",
+   "a dona de uma startup",
+   "um produtor de realidade virtual",
+   "uma médica de família",
+   "um chef de cozinha",
+   "um motorista de aplicativo que estuda Direito à noite"
+  ],
+  "conflito": [
+   "a herança de uma gráfica",
+   "a rivalidade entre duas bandas",
+   "uma startup disputada por investidores",
+   "um segredo de família numa casa de praia",
+   "a eleição para a reitoria",
+   "um aplicativo que viraliza pelo motivo errado",
+   "a volta de quem foi embora e não reconhece mais a cidade",
+   "um restaurante e a receita da avó"
+  ],
+  "cliche": [
+   "coronel",
+   "seca como vilã",
+   "retirante",
+   "jagunço",
+   "beata",
+   "oxente em toda frase",
+   "pau de arara"
+  ]
+ },
+ "jornada": [
+  {
+   "etapa": "Mundo comum",
+   "cliche": "Casa de taipa, chão rachado, fome.",
+   "troca": "Uma casa comum, com boleto, wi-fi e gente atrasada para o trabalho."
+  },
+  {
+   "etapa": "Chamado à aventura",
+   "cliche": "A seca expulsa o herói.",
+   "troca": "Uma oportunidade aparece: um edital, uma vaga, uma ideia."
+  },
+  {
+   "etapa": "Recusa do chamado",
+   "cliche": "O herói não quer deixar a terra amada.",
+   "troca": "A dúvida é prática: quem cuida da avó? Dá para pagar o aluguel?"
+  },
+  {
+   "etapa": "Encontro com o mentor",
+   "cliche": "Um velho sábio que fala por provérbio.",
+   "troca": "Uma professora da rede pública que conhece o caminho."
+  },
+  {
+   "etapa": "Travessia do limiar",
+   "cliche": "A viagem de pau de arara para o Sudeste.",
+   "troca": "A decisão de ficar e fazer aqui, ou de ir e voltar."
+  },
+  {
+   "etapa": "Provas, aliados e inimigos",
+   "cliche": "Coronel, jagunço, capataz.",
+   "troca": "Burocracia, falta de investimento, sócio difícil, grupo de amigos que segura a onda."
+  },
+  {
+   "etapa": "Aproximação",
+   "cliche": "O duelo marcado ao meio-dia.",
+   "troca": "A véspera da apresentação, da prova, do lançamento."
+  },
+  {
+   "etapa": "Provação",
+   "cliche": "Tiroteio ou morte de um inocente.",
+   "troca": "O projeto quase quebra. A pessoa quase desiste."
+  },
+  {
+   "etapa": "Recompensa",
+   "cliche": "Vingança ou um pedaço de terra.",
+   "troca": "O negócio dá certo, o filme estreia, a turma passa."
+  },
+  {
+   "etapa": "Caminho de volta",
+   "cliche": "O herói retorna rico do Sudeste.",
+   "troca": "A pessoa nunca saiu. Ou saiu, estudou e voltou por escolha."
+  },
+  {
+   "etapa": "Ressurreição",
+   "cliche": "O milagre da chuva.",
+   "troca": "A cidade muda porque as pessoas mudaram a cidade."
+  },
+  {
+   "etapa": "Retorno com o elixir",
+   "cliche": "A fazenda salva.",
+   "troca": "Conhecimento que fica: escola, empresa, disco, pesquisa."
+  }
+ ]
+}

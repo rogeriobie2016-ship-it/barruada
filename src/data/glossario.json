@@ -1,0 +1,284 @@
+[
+ {
+  "termo": "barruada",
+  "significado": "Batida, trombada, colisão. Do verbo barruar.",
+  "exemplo": "Dei uma barruada na porta de vidro.",
+  "onde": "CE e vizinhança"
+ },
+ {
+  "termo": "barruar",
+  "significado": "Bater, colidir, esbarrar com força.",
+  "exemplo": "O carro barruou no poste.",
+  "onde": "CE e vizinhança"
+ },
+ {
+  "termo": "arretado",
+  "significado": "Muito bom, admirável. Em alguns lugares também quer dizer irritado.",
+  "exemplo": "Esse disco é arretado.",
+  "onde": "PE, PB, AL e além"
+ },
+ {
+  "termo": "massa",
+  "significado": "Legal, ótimo.",
+  "exemplo": "Ficou massa o vídeo.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "oxente / oxe",
+  "significado": "Espanto, surpresa ou discordância.",
+  "exemplo": "Oxe, e quem disse isso?",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "visse",
+  "significado": "Reforço no fim da frase, como \"viu?\".",
+  "exemplo": "Chega cedo, visse?",
+  "onde": "PE e PB"
+ },
+ {
+  "termo": "macho",
+  "significado": "Jeito de chamar qualquer pessoa, de qualquer gênero.",
+  "exemplo": "Macho, tu viu a novela?",
+  "onde": "CE"
+ },
+ {
+  "termo": "arre égua",
+  "significado": "Espanto ou admiração.",
+  "exemplo": "Arre égua, que calor.",
+  "onde": "CE"
+ },
+ {
+  "termo": "égua",
+  "significado": "Espanto.",
+  "exemplo": "Égua, que coisa linda.",
+  "onde": "MA e PI"
+ },
+ {
+  "termo": "mainha e painho",
+  "significado": "Mãe e pai, com carinho.",
+  "exemplo": "Mainha mandou lembrança.",
+  "onde": "BA, PE e além"
+ },
+ {
+  "termo": "aperreado",
+  "significado": "Aflito, preocupado, apressado.",
+  "exemplo": "Tô aperreado com o prazo.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "avexado",
+  "significado": "Apressado, agoniado.",
+  "exemplo": "Calma, não se avexe.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "abestado",
+  "significado": "Bobo, distraído.",
+  "exemplo": "Deixa de ser abestado.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "arengar",
+  "significado": "Brigar, discutir por pouca coisa.",
+  "exemplo": "Vivem arengando.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "arrudeio",
+  "significado": "Volta, desvio, caminho mais comprido.",
+  "exemplo": "Dá um arrudeio pela praça.",
+  "onde": "CE, PB, RN"
+ },
+ {
+  "termo": "baixa da égua",
+  "significado": "Lugar muito longe.",
+  "exemplo": "Ele mora lá na baixa da égua.",
+  "onde": "CE"
+ },
+ {
+  "termo": "botar boneco",
+  "significado": "Fazer confusão, criar caso.",
+  "exemplo": "Não vá botar boneco na reunião.",
+  "onde": "CE"
+ },
+ {
+  "termo": "brocado",
+  "significado": "Com muita fome.",
+  "exemplo": "Tô brocado.",
+  "onde": "CE e além"
+ },
+ {
+  "termo": "canelau",
+  "significado": "Pessoa sem modos ou sem cuidado.",
+  "exemplo": "Deixa de ser canelau.",
+  "onde": "CE"
+ },
+ {
+  "termo": "dar fé",
+  "significado": "Perceber, notar.",
+  "exemplo": "Quando dei fé, já era noite.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "diabéisso",
+  "significado": "Espanto: \"que diabo é isso?\".",
+  "exemplo": "Diabéisso, menino?",
+  "onde": "CE"
+ },
+ {
+  "termo": "estribado",
+  "significado": "Com dinheiro.",
+  "exemplo": "Tá estribado, hein.",
+  "onde": "CE, PI"
+ },
+ {
+  "termo": "frescar",
+  "significado": "Brincar, zoar.",
+  "exemplo": "Tô só frescando contigo.",
+  "onde": "CE"
+ },
+ {
+  "termo": "fuleiro",
+  "significado": "De má qualidade, sem valor.",
+  "exemplo": "Que cenário fuleiro.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "gaiato",
+  "significado": "Engraçado, brincalhão.",
+  "exemplo": "Menino gaiato.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "gastura",
+  "significado": "Aflição, incômodo.",
+  "exemplo": "Me dá uma gastura ouvir isso.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "jerimum",
+  "significado": "Abóbora.",
+  "exemplo": "Doce de jerimum.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "macaxeira",
+  "significado": "Mandioca de mesa, aipim.",
+  "exemplo": "Macaxeira frita.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "liso",
+  "significado": "Sem dinheiro.",
+  "exemplo": "Tô liso esse mês.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "mangar",
+  "significado": "Zombar, rir de alguém.",
+  "exemplo": "Tá mangando de mim?",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "marminino",
+  "significado": "Espanto, vindo de \"mas, menino\".",
+  "exemplo": "Marminino, que história é essa?",
+  "onde": "CE"
+ },
+ {
+  "termo": "migué",
+  "significado": "Desculpa esfarrapada, enrolação.",
+  "exemplo": "Deixa de migué.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "miolo de pote",
+  "significado": "Conversa sem importância.",
+  "exemplo": "Isso é miolo de pote.",
+  "onde": "CE"
+ },
+ {
+  "termo": "mói",
+  "significado": "Monte, grande quantidade.",
+  "exemplo": "Tem um mói de gente.",
+  "onde": "CE, RN, PB"
+ },
+ {
+  "termo": "muriçoca",
+  "significado": "Pernilongo, mosquito.",
+  "exemplo": "A muriçoca não deixou dormir.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "pantim",
+  "significado": "Frescura, drama.",
+  "exemplo": "Deixa de pantim.",
+  "onde": "PB, PE, RN"
+ },
+ {
+  "termo": "peba",
+  "significado": "Ruim, de pouca qualidade.",
+  "exemplo": "Um sinal peba de internet.",
+  "onde": "CE e além"
+ },
+ {
+  "termo": "pense",
+  "significado": "Reforço de intensidade no começo da frase.",
+  "exemplo": "Pense num povo trabalhador.",
+  "onde": "CE"
+ },
+ {
+  "termo": "rebolar no mato",
+  "significado": "Jogar fora.",
+  "exemplo": "Rebola isso no mato.",
+  "onde": "CE"
+ },
+ {
+  "termo": "ruma",
+  "significado": "Monte, grande quantidade.",
+  "exemplo": "Uma ruma de livro.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "só o mi",
+  "significado": "Muito bom, perfeito.",
+  "exemplo": "Esse show foi só o mi.",
+  "onde": "CE"
+ },
+ {
+  "termo": "sustança",
+  "significado": "Força, energia que vem da comida.",
+  "exemplo": "Come pra ter sustança.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "tabacudo",
+  "significado": "Bobo, atrapalhado.",
+  "exemplo": "Deixa de ser tabacudo.",
+  "onde": "PE"
+ },
+ {
+  "termo": "triscar",
+  "significado": "Tocar de leve.",
+  "exemplo": "Nem trisque nisso.",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "xexeiro",
+  "significado": "Quem não paga o que deve.",
+  "exemplo": "Fulano é xexeiro.",
+  "onde": "PE"
+ },
+ {
+  "termo": "zoada",
+  "significado": "Barulho.",
+  "exemplo": "Que zoada é essa?",
+  "onde": "Vários estados"
+ },
+ {
+  "termo": "dindim",
+  "significado": "Suco congelado no saquinho. Em outros lugares: geladinho, sacolé, chup-chup.",
+  "exemplo": "Me dá um dindim de coco.",
+  "onde": "CE e além"
+ }
+]
