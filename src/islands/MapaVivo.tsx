@@ -159,6 +159,10 @@ export default function MapaVivo({ estados, modo, base }: Props) {
             <p className="rotulo m-0 cor-destaque">{atual.uf}</p>
             <h2 className="mt-2 text-5xl md:text-6xl" data-nome-estado>{atual.nome}</h2>
 
+            <a href={`${base}/estado/${atual.uf.toLowerCase()}/`} className="mt-2 inline-flex min-h-11 items-center font-bold underline" data-pagina-estado>
+              Abrir a página de {atual.nome}
+            </a>
+
             <h3 className="mt-6 text-xl">Gente do coletivo</h3>
             {atual.membros.length === 0 ? (
               <p className="m-0 mt-1 text-cinza-quente">Ninguém cadastrado aqui ainda.</p>

@@ -1,0 +1,170 @@
+---
+// Página de cada um dos nove estados: gente do coletivo, dados checados, biblioteca, palavras e mural.
+import { Capa } from '../../components/marca/Capa.tsx';
+import { Ilustra } from '../../components/marca/Ilustra.tsx';
+import mapa from '../../data/ne-map.json';
+import Base from '../../layouts/Base.astro';
+import { ufsDoItem } from '../../lib/biblioteca.ts';
+import { biblioteca, glossario, membros, mural, rota } from '../../lib/dados.ts';
+import { resumoPorEstado, type ResumoEstado } from '../../lib/estados.ts';
+import { slug } from '../../lib/texto.ts';
+
+export function getStaticPaths() {
+  return resumoPorEstado(biblioteca, membros).map((estado) => ({ params: { uf: estado.uf.toLowerCase() }, props: { estado } }));
+}
+
+interface Props {
+  estado: ResumoEstado;
+}
+const { estado } = Astro.props;
+const geo = mapa as { w: number; h: number; states: { uf: string; name: string; d: string }[] };
+const palavras = glossario.filter((t) => ufsDoItem({ uf: t.onde }).includes(estado.uf));
+const recados = mural.filter((r) => r.estado === estado.uf);
+const vizinhos = resumoPorEstado(biblioteca, membros).filter((e) => e.uf !== estado.uf);
+const cores = ['anil', 'barro', 'nanquim', 'sol'] as const;
+---
+
+<Base titulo={estado.nome} descricao={`${estado.nome} na Barruada: gente do coletivo, dados checados, referências e palavras de lá.`}>
+  <header class="faixa faixa--anil grao relative overflow-hidden">
+    <Ilustra nome="estrela" className="solta left-[52%] top-6 hidden w-8 -rotate-12 md:block" />
+    <div class="relative mx-auto grid max-w-6xl items-center gap-6 px-4 py-10 md:grid-cols-[1.2fr_1fr] md:px-8 md:py-14">
+      <div>
+        <p class="etiqueta etiqueta-sol m-0 text-sm">Um dos nove</p>
+        <h1 class="mt-4 text-6xl md:text-8xl">{estado.nome}</h1>
+        <p class="mt-4 max-w-md text-lg">
+          {estado.membros.length === 0 ? 'Ninguém do coletivo cadastrado aqui ainda.' : estado.membros.length === 1 ? '1 pessoa do coletivo é daqui.' : `${estado.membros.length} pessoas do coletivo são daqui.`}
+        </p>
+        <a href={rota(`/quem-somos/#${estado.uf}`)} class="botao botao-linha mt-5">Ver no mapa dos nove</a>
+      </div>
+      <div class="cena-mapa" aria-hidden="true">
+        <Ilustra nome="raios" className="cena-raios giro" />
+        <span class="cena-disco grao"></span>
+        <svg viewBox={`-20 -20 ${geo.w + 40} ${geo.h + 40}`} class="cena-desenho">
+          {
+            geo.states.map((s) => (
+              <path
+                d={s.d}
+                style={`fill: var(${s.uf === estado.uf ? '--sol' : '--papel'}); stroke: var(${s.uf === estado.uf ? '--nanquim' : '--barro'}); stroke-width: ${s.uf === estado.uf ? '3px' : 'var(--traco-mapa)'}; vector-effect: non-scaling-stroke; stroke-linejoin: round;`}
+              />
+            ))
+          }
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  {
+    estado.membros.length > 0 && (
+      <section class="faixa faixa--papel grao rasgo sobre-claro relative" aria-labelledby="titulo-gente">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+          <h2 id="titulo-gente" class="text-3xl md:text-5xl">Gente do coletivo</h2>
+          <ul class="m-0 mt-5 grid list-none gap-3 p-0 md:grid-cols-3">
+            {estado.membros.map((m) => (
+              <li class="border border-nanquim p-4" data-membro>
+                <p class="m-0 font-titulo text-2xl font-extrabold tracking-[-0.04em]">{m.nome}</p>
+                {m.area && <p class="m-0 mt-1">{m.area}</p>}
+                {m.topa.length > 0 && (
+                  <p class="m-0 mt-2 flex flex-wrap gap-1">
+                    {m.topa.map((t) => <span class="rotulo bg-anil px-1.5 py-0.5 text-papel">{t}</span>)}
+                  </p>
+                )}
+                {m.link && (
+                  <a href={m.link} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-11 items-center font-bold text-anil">
+                    Ver o perfil<span class="so-leitor"> de {m.nome} (abre em nova aba)</span>
+                  </a>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    estado.dados.length > 0 && (
+      <section class="faixa faixa--sol grao rasgo sobre-claro relative" aria-labelledby="titulo-dados">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+          <h2 id="titulo-dados" class="text-3xl md:text-5xl">Dados para afirmar</h2>
+          <ul class="m-0 mt-5 grid list-none gap-4 p-0 md:grid-cols-2">
+            {estado.dados.map((d) => (
+              <li class="border-l-4 border-nanquim pl-4" data-dado>
+                <a href={rota(`/biblioteca/#${slug(d.titulo)}`)} class="font-titulo text-2xl font-extrabold tracking-[-0.04em]">{d.titulo}</a>
+                {d.por_que && <p class="m-0 mt-1 text-lg">{d.por_que}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    estado.referencias.length > 0 && (
+      <section class="faixa faixa--noite grao rasgo relative" aria-labelledby="titulo-refs">
+        <div class="mx-auto max-w-6xl px-4 pt-10 md:px-8">
+          <h2 id="titulo-refs" class="text-3xl md:text-5xl">Na biblioteca</h2>
+        </div>
+        <div class="mx-auto max-w-6xl pt-4">
+          <ul class="trilho" tabindex="0" aria-label="Referências deste estado: role para o lado para ver mais">
+            {estado.referencias.map((r, n) => (
+              <li>
+                <a href={rota(`/biblioteca/#${slug(r.titulo)}`)} class="cartao-link">
+                  <Capa titulo={r.titulo} rotulo={r.secao} esquema={cores[n % 4]} />
+                  <span class="mt-2 block text-sm text-texto-suave">{[r.autoria, r.ano].filter(Boolean).join(', ')}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    palavras.length > 0 && (
+      <section class="faixa faixa--areia grao rasgo sobre-claro relative" aria-labelledby="titulo-palavras">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+          <h2 id="titulo-palavras" class="text-3xl md:text-5xl">Palavras que se ouvem por lá</h2>
+          <ul class="m-0 mt-5 flex list-none flex-wrap gap-3 p-0">
+            {palavras.map((t, n) => (
+              <li>
+                <a href={rota(`/glossario/#${slug(t.termo)}`)} class:list={['etiqueta text-xl no-underline', n % 3 === 1 && 'etiqueta-sol', n % 3 === 2 && 'etiqueta-barro']} title={t.significado}>
+                  {t.termo}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    recados.length > 0 && (
+      <section class="faixa faixa--barro grao rasgo relative" aria-labelledby="titulo-recados">
+        <div class="mx-auto max-w-6xl px-4 py-10 md:px-8">
+          <h2 id="titulo-recados" class="text-3xl md:text-5xl">Me mostra na novela</h2>
+          <ul class="m-0 mt-5 grid list-none gap-4 p-0 md:grid-cols-3">
+            {recados.map((r) => (
+              <li class="faixa faixa--papel grao sobre-claro p-4" data-recado>
+                <p class="m-0 font-titulo text-xl font-bold leading-tight tracking-[-0.03em]">{r.texto}</p>
+                {r.nome && <p class="m-0 mt-3 text-sm">{r.nome}</p>}
+              </li>
+            ))}
+          </ul>
+          <a href={rota('/mural/')} class="botao botao-linha mt-5">Ver o mural inteiro</a>
+        </div>
+      </section>
+    )
+  }
+
+  <nav class="faixa faixa--nanquim grao rasgo relative" aria-label="Outros estados">
+    <div class="mx-auto max-w-6xl px-4 py-8 md:px-8">
+      <p class="rotulo m-0 cor-destaque">Os outros oito</p>
+      <ul class="m-0 mt-3 flex list-none flex-wrap gap-2 p-0">
+        {vizinhos.map((e) => <li><a href={rota(`/estado/${e.uf.toLowerCase()}/`)} class="botao botao-linha min-h-11 py-2">{e.nome}</a></li>)}
+      </ul>
+    </div>
+  </nav>
+</Base>
