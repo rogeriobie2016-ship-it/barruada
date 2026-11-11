@@ -119,4 +119,5 @@ export interface Site {
   status: string[];
   drive: Record<string, string>;
   redes: Record<string, string>;
+  mural_formulario?: string; // link do formulário externo do mural (vazio = envio fechado)
 }

@@ -1,0 +1,5 @@
+Carimbo de data/hora,nome,estado,texto,link,aprovado
+2026-11-12 10:00,Pessoa aprovada,ce,"Terça-feira em Fortaleza: ônibus cheio, reunião às nove e café na padaria.",https://example.com/video,sim
+2026-11-12 10:05,Pessoa em espera,PE,Recado que ainda não passou pela moderação.,https://example.com/espera,
+2026-11-12 10:07,Pessoa recusada,BA,Recado recusado pela moderação.,,não
+2026-11-12 10:09,Outra aprovada,BA,Salvador numa terça sem trio e sem abadá.,http://link-sem-https.example,SIM

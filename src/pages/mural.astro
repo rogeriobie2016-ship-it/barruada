@@ -1,0 +1,98 @@
+---
+// Mural "Me mostra na novela". O envio é por formulário externo (site.mural_formulario)
+// e só aparece aqui o que a moderação aprovou (ver src/lib/mural.ts e o README).
+import Cabecalho from '../components/Cabecalho.astro';
+import { Ilustra } from '../components/marca/Ilustra.tsx';
+import Base from '../layouts/Base.astro';
+import { nomeDoLugar } from '../lib/biblioteca.ts';
+import { mural, pautas, rota, series, site } from '../lib/dados.ts';
+import { dominio } from '../lib/texto.ts';
+
+const serie = series.find((s) => s.id === 'S04');
+const ganchos = pautas.filter((p) => p.serie_id === 'S04' && p.gancho);
+const formulario = site.mural_formulario ?? '';
+const tons = ['papel', 'sol', 'areia'] as const;
+---
+
+<Base titulo="Me mostra na novela" descricao={serie?.premissa ?? 'Mural do Nordeste num dia comum.'}>
+  <Cabecalho
+    rotulo="Mural"
+    titulo="Me mostra na novela"
+    texto={serie?.premissa}
+    tom="barro"
+    arte="predio"
+  />
+
+  <section class="faixa faixa--sol grao rasgo sobre-claro relative" aria-labelledby="titulo-enviar">
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[1.2fr_1fr] md:px-8">
+      <div>
+        <h2 id="titulo-enviar" class="text-3xl md:text-5xl">Mande o seu Nordeste de terça-feira</h2>
+        <ol class="m-0 mt-5 grid list-none gap-3 p-0 text-lg">
+          <li class="border-l-4 border-nanquim pl-3"><strong>1.</strong> Grave ou escreva um dia comum no seu lugar.</li>
+          <li class="border-l-4 border-nanquim pl-3"><strong>2.</strong> Envie pelo formulário, com o link do seu post se quiser.</li>
+          <li class="border-l-4 border-nanquim pl-3"><strong>3.</strong> Uma pessoa do coletivo lê antes de publicar. Nada entra no mural sem passar por ela.</li>
+        </ol>
+        {
+          formulario ? (
+            <a href={formulario} target="_blank" rel="noopener noreferrer" class="botao botao-tinta mt-6" data-enviar>
+              Abrir o formulário<span class="so-leitor"> (abre em nova aba)</span>
+            </a>
+          ) : (
+            <p class="etiqueta mt-6 text-base" data-envio-fechado>O formulário de envio ainda não está ligado.</p>
+          )
+        }
+      </div>
+      {
+        ganchos.length > 0 && (
+          <div>
+            <p class="rotulo m-0">Para dar ideia</p>
+            <ul class="m-0 mt-3 grid list-none gap-3 p-0">
+              {ganchos.map((p, n) => (
+                <li class:list={['etiqueta !block p-3 text-lg', n % 2 === 0 ? '' : 'etiqueta-barro']} style={`transform: rotate(${n % 2 === 0 ? -1 : 1}deg)`}>
+                  {p.gancho}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="faixa faixa--noite grao rasgo relative overflow-hidden" aria-labelledby="titulo-mural">
+    <Ilustra nome="estrela" className="solta right-[6%] top-8 w-10 rotate-12" />
+    <div class="relative mx-auto max-w-6xl px-4 py-10 md:px-8">
+      <h2 id="titulo-mural" class="text-3xl md:text-5xl">O mural</h2>
+      {
+        mural.length === 0 ? (
+          <div class="mt-5 max-w-xl" data-mural-vazio>
+            <p class="caneta m-0 -rotate-1 text-4xl text-sol">O primeiro recado pode ser o seu.</p>
+            <p class="mt-3 text-lg text-texto-suave">Ainda não tem recado aprovado. Assim que a moderação liberar os primeiros, eles aparecem aqui.</p>
+          </div>
+        ) : (
+          <ul class="m-0 mt-6 grid list-none gap-4 p-0 md:grid-cols-3">
+            {mural.map((r, n) => (
+              <li class:list={['faixa grao sobre-claro p-4', `faixa--${tons[n % tons.length]}`]} data-recado>
+                <p class="rotulo m-0 cor-destaque">{r.estado ? nomeDoLugar(r.estado) : 'Nordeste'}</p>
+                <p class="m-0 mt-2 font-titulo text-xl font-bold leading-tight tracking-[-0.03em]">{r.texto}</p>
+                {r.nome && <p class="m-0 mt-3 text-sm">{r.nome}</p>}
+                <div class="flex flex-wrap gap-x-4">
+                  {r.link && (
+                    <a href={r.link} target="_blank" rel="noopener noreferrer nofollow ugc" class="inline-flex min-h-11 items-center text-sm font-bold">
+                      Ver em {dominio(r.link)}<span class="so-leitor"> (abre em nova aba)</span>
+                    </a>
+                  )}
+                  {r.estado && (
+                    <a href={rota(`/estado/${r.estado.toLowerCase()}/`)} class="inline-flex min-h-11 items-center text-sm font-bold">
+                      Mais de {nomeDoLugar(r.estado)}
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+</Base>

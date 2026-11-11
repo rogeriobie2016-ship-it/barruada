@@ -1,8 +1,9 @@
 // npm run validate: confere os JSON de src/data antes do build.
 import { readFileSync } from 'node:fs';
+import { validarMural } from '../src/lib/mural.ts';
 import { validarTudo } from '../src/lib/validate.ts';
 
-const nomes = ['site', 'series', 'pautas', 'biblioteca', 'glossario', 'jogos', 'membros'];
+const nomes = ['site', 'series', 'pautas', 'biblioteca', 'glossario', 'jogos', 'membros', 'mural'];
 const dados: Record<string, unknown> = {};
 const erros: string[] = [];
 
@@ -16,6 +17,7 @@ for (const nome of nomes) {
 }
 
 erros.push(...validarTudo(dados));
+erros.push(...validarMural(dados.mural));
 
 if (erros.length > 0) {
   console.error(`\nDados inválidos em src/data. ${erros.length} problema(s):\n`);

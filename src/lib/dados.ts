@@ -6,9 +6,11 @@ import forroJson from '../data/forro-ingles.json';
 import jogosJson from '../data/jogos.json';
 import kitJson from '../data/kit.json';
 import membrosJson from '../data/membros.json';
+import muralJson from '../data/mural.json';
 import pautasJson from '../data/pautas.json';
 import seriesJson from '../data/series.json';
 import siteJson from '../data/site.json';
+import { muralPublico, type Recado } from './mural.ts';
 import type { Jogos, Membro, Pauta, SecaoBiblioteca, Serie, Site, Termo } from './types.ts';
 
 export const site = siteJson as unknown as Site;
@@ -20,6 +22,8 @@ export const jogos = jogosJson as Jogos;
 export const membros = membrosJson as Membro[];
 export const kit = kitJson as { titulo: string; area: string; ano: string; tempo: string; objetivo: string }[];
 export const forroIngles = forroJson;
+// Só o que a moderação aprovou chega às páginas.
+export const mural = muralPublico(muralJson as Recado[]);
 
 // Caminho interno respeitando BASE_PATH (publicação em subpasta).
 export function rota(caminho: string): string {
