@@ -14,7 +14,7 @@ export default defineConfig({
   integrations: [
     react(),
     // /bastidores fica fora do sitemap (área de trabalho, ver src/pages/bastidores.astro).
-    sitemap({ filter: (pagina) => !pagina.includes('/bastidores') }),
+    sitemap({ filter: (pagina) => !//(bastidores|nove|manifesto)//.test(pagina) }),
   ],
   vite: { plugins: [tailwindcss()] },
 });
