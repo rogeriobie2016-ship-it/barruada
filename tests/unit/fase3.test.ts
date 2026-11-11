@@ -112,3 +112,96 @@ describe('páginas por estado', () => {
     }
   });
 });
+
+describe('em cartaz por tipo', async () => {
+  const { grupoDoFormato, itensEmCartaz, validarTexto, GRUPOS } = await import('../../src/lib/cartaz.ts');
+  const pautas = (await import('../../src/data/pautas.json')).default as import('../../src/lib/types.ts').Pauta[];
+
+  it('separa vídeo, carrossel, podcast e texto pelo formato da pauta', () => {
+    expect(grupoDoFormato('Vídeo')).toBe('video');
+    expect(grupoDoFormato('Story')).toBe('video');
+    expect(grupoDoFormato('Carrossel')).toBe('carrossel');
+    expect(grupoDoFormato('Podcast')).toBe('podcast');
+    expect(grupoDoFormato('Episódio de áudio')).toBe('podcast');
+    expect(grupoDoFormato('Blog')).toBe('texto');
+    expect(grupoDoFormato('Texto')).toBe('texto');
+    expect(GRUPOS.map((g) => g.id)).toEqual(['video', 'carrossel', 'podcast', 'texto']);
+  });
+
+  it('só entra pauta postada, e texto do site entra no grupo de textos', () => {
+    const postadas = pautas.map((p, i) => ({ ...p, status: i < 2 ? 'Postado' : p.status, formato: i === 1 ? 'Podcast' : p.formato })) as typeof pautas;
+    const textos = [{ slug: 'um-texto', titulo: 'Um texto', resumo: '', autoria: '', data: '2026-11-11', serie: '', pilar: '' }];
+    const itens = itensEmCartaz(postadas, textos);
+    expect(itens).toHaveLength(3);
+    expect(itens.map((i) => i.grupo).sort()).toEqual(['podcast', 'texto', 'video']);
+    expect(itens.find((i) => i.grupo === 'texto')!.href).toBe('/em-cartaz/textos/um-texto/');
+  });
+
+  it('confere o cabeçalho dos textos', () => {
+    expect(validarTexto('a.md', { titulo: 'Oi', data: '2026-11-11' })).toEqual([]);
+    const erros = validarTexto('a.md', { titulo: '', data: '11/11/2026', pilar: 'Outro' });
+    expect(erros).toHaveLength(3);
+    expect(erros[0]).toContain('a.md');
+  });
+});
+
+describe('palavras cruzadas', async () => {
+  const { casasDa, conferir, limpar, montarGrade } = await import('../../src/lib/cruzadas.ts');
+  const dados = (await import('../../src/data/cruzadas.json')).default;
+  const semente = (s: number) => () => ((s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296);
+  const entradas = dados.referencias.map((r) => ({ resposta: r.resposta, dica: r.dica }));
+  const grade = montarGrade(entradas, 13, 12, semente(7));
+
+  it('tira acento e espaço das respostas', () => {
+    expect(limpar('Ficção')).toBe('FICCAO');
+    expect(limpar('arre égua')).toBe('ARREEGUA');
+  });
+
+  it('monta uma grade que cabe no limite, com as palavras pedidas', () => {
+    expect(grade.palavras.length).toBeGreaterThanOrEqual(10);
+    expect(grade.linhas).toBeLessThanOrEqual(13);
+    expect(grade.colunas).toBeLessThanOrEqual(13);
+  });
+
+  it('cada palavra bate letra por letra com o gabarito', () => {
+    for (const p of grade.palavras) {
+      const escrita = casasDa(p).map(([l, c]) => grade.letras[l][c]).join('');
+      expect(escrita).toBe(p.resposta);
+    }
+  });
+
+  it('toda palavra cruza com outra e nenhuma casa fica solta', () => {
+    const uso = new Map<string, number>();
+    for (const p of grade.palavras) for (const [l, c] of casasDa(p)) uso.set(`${l},${c}`, (uso.get(`${l},${c}`) ?? 0) + 1);
+    for (const p of grade.palavras) expect(casasDa(p).some(([l, c]) => uso.get(`${l},${c}`)! > 1), p.resposta).toBe(true);
+    const preenchidas = grade.letras.flat().filter((x) => x !== null).length;
+    expect(preenchidas).toBe(uso.size);
+  });
+
+  it('não repete resposta e numera na ordem de leitura', () => {
+    expect(new Set(grade.palavras.map((p) => p.resposta)).size).toBe(grade.palavras.length);
+    const numeros = grade.palavras.map((p) => p.numero);
+    expect([...numeros].sort((a, b) => a - b)).toEqual(numeros);
+  });
+
+  it('a mesma semente dá a mesma grade', () => {
+    expect(montarGrade(entradas, 13, 12, semente(7))).toEqual(grade);
+  });
+
+  it('confere letras certas e grade completa', () => {
+    const vazio = grade.letras.map((l) => l.map(() => ''));
+    expect(conferir(grade, vazio).completa).toBe(false);
+    const cheio = grade.letras.map((l) => l.map((x) => x ?? ''));
+    const r = conferir(grade, cheio);
+    expect(r.completa).toBe(true);
+    expect(r.certas).toBe(r.total);
+  });
+
+  it('as respostas têm dica e origem nos dados do site', () => {
+    for (const r of dados.referencias) {
+      expect(r.dica.length).toBeGreaterThan(10);
+      expect(r.origem).not.toBe('');
+      expect(limpar(r.resposta).length).toBeGreaterThanOrEqual(3);
+    }
+  });
+});

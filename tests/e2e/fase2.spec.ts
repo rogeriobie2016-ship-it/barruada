@@ -171,3 +171,45 @@ test('fase 3: página de estado, mural fechado e exportação do hub', async ({ 
   const [arquivo] = await Promise.all([page.waitForEvent('download', { timeout: 60000 }), botao.click()]);
   expect(arquivo.suggestedFilename()).toMatch(/^barruada-.*\.png$/);
 });
+
+test('em cartaz mostra os quatro tipos, com podcast e blog', async ({ page }) => {
+  await page.goto('/em-cartaz/');
+  for (const tipo of ['video', 'carrossel', 'podcast', 'texto']) await expect(page.locator(`[data-grupo="${tipo}"]`)).toBeVisible();
+  await expect(page.locator('[data-grupo="podcast"] h2')).toHaveText('Podcast');
+  await expect(page.locator('[data-grupo="texto"] h2')).toHaveText('Blog e textos');
+  await page.locator('[data-tipo="podcast"]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('[data-grupo]')).toHaveCount(1);
+  await expect(page.locator('[data-grupo="podcast"]')).toBeVisible();
+});
+
+for (const jogo of ['cruzadinha', 'palavras-cruzadas']) {
+  test(`${jogo}: escreve pelo teclado, confere e fecha a grade`, async ({ page }) => {
+    await page.goto(`/jogos/${jogo}/?ordem=fixa`);
+    const quadro = page.locator('[data-jogo="cruzadas"]');
+    await expect(quadro).toBeVisible();
+
+    // Escrever avança sozinho; letra errada aparece ao conferir.
+    await page.locator('[data-dica]').first().focus();
+    await page.keyboard.press('Enter');
+    await page.keyboard.type('zz');
+    await page.locator('[data-conferir]').focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('[data-aviso]')).toContainText('errada');
+    await expect(page.locator('[aria-invalid="true"]').first()).toBeVisible();
+
+    // Revela palavra por palavra, só com teclado, até fechar.
+    const dicas = page.locator('[data-dica]');
+    const total = await dicas.count();
+    for (let i = 0; i < total; i++) {
+      await dicas.nth(i).focus();
+      await page.keyboard.press('Enter');
+      await page.locator('[data-revelar]').focus();
+      await page.keyboard.press('Enter');
+    }
+    await page.locator('[data-conferir]').focus();
+    await page.keyboard.press('Enter');
+    await expect(quadro).toHaveAttribute('data-completa', 'true');
+    await conferirCartao(page);
+  });
+}

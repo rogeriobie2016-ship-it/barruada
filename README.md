@@ -104,6 +104,21 @@ Atenção: o README do design system pede para conferir a autorização da frase
 - As atividades de `/sala-de-aula` vêm de `src/data/kit.json`, copiado do documento 05 Kit educacional no Drive.
 - Aprendendo inglês com forró é um protótipo. O conteúdo está em `src/data/forro-ingles.json` e as traduções precisam da revisão das professoras de inglês do grupo. Não entra letra de música, nem traduzida: só palavra solta e título.
 
+## Em cartaz: vídeo, carrossel, podcast, blog e textos
+
+A página `/em-cartaz` separa o que foi publicado em quatro tipos. O tipo sai da coluna `formato` da planilha de pautas:
+
+| Escreva em formato | Aparece em |
+| --- | --- |
+| Vídeo, Story, Reels | Vídeos |
+| Carrossel, Post | Carrosséis |
+| Podcast, Áudio, Episódio | Podcast |
+| Blog, Texto, Artigo, Newsletter | Blog e textos |
+
+A pauta entra quando o status vira `Postado`. O botão da peça leva para `post_url` (o episódio no tocador, o post na rede).
+
+Para texto hospedado no próprio site, crie um arquivo Markdown em `src/textos/`. Copie `_modelo.md`, tire o sublinhado do nome e preencha o cabeçalho (`titulo` e `data` são obrigatórios). O nome do arquivo vira o endereço: `src/textos/meu-texto.md` abre em `/em-cartaz/textos/meu-texto/`. Arquivo com sublinhado no começo é rascunho.
+
 ## Mural Me mostra na novela
 
 O envio é por formulário externo e nada aparece no site sem moderação.
@@ -153,6 +168,7 @@ Antes de publicar recado com nome de pessoa, confirme a autorização dela no pr
 | `kit.json` | Atividades do kit educacional |
 | `mural.json` | Recados aprovados do mural. Formato: `{"nome": "", "estado": "CE", "texto": "", "link": "", "aprovado": true}` |
 | `forro-ingles.json` | Pares de palavras do protótipo de inglês |
+| `cruzadas.json` | Respostas e dicas das palavras cruzadas, cada uma com a origem do dado |
 
 ## Fases
 

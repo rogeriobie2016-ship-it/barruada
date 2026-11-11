@@ -1,0 +1,16 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import Cruzadas from '../../islands/Cruzadas.tsx';
+import Base from '../../layouts/Base.astro';
+import { cruzadas, rota } from '../../lib/dados.ts';
+
+const entradas = cruzadas.referencias.map((r) => ({ resposta: r.resposta, dica: r.dica }));
+---
+
+<Base titulo="Palavras cruzadas" descricao="Palavras cruzadas com as referências da Barruada: novela, música, dados e clichês.">
+  <Cabecalho rotulo="Jogo" titulo="Palavras cruzadas" texto="Doze palavras das referências do projeto: a novela, a música, os dados e os clichês do bingo." tom="anil" arte="azulejo" />
+  <div class="mx-auto max-w-4xl px-4 pt-8 md:px-8">
+    <Cruzadas entradas={entradas} lado={13} quantas={12} nome="Palavras cruzadas" arquivo="barruada-palavras-cruzadas" client:load />
+    <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>
+  </div>
+</Base>

@@ -2,6 +2,7 @@
 
 import bibliotecaJson from '../data/biblioteca.json';
 import glossarioJson from '../data/glossario.json';
+import cruzadasJson from '../data/cruzadas.json';
 import forroJson from '../data/forro-ingles.json';
 import jogosJson from '../data/jogos.json';
 import kitJson from '../data/kit.json';
@@ -22,6 +23,7 @@ export const jogos = jogosJson as Jogos;
 export const membros = membrosJson as Membro[];
 export const kit = kitJson as { titulo: string; area: string; ano: string; tempo: string; objetivo: string }[];
 export const forroIngles = forroJson;
+export const cruzadas = cruzadasJson;
 // Só o que a moderação aprovou chega às páginas.
 export const mural = muralPublico(muralJson as Recado[]);
 

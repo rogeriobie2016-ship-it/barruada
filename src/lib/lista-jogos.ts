@@ -54,6 +54,22 @@ export const JOGOS: Jogo[] = [
     pronto: true,
   },
   {
+    id: 'cruzadinha',
+    nome: 'Cruzadinha do dicionário',
+    descricao: 'Grade pequena com palavras do Dicionário da Barruada. A dica é o significado.',
+    esquema: 'sol',
+    arte: 'caju',
+    pronto: true,
+  },
+  {
+    id: 'palavras-cruzadas',
+    nome: 'Palavras cruzadas',
+    descricao: 'Grade grande com as referências do projeto: novela, música, dados e clichês.',
+    esquema: 'anil',
+    arte: 'azulejo',
+    pronto: true,
+  },
+  {
     id: 'ingles-com-forro',
     nome: 'Aprendendo inglês com forró',
     descricao: 'Ligue as palavras do forró e do dicionário com o inglês. Dá para ouvir a pronúncia.',

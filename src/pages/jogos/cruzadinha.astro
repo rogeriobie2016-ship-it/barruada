@@ -1,0 +1,17 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import Cruzadas from '../../islands/Cruzadas.tsx';
+import Base from '../../layouts/Base.astro';
+import { glossario, rota } from '../../lib/dados.ts';
+
+// Só entram termos de uma palavra só. A dica é o significado do dicionário.
+const entradas = glossario.filter((t) => !/\s|\//.test(t.termo)).map((t) => ({ resposta: t.termo, dica: t.significado }));
+---
+
+<Base titulo="Cruzadinha do dicionário" descricao="Cruzadinha com palavras do Nordeste tiradas do Dicionário da Barruada.">
+  <Cabecalho rotulo="Jogo" titulo="Cruzadinha do dicionário" texto="Seis palavras do Dicionário da Barruada. A dica é o significado: você escreve a palavra." tom="sol" arte="caju" />
+  <div class="mx-auto max-w-4xl px-4 pt-8 md:px-8">
+    <Cruzadas entradas={entradas} lado={9} quantas={6} nome="Cruzadinha do dicionário" arquivo="barruada-cruzadinha" client:load />
+    <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>
+  </div>
+</Base>
