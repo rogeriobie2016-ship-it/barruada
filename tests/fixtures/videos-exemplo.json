@@ -1,0 +1,29 @@
+[
+ {
+  "titulo": "Vídeo de exemplo do coletivo",
+  "autoria": "Pessoa de exemplo",
+  "url": "https://www.youtube.com/watch?v=aaaaaaaaaaa",
+  "origem": "coletivo",
+  "uf": "CE",
+  "por_que": "Texto de exemplo para o teste do feed.",
+  "checagem": "ok"
+ },
+ {
+  "titulo": "Referência de exemplo no Instagram",
+  "autoria": "Outra pessoa",
+  "url": "https://www.instagram.com/reel/bbbbbbbbbbb/",
+  "origem": "referencia",
+  "uf": "PE",
+  "por_que": "",
+  "checagem": "ok"
+ },
+ {
+  "titulo": "Vídeo ainda não checado",
+  "autoria": "",
+  "url": "https://youtu.be/ccccccccccc",
+  "origem": "referencia",
+  "uf": "",
+  "por_que": "Este não pode aparecer.",
+  "checagem": "conferir"
+ }
+]

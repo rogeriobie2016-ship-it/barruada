@@ -1,0 +1,29 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import FeedVideos from '../../islands/FeedVideos.tsx';
+import Base from '../../layouts/Base.astro';
+import { rota, videos } from '../../lib/dados.ts';
+---
+
+<Base titulo="Vídeos" descricao="Vídeos do coletivo e referências para ver, em formato de feed.">
+  <Cabecalho
+    rotulo="Biblioteca"
+    titulo="Pra ver"
+    texto="Vídeos do coletivo e referências que já existem. Um por tela: role, toque para assistir e curta os seus."
+    tom="nanquim"
+    arte="predio"
+  />
+  <div class="mx-auto max-w-3xl px-4 pt-8 md:px-8">
+    {
+      videos.length === 0 ? (
+        <div data-videos-vazio>
+          <p class="caneta m-0 -rotate-1 text-4xl text-sol">Os primeiros vídeos estão chegando.</p>
+          <p class="mt-3 text-lg text-texto-suave">Assim que os links forem checados, eles aparecem aqui.</p>
+        </div>
+      ) : (
+        <FeedVideos videos={videos} client:load />
+      )
+    }
+    <p class="mt-6"><a href={rota('/biblioteca/')} class="inline-flex min-h-11 items-center text-sol">Voltar para a biblioteca</a></p>
+  </div>
+</Base>

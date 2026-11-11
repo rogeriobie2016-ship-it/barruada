@@ -276,3 +276,34 @@
   .cena-cartao { position: relative; bottom: auto; margin-top: -1.5rem; }
   .cena-mapa { max-width: 24rem; }
 }
+
+/* Feed de vídeos: um por tela, rolagem vertical com encaixe. */
+.feed-videos {
+  height: min(78vh, 46rem);
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  border: var(--traco) solid var(--linha);
+  scrollbar-width: thin;
+}
+.feed-video {
+  min-height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 0.75rem;
+  padding: 0.75rem;
+}
+.feed-tela {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  align-self: center;
+}
+.feed-tela-vertical { aspect-ratio: 9 / 16; max-height: 52vh; width: auto; justify-self: center; }
+.feed-capa { position: relative; width: 100%; height: 100%; padding: 0; border: 0; background: none; text-align: left; }
+.feed-capa .capa { height: 100%; aspect-ratio: auto; }
+.feed-tocar { position: absolute; left: 50%; top: 50%; translate: -50% -50%; white-space: nowrap; }
+.feed-texto { padding: 0 0.25rem 0.5rem; }

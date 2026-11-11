@@ -3,10 +3,16 @@ import Cabecalho from '../components/Cabecalho.astro';
 import BibliotecaExplorer from '../islands/BibliotecaExplorer.tsx';
 import Base from '../layouts/Base.astro';
 import { bibliotecaPublica } from '../lib/biblioteca.ts';
-import { biblioteca } from '../lib/dados.ts';
+import { biblioteca, rota, videos } from '../lib/dados.ts';
 
 // Regra do projeto: a área pública só recebe itens com checagem "ok".
 const publica = bibliotecaPublica(biblioteca);
+const resumoVideos =
+  videos.length === 0
+    ? 'Vídeos do coletivo e referências, em formato de feed. Os primeiros estão chegando.'
+    : videos.length === 1
+      ? '1 vídeo para assistir e curtir.'
+      : `${videos.length} vídeos para rolar, assistir e curtir.`;
 ---
 
 <Base titulo="Biblioteca" descricao="Estudos, livros, música e dados para contar outro Nordeste, cada um com fonte.">
@@ -17,6 +23,15 @@ const publica = bibliotecaPublica(biblioteca);
     titulo="Tudo aqui tem fonte."
     texto="Referências que o coletivo usa para responder e para afirmar. Só entra na vitrine o que já foi checado."
   />
+  <section class="faixa faixa--nanquim grao rasgo relative" aria-labelledby="titulo-videos">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-8 md:px-8">
+      <div>
+        <h2 id="titulo-videos" class="text-3xl md:text-4xl">Pra ver: vídeos</h2>
+        <p class="m-0 mt-2 max-w-xl text-texto-suave">{resumoVideos}</p>
+      </div>
+      <a href={rota('/biblioteca/videos/')} class="botao botao-sol sobre-claro" data-abrir-videos>Abrir o feed de vídeos</a>
+    </div>
+  </section>
   <div class="mx-auto max-w-6xl px-4 pt-8 md:px-8">
     <BibliotecaExplorer secoes={publica} client:load />
   </div>

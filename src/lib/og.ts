@@ -24,6 +24,7 @@ export const PAGINAS_OG: PaginaOg[] = [
   { caminho: '/', rotulo: 'Barruada', titulo: 'O Nordeste que a novela não mostra', tom: 'anil' },
   { caminho: '/em-cartaz/', rotulo: 'Em cartaz', titulo: 'O que já foi pro ar', tom: 'anil' },
   { caminho: '/biblioteca/', rotulo: 'Biblioteca', titulo: 'Tudo aqui tem fonte.', tom: 'papel' },
+  { caminho: '/biblioteca/videos/', rotulo: 'Biblioteca', titulo: 'Pra ver', tom: 'nanquim' },
   { caminho: '/glossario/', rotulo: 'Dicionário da Barruada', titulo: 'Oxe, que palavra é essa?', tom: 'areia' },
   { caminho: '/jogos/', rotulo: 'Jogos', titulo: 'Pra jogar com uma mão só', tom: 'barro' },
   { caminho: '/sala-de-aula/', rotulo: 'Leva pra sala', titulo: 'Material para usar com a turma', tom: 'anil' },

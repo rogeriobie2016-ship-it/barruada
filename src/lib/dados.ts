@@ -11,7 +11,9 @@ import muralJson from '../data/mural.json';
 import pautasJson from '../data/pautas.json';
 import seriesJson from '../data/series.json';
 import siteJson from '../data/site.json';
+import videosJson from '../data/videos.json';
 import { muralPublico, type Recado } from './mural.ts';
+import { videosPublicos, type Video } from './videos.ts';
 import type { Jogos, Membro, Pauta, SecaoBiblioteca, Serie, Site, Termo } from './types.ts';
 
 export const site = siteJson as unknown as Site;
@@ -26,6 +28,8 @@ export const forroIngles = forroJson;
 export const cruzadas = cruzadasJson;
 // Só o que a moderação aprovou chega às páginas.
 export const mural = muralPublico(muralJson as Recado[]);
+// Só vídeo checado e com link reconhecido chega às páginas.
+export const videos = videosPublicos(videosJson as Video[]);
 
 // Caminho interno respeitando BASE_PATH (publicação em subpasta).
 export function rota(caminho: string): string {

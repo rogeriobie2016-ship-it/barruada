@@ -97,8 +97,30 @@ Ficou de fora, de propósito, o Hub de marca v2 (nomes e logos antigos). Ao reco
 
 Atenção: o README do design system pede para conferir a autorização da frase da animação 1 antes de divulgar.
 
+## Vídeos da biblioteca
+
+`/biblioteca/videos/` é um feed: um vídeo por tela, com curtir (a curtida fica salva só no aparelho de quem curtiu). O site não hospeda vídeo: incorpora o tocador oficial do YouTube ou do Instagram, e só depois do toque.
+
+Para acrescentar um vídeo, edite `src/data/videos.json`:
+
+```json
+{
+  "titulo": "",
+  "autoria": "",
+  "url": "link do YouTube ou do Instagram",
+  "origem": "coletivo ou referencia",
+  "uf": "CE",
+  "por_que": "",
+  "checagem": "ok ou conferir"
+}
+```
+
+Só aparece vídeo com `checagem: "ok"`. Antes de marcar ok, confira se o link é o canal oficial de quem fez o vídeo.
+
 ## Jogos e sala de aula
 
+- A jornada desmontada é um jogo narrativo: doze cenas, dois caminhos por cena, e no fim o veredito (caiu no estereótipo da TV ou contou o Nordeste de verdade). As cartas que viram continuam em `?modo=cartas`.
+- Cruzadinha do dicionário e Palavras cruzadas montam a grade sozinhas a partir de `glossario.json` e `cruzadas.json`.
 - Todo jogo tem tela de resultado e gera um cartão 1080x1350 em PNG (`src/lib/cartao.ts`), com as cores e fontes de `tokens.css`.
 - `/sala-de-aula/projetar/` é o Novela ou Nordeste? para projetar: tela cheia, uma afirmação por vez, sem placar.
 - As atividades de `/sala-de-aula` vêm de `src/data/kit.json`, copiado do documento 05 Kit educacional no Drive.

@@ -230,3 +230,37 @@ describe('jornada narrativa', async () => {
     expect(veredito(doze(0)).cliches).toBe(0);
   });
 });
+
+describe('vídeos da biblioteca', async () => {
+  const { tocadorDe, validarVideos, videosPublicos } = await import('../../src/lib/videos.ts');
+  const exemplo = (await import('../fixtures/videos-exemplo.json')).default as import('../../src/lib/videos.ts').Video[];
+
+  it('reconhece os formatos de link do YouTube e do Instagram', () => {
+    expect(tocadorDe('https://www.youtube.com/watch?v=aaaaaaaaaaa')?.embed).toBe('https://www.youtube-nocookie.com/embed/aaaaaaaaaaa?autoplay=1&rel=0');
+    expect(tocadorDe('https://youtu.be/aaaaaaaaaaa')?.id).toBe('aaaaaaaaaaa');
+    expect(tocadorDe('https://www.youtube.com/shorts/aaaaaaaaaaa')?.vertical).toBe(true);
+    expect(tocadorDe('https://www.instagram.com/reel/bbbbbbbbbbb/')?.embed).toBe('https://www.instagram.com/reel/bbbbbbbbbbb/embed/');
+    expect(tocadorDe('https://www.instagram.com/p/bbbbbbbbbbb/')?.plataforma).toBe('instagram');
+  });
+
+  it('recusa link que não é de vídeo ou de outro site', () => {
+    expect(tocadorDe('https://example.com/watch?v=aaaaaaaaaaa')).toBeNull();
+    expect(tocadorDe('https://www.youtube.com/@canal')).toBeNull();
+    expect(tocadorDe('não é link')).toBeNull();
+    expect(tocadorDe('https://www.youtube.com/watch?v="><script>')).toBeNull();
+  });
+
+  it('a área pública só mostra vídeo checado', () => {
+    expect(validarVideos(exemplo)).toEqual([]);
+    expect(videosPublicos(exemplo).map((v) => v.titulo)).toEqual(['Vídeo de exemplo do coletivo', 'Referência de exemplo no Instagram']);
+  });
+
+  it('avisa quando falta campo ou o link é inválido', () => {
+    const erros = validarVideos([{ titulo: '', autoria: '', url: 'https://example.com', origem: 'x', uf: '', por_que: '', checagem: 'ok' }]);
+    expect(erros).toHaveLength(3);
+  });
+
+  it('o arquivo do repositório é válido', async () => {
+    expect(validarVideos((await import('../../src/data/videos.json')).default)).toEqual([]);
+  });
+});

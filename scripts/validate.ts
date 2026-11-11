@@ -2,8 +2,9 @@
 import { readFileSync } from 'node:fs';
 import { validarMural } from '../src/lib/mural.ts';
 import { validarTudo } from '../src/lib/validate.ts';
+import { validarVideos } from '../src/lib/videos.ts';
 
-const nomes = ['site', 'series', 'pautas', 'biblioteca', 'glossario', 'jogos', 'membros', 'mural'];
+const nomes = ['site', 'series', 'pautas', 'biblioteca', 'glossario', 'jogos', 'membros', 'mural', 'videos'];
 const dados: Record<string, unknown> = {};
 const erros: string[] = [];
 
@@ -18,6 +19,7 @@ for (const nome of nomes) {
 
 erros.push(...validarTudo(dados));
 erros.push(...validarMural(dados.mural));
+erros.push(...validarVideos(dados.videos));
 
 if (erros.length > 0) {
   console.error(`\nDados inválidos em src/data. ${erros.length} problema(s):\n`);
