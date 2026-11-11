@@ -147,8 +147,27 @@ test('sala de aula: atividades do kit e versão para projetar sem placar', async
 
 test('hub de marca abre as ferramentas do design system', async ({ page }) => {
   await page.goto('/marca/');
-  await expect(page.locator('[data-hub]')).toHaveCount(5);
+  await expect(page.locator('[data-hub]')).toHaveCount(6);
   await expect(page.locator('[data-cor="barro"]')).toHaveText(/^#[0-9A-F]{6}$/);
   await page.locator('[data-hub]').first().click();
   await expect(page.getByRole('heading', { name: 'Hub de Design' })).toBeVisible({ timeout: 15000 });
+});
+
+test('fase 3: página de estado, mural fechado e exportação do hub', async ({ page }) => {
+  await page.goto('/quem-somos/#CE');
+  await page.locator('[data-pagina-estado]').click();
+  await expect(page).toHaveURL(/\/estado\/ce\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Ceará');
+  await expect(page.locator('[data-dado]').first()).toBeVisible();
+
+  await page.goto('/mural/');
+  await expect(page.locator('[data-mural-vazio]')).toBeVisible();
+  await expect(page.locator('[data-envio-fechado]')).toBeVisible();
+  await expect(page.locator('[data-recado]')).toHaveCount(0);
+
+  await page.goto('/hub/' + encodeURIComponent('Coletivo Nordeste - Kit Rede Social.dc.html'));
+  const botao = page.locator('[data-exportar]');
+  await expect(botao).toBeVisible({ timeout: 20000 });
+  const [arquivo] = await Promise.all([page.waitForEvent('download', { timeout: 60000 }), botao.click()]);
+  expect(arquivo.suggestedFilename()).toMatch(/^barruada-.*\.png$/);
 });

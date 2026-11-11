@@ -22,7 +22,8 @@ Outros comandos:
 | `npm test` | Gera o site e roda os testes de lógica e de regras (Vitest) |
 | `npm run test:e2e` | Gera o site e joga cada jogo só com teclado (Playwright) |
 | `npm run validate` | Só confere os JSON de `src/data/` |
-| `npm run sync` | Só sincroniza a planilha |
+| `npm run sync` | Só sincroniza as planilhas (pautas e mural) |
+| `npm run og` | Gera as imagens de compartilhamento em `public/og/` |
 
 Na primeira vez que rodar os testes de ponta a ponta: `npx playwright install chromium`.
 
@@ -57,6 +58,7 @@ Variáveis de ambiente:
 | `SITE_URL` | Endereço público do site (usado no sitemap) |
 | `BASE_PATH` | Subpasta de publicação. Deixe vazio na Vercel e na Netlify |
 | `SHEET_CSV_URL` | CSV publicado da planilha Banco de pautas |
+| `MURAL_CSV_URL` | CSV publicado da planilha de moderação do mural |
 
 ## Como atualizar a planilha
 
@@ -91,7 +93,9 @@ A página `/marca` é a porta de entrada para quem produz conteúdo. As ferramen
 
 Para atualizar: exporte o projeto no Claude Design, copie para `public/hub/` os arquivos `.dc.html` dos hubs e os `.js` e `.jsx` que eles usam, e troque qualquer travessão por hífen (o teste de travessão varre essa pasta também). A pasta `uploads/` do projeto não entra: são referências de terceiros.
 
-Ficaram de fora, de propósito: o Hub de Animações (a frase da animação 1 ainda depende de autorização, segundo o README do design system) e o Hub de marca v2 (nomes e logos antigos).
+Ficou de fora, de propósito, o Hub de marca v2 (nomes e logos antigos). Ao recopiar o Hub de Design e o Kit Rede Social, recoloque antes de `</body>` as duas linhas de script: `html-to-image.js` e `exportar.js`.
+
+Atenção: o README do design system pede para conferir a autorização da frase da animação 1 antes de divulgar.
 
 ## Jogos e sala de aula
 
@@ -99,6 +103,31 @@ Ficaram de fora, de propósito: o Hub de Animações (a frase da animação 1 ai
 - `/sala-de-aula/projetar/` é o Novela ou Nordeste? para projetar: tela cheia, uma afirmação por vez, sem placar.
 - As atividades de `/sala-de-aula` vêm de `src/data/kit.json`, copiado do documento 05 Kit educacional no Drive.
 - Aprendendo inglês com forró é um protótipo. O conteúdo está em `src/data/forro-ingles.json` e as traduções precisam da revisão das professoras de inglês do grupo. Não entra letra de música, nem traduzida: só palavra solta e título.
+
+## Mural Me mostra na novela
+
+O envio é por formulário externo e nada aparece no site sem moderação.
+
+1. Crie um formulário (Google Forms, por exemplo) com as perguntas `nome`, `estado` (sigla), `texto` e `link`. Os títulos das perguntas viram os nomes das colunas.
+2. Na planilha de respostas, acrescente a coluna `aprovado`. Quem modera escreve `sim` nas linhas que podem ir ao ar.
+3. Publique a planilha como CSV e cadastre o link em `MURAL_CSV_URL`.
+4. Ponha o link do formulário em `mural_formulario`, no `src/data/site.json`. Enquanto estiver vazio, a página avisa que o envio não está ligado.
+
+A cada build, `npm run sync` grava em `src/data/mural.json` só as linhas aprovadas, com texto cortado em 280 caracteres e link só se começar com https. A página ainda confere `aprovado: true` item por item. Também dá para editar o `mural.json` à mão.
+
+Antes de publicar recado com nome de pessoa, confirme a autorização dela no próprio formulário.
+
+## Páginas por estado e imagens de compartilhamento
+
+- `/estado/ce/` e as outras oito juntam gente do coletivo, dados checados, referências, palavras do dicionário e recados do mural daquele estado.
+- Cada página tem uma imagem de compartilhamento 1200x630 em `public/og/`. A lista de páginas e títulos fica em `src/lib/og.ts`.
+- As imagens ficam no repositório. Mudou um título, criou página ou trocou o design system? Rode `npm run og` e faça commit. O gerador usa o Chromium do Playwright.
+
+## Exportar peças dos hubs
+
+- Hub de Design e Kit Rede Social: o botão Baixar PNG fica no canto de baixo da tela (`public/hub/exportar.js`). Clique na peça, escolha o tamanho (1080 px de largura é o padrão) e baixe.
+- Hub de Animações: a aba Exportar baixa um quadro em PNG ou SVG e dá o código para incorporar. Vídeo em arquivo só sai pelo editor do Claude Design.
+- Hub de Vídeo: no site ele serve para ver e ajustar. A exportação em vídeo também é pelo Claude Design.
 
 ## Regras do projeto
 
@@ -122,13 +151,14 @@ Ficaram de fora, de propósito: o Hub de Animações (a frase da animação 1 ai
 | `membros.json` | Membros do coletivo. Formato: `{"nome": "", "estado": "CE", "area": "", "topa": ["vídeo", "texto"], "link": ""}` |
 | `ne-map.json` | Geometria dos nove estados |
 | `kit.json` | Atividades do kit educacional |
+| `mural.json` | Recados aprovados do mural. Formato: `{"nome": "", "estado": "CE", "texto": "", "link": "", "aprovado": true}` |
 | `forro-ingles.json` | Pares de palavras do protótipo de inglês |
 
 ## Fases
 
 - Fase 1 (entregue): estrutura, tokens, início com trilhos, biblioteca, dicionário, bastidores, Novela ou Nordeste?, Monte sua novela, sync da planilha, prévia.
 - Fase 2 (entregue): Bingo, Dicionário em modo jogo, A jornada desmontada, mapa vivo dos nove em Quem somos, sala de aula, cartões de compartilhamento. Entraram junto: hub de marca, visual com as ilustrações e texturas do design system e o protótipo Aprendendo inglês com forró.
-- Fase 3: mural Me mostra na novela, páginas por estado, imagens de compartilhamento por página.
+- Fase 3 (entregue): mural Me mostra na novela com moderação, páginas por estado, imagens de compartilhamento por página. Entraram junto: Hub de Animações e exportação em PNG nos hubs.
 
 ## Créditos
 
