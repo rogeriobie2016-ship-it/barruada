@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=[];var B=false;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here - open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file - visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store - not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read - re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><title>Hub de Design · Coletivo Nordeste</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap"><script src="./image-slot.js"></script><style>:root{--tx-grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3Cfe%54urbulence type='fractalNoise' base%46requency='.85' num%4Fctaves='2' stitch%54iles='stitch'/%3E%3Cfe%43olor%4Datrix values='0 0 0 0 .1 0 0 0 0 .09 0 0 0 0 .08 3.2 0 0 0 -1.78'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");--tx-speck:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3Cfe%54urbulence type='fractalNoise' base%46requency='.6' num%4Fctaves='2' seed='5' stitch%54iles='stitch'/%3E%3Cfe%43olor%4Datrix values='0 0 0 0 1 0 0 0 0 .97 0 0 0 0 .9 7 0 0 0 -4.7'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)'/%3E%3C/svg%3E");--tx-fiber:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3Cfe%54urbulence type='fractalNoise' base%46requency='.012 .03' num%4Fctaves='3' seed='9' stitch%54iles='stitch'/%3E%3Cfe%43olor%4Datrix values='0 0 0 0 .1 0 0 0 0 .09 0 0 0 0 .08 0.7 0 0 0 -.34'/%3E%3C/filter%3E%3Crect width='640' height='640' filter='url(%23n)'/%3E%3C/svg%3E")}body{margin:0;background:#EDE6D8;color:#1D1A16;font-family:'Archivo',system-ui,sans-serif;-webkit-font-smoothing:antialiased}*{box-sizing:border-box}a{color:#2A4BA0;text-underline-offset:3px}a:hover{color:#C63A22}::selection{background:#F2B441;color:#1D1A16}</style></helmet>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<filter id="cn-ink-s" x="-6%" y="-12%" width="112%" height="124%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="7" result="w"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="w" scale="1.4" xChannelSelector="R" yChannelSelector="G" result="d"></feDisplacementMap><feGaussianBlur in="d" stdDeviation="0.35" result="b"></feGaussianBlur><feComponentTransfer in="b" result="s"><feFuncA type="linear" slope="5" intercept="-1.8"></feFuncA></feComponentTransfer><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" seed="3" result="g"></feTurbulence><feColorMatrix in="g" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 9 0 0 0 -6.5" result="h"></feColorMatrix><feComposite in="s" in2="h" operator="out"></feComposite></filter>
+<filter id="cn-torn" x="-8%" y="-10%" width="116%" height="120%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="12" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G" result="d"></feDisplacementMap><feMorphology in="d" operator="dilate" radius="1.4" result="dd"></feMorphology><feColorMatrix in="dd" type="matrix" values="0 0 0 0 1 0 0 0 0 .98 0 0 0 0 .94 0 0 0 1 0" result="rim"></feColorMatrix><feMerge><feMergeNode in="rim"></feMergeNode><feMergeNode in="d"></feMergeNode></feMerge></filter>
+<filter id="cn-rough" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+<filter id="cn-die" x="-15%" y="-15%" width="130%" height="140%" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"></feGaussianBlur><feComponentTransfer in="b" result="d"><feFuncA type="linear" slope="30" intercept="-1"></feFuncA></feComponentTransfer><feFlood flood-color="#FFFDF8"></feFlood><feComposite in2="d" operator="in" result="w"></feComposite><feGaussianBlur in="d" stdDeviation="5" result="sb"></feGaussianBlur><feOffset in="sb" dy="6" result="so"></feOffset><feFlood flood-color="#000000" flood-opacity="0.28"></feFlood><feComposite in2="so" operator="in" result="s"></feComposite><feMerge><feMergeNode in="s"></feMergeNode><feMergeNode in="w"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge></filter>
+</defs></svg>
+
+<header style="padding:26px 28px 20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between">
+  <div style="min-width:0"><div style="font:600 10px/1 'Archivo',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C63A22">Coletivo Nordeste · etapa 3</div><h1 style="margin:8px 0 0;font:800 40px/.92 'Archivo',sans-serif;letter-spacing:-.05em">Hub de Design</h1><p style="margin:10px 0 0;max-width:560px;font:400 14px/1.45 'Archivo',sans-serif;color:#4A443A;text-wrap:pretty">Livro aberto, de uso livre para quem cria conteúdo sobre o Nordeste. Escolha uma base, troque ou apague qualquer parte e solte elementos, textos e riscos por cima. Tudo fica salvo neste navegador.</p></div>
+  <nav style="display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font:600 12px/1.2 'Archivo',sans-serif"><span style="display:inline-flex;border:1px solid #1D1A16"><span style="padding:9px 14px;background:#1D1A16;color:#FBF5E8;font-weight:700">Peças</span><a href="Coletivo Nordeste - Hub de Vídeo.dc.html" style="padding:9px 14px;color:#1D1A16;text-decoration:none;font-weight:700" style-hover="background:#F2B441">Vídeo</a><a href="Coletivo Nordeste - Kit Rede Social.dc.html" style="padding:9px 14px;color:#1D1A16;text-decoration:none;font-weight:700" style-hover="background:#F2B441">Rede social</a></span><a href="Barruada - Propostas de Logo.dc.html">Propostas de logo</a><a href="Coletivo Nordeste - Lab de Estilos.dc.html">Lab de estilos</a><a href="#">Hub de marca v2</a></nav>
+</header>
+
+<main style="display:flex;flex-wrap:wrap;gap:24px;padding:0 28px 48px;align-items:flex-start">
+
+<div style="flex:1 1 280px;min-width:260px;display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start">
+<aside style="flex:1 1 280px;max-width:340px;min-width:260px;display:grid;gap:24px">
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">01</span>Base</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><sc-for list="{{ bases }}" as="b" hint-placeholder-count="11"><button onClick="{{ b.pick }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:9px 10px;min-height:38px;border:1px solid #1D1A16;background:{{ b.bg }};color:{{ b.fg }};cursor:pointer;text-align:left;border-radius:0">{{ b.n }}</button></sc-for></div>
+  </section>
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">02</span>Palavras</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px"><sc-for list="{{ frases }}" as="f" hint-placeholder-count="7"><button onClick="{{ f.pick }}" style="font:500 11px/1.2 'Archivo',sans-serif;padding:6px 9px;border:1px solid rgba(29,26,22,.4);background:#FBF5E8;color:#1D1A16;cursor:pointer;border-radius:999px" style-hover="border-color:#C63A22;color:#C63A22">{{ f.n }}</button></sc-for></div>
+    <div style="display:grid;gap:8px">
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Título<input type="text" value="{{ t.titulo }}" onChange="{{ on.titulo }}" style="font:600 14px/1.2 'Archivo',sans-serif;padding:9px 10px;border:1px solid #1D1A16;background:#FBF5E8;color:#1D1A16;border-radius:0;width:100%"></label>
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Apoio<input type="text" value="{{ t.apoio }}" onChange="{{ on.apoio }}" style="font:600 14px/1.2 'Archivo',sans-serif;padding:9px 10px;border:1px solid #1D1A16;background:#FBF5E8;color:#1D1A16;border-radius:0;width:100%"></label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Lateral esq.<input type="text" value="{{ t.ladoE }}" onChange="{{ on.ladoE }}" style="font:600 13px/1.2 'Archivo',sans-serif;padding:8px 9px;border:1px solid #1D1A16;background:#FBF5E8;color:#1D1A16;border-radius:0;width:100%"></label>
+        <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Lateral dir.<input type="text" value="{{ t.ladoD }}" onChange="{{ on.ladoD }}" style="font:600 13px/1.2 'Archivo',sans-serif;padding:8px 9px;border:1px solid #1D1A16;background:#FBF5E8;color:#1D1A16;border-radius:0;width:100%"></label>
+      </div>
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Assinatura<input type="text" value="{{ t.assina }}" onChange="{{ on.assina }}" style="font:600 13px/1.2 'Archivo',sans-serif;padding:8px 9px;border:1px solid #1D1A16;background:#FBF5E8;color:#1D1A16;border-radius:0;width:100%"></label>
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Tamanho do título<input type="range" min="60" max="140" step="2" value="{{ v.tam }}" onChange="{{ on.tam }}" style="width:100%;accent-color:#C63A22"></label>
+    </div>
+  </section>
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">03</span>Cor</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px"><sc-for list="{{ pals }}" as="p" hint-placeholder-count="6"><button onClick="{{ p.pick }}" style="padding:6px;border:1px solid #1D1A16;background:{{ p.selBg }};color:{{ p.selFg }};cursor:pointer;border-radius:0;display:grid;gap:6px;font:600 11px/1 'Archivo',sans-serif;text-align:left"><span style="display:flex;height:26px;border:1px solid rgba(29,26,22,.25)"><i style="flex:3;background:{{ p.bg }}"></i><i style="flex:1;background:{{ p.acc }}"></i><i style="flex:1;background:{{ p.acc2 }}"></i><i style="flex:1;background:{{ p.fgc }}"></i></span>{{ p.n }}</button></sc-for></div>
+  </section>
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">04</span>Textura</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><sc-for list="{{ texs }}" as="x" hint-placeholder-count="7"><button onClick="{{ x.pick }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:8px 10px;border:1px solid #1D1A16;background:{{ x.bg }};color:{{ x.fg }};cursor:pointer;border-radius:0">{{ x.n }}</button></sc-for></div>
+    <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Intensidade<input type="range" min="0" max="100" step="5" value="{{ v.texI }}" onChange="{{ on.texI }}" style="width:100%;accent-color:#C63A22"></label>
+  </section>
+</aside>
+
+<aside style="flex:1 1 280px;max-width:360px;min-width:260px;display:grid;gap:24px">
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">05</span>Ilustração</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin-bottom:6px"><sc-for list="{{ modos }}" as="m" hint-placeholder-count="3"><button onClick="{{ m.pick }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:9px 6px;border:1px solid #1D1A16;margin-left:-1px;background:{{ m.bg }};color:{{ m.fg }};cursor:pointer;border-radius:0">{{ m.n }}</button></sc-for></div>
+    <p style="margin:0 0 10px;font:400 12px/1.4 'Archivo',sans-serif;color:#4A443A">{{ modoDica }}</p>
+    <sc-if value="{{ naoPincel }}" hint-placeholder-val="{{ true }}"><div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px"><sc-for list="{{ lib }}" as="e" hint-placeholder-count="20"><button onClick="{{ e.pick }}" title="{{ e.n }}" style="padding:7px 4px 5px;border:1px solid {{ e.bd }};background:{{ e.bg }};cursor:pointer;border-radius:0;display:grid;gap:4px;justify-items:center;font:500 10px/1.1 'Archivo',sans-serif;color:#1D1A16" style-hover="border-color:#C63A22"><span style="width:42px;height:42px;display:block">{{ e.thumb }}</span>{{ e.n }}</button></sc-for></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px"><sc-for list="{{ textosNovos }}" as="x" hint-placeholder-count="3"><button onClick="{{ x.pick }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0">{{ x.n }}</button></sc-for></div></div></sc-if>
+    <sc-if value="{{ ehPincel }}" hint-placeholder-val="{{ false }}"><div style="display:grid;gap:10px">
+      <div style="display:flex;gap:6px;align-items:center"><sc-for list="{{ pCores }}" as="k" hint-placeholder-count="5"><button onClick="{{ k.pick }}" aria-label="{{ k.n }}" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(29,26,22,.45);background:{{ k.cor }};cursor:pointer;outline:{{ k.outline }};outline-offset:2px"></button></sc-for></div>
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Espessura do pincel<input type="range" min="2" max="26" step="1" value="{{ v.pW }}" onChange="{{ on.pW }}" style="width:100%;accent-color:#C63A22"></label>
+      <button onClick="{{ desfazer }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0;justify-self:start">Desfazer último risco</button>
+    </div></sc-if>
+  </section>
+
+  <sc-if value="{{ temSel }}" hint-placeholder-val="{{ false }}"><section style="border:1.5px dashed #E0109A;padding:12px"><h2 style="margin:0 0 10px;font:800 15px/1 'Archivo',sans-serif;letter-spacing:-.03em">Elemento solto selecionado</h2>
+    <div style="display:grid;gap:10px">
+      <sc-if value="{{ selTxt }}" hint-placeholder-val="{{ false }}"><label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Texto<input type="text" value="{{ selTxtV }}" onChange="{{ selOn.txt }}" style="font:600 14px/1.2 'Archivo',sans-serif;padding:9px 10px;border:1px solid #1D1A16;background:#FBF5E8;color:#1D1A16;border-radius:0;width:100%"></label></sc-if>
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Tamanho<input type="range" min="30" max="420" step="2" value="{{ selV.s }}" onChange="{{ selOn.s }}" style="width:100%;accent-color:#C63A22"></label>
+      <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Giro<input type="range" min="-180" max="180" step="1" value="{{ selV.r }}" onChange="{{ selOn.r }}" style="width:100%;accent-color:#C63A22"></label>
+      <div style="display:flex;gap:6px;align-items:center"><sc-for list="{{ selCores }}" as="k" hint-placeholder-count="5"><button onClick="{{ k.pick }}" aria-label="{{ k.n }}" style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(29,26,22,.45);background:{{ k.cor }};cursor:pointer;outline:{{ k.outline }};outline-offset:2px"></button></sc-for></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px"><button onClick="{{ toggleTrocar }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:{{ trocarBtn.bg }};color:{{ trocarBtn.fg }};cursor:pointer;border-radius:0">Trocar por outro</button><button onClick="{{ selDup }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0">Duplicar</button><button onClick="{{ selFrente }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0">Para frente</button><button onClick="{{ selTras }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0">Para trás</button><button onClick="{{ selRemover }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #C63A22;background:transparent;color:#C63A22;cursor:pointer;border-radius:0">Apagar</button></div><p style="margin:0;font:400 11px/1.4 'Archivo',sans-serif;color:#4A443A">Delete apaga · setas movem · Ctrl+D duplica · Esc solta</p>
+    </div>
+  </section></sc-if>
+
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">06</span>Camadas da base</h2>
+    <p style="margin:0 0 10px;font:400 12px/1.4 'Archivo',sans-serif;color:#4A443A">Clique numa parte da peça e aperte Delete para apagar. Aqui, o × apaga e o + traz de volta.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ camadas }}" as="k" hint-placeholder-count="6"><span style="display:inline-flex;border:1px solid {{ k.bd }};background:{{ k.bg }}"><button onClick="{{ k.pick }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:9px 4px 9px 10px;border:0;background:transparent;color:{{ k.fg }};text-decoration:{{ k.deco }};cursor:pointer">{{ k.n }}</button><button onClick="{{ k.toggle }}" aria-label="{{ k.aria }}" style="font:700 14px/1 'Archivo',sans-serif;padding:9px 10px 9px 6px;border:0;background:transparent;color:#C63A22;cursor:pointer">{{ k.ico }}</button></span></sc-for></div>
+    <button onClick="{{ restaurarCamadas }}" style="font:600 12px/1 'Archivo',sans-serif;padding:10px 12px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0;margin-top:10px">Restaurar todas</button>
+  </section>
+
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">07</span>Estado</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:5px"><sc-for list="{{ ufs }}" as="u" hint-placeholder-count="9"><button onClick="{{ u.pick }}" title="{{ u.nome }}" style="font:700 12px/1 'Archivo',sans-serif;width:36px;height:36px;border:1px solid #1D1A16;background:{{ u.bg }};color:{{ u.fg }};cursor:pointer;border-radius:0">{{ u.uf }}</button></sc-for></div>
+    <p style="margin:8px 0 0;font:400 12px/1.4 'Archivo',sans-serif;color:#4A443A">Vale para a base "Adesivo por estado" e para o elemento "Estado". O ícone de cada estado é provisório.</p>
+  </section>
+
+  <section><h2 style="margin:0 0 10px;font:800 17px/1 'Archivo',sans-serif;letter-spacing:-.03em;display:flex;gap:8px;align-items:baseline"><span style="font:600 10px ui-monospace,Menlo,monospace;color:#C63A22">08</span>Traço</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;margin-bottom:12px"><sc-for list="{{ tracos }}" as="m" hint-placeholder-count="3"><button onClick="{{ m.pick }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:9px 6px;border:1px solid #1D1A16;margin-left:-1px;background:{{ m.bg }};color:{{ m.fg }};cursor:pointer;border-radius:0">{{ m.n }}</button></sc-for></div>
+    <label style="display:grid;gap:4px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#4A443A">Contorno do mapa e da linha · {{ v.contorno }} px<input type="range" min="0" max="8" step="0.5" value="{{ v.contorno }}" onChange="{{ on.contorno }}" style="width:100%;accent-color:#C63A22"></label>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px"><button onClick="{{ toggleDie }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:9px 10px;border:1px solid #1D1A16;background:{{ dieBtn.bg }};color:{{ dieBtn.fg }};cursor:pointer;border-radius:0">Recorte de adesivo</button><button onClick="{{ toggleUpload }}" style="font:600 12px/1.2 'Archivo',sans-serif;padding:9px 10px;border:1px solid #1D1A16;background:{{ upBtn.bg }};color:{{ upBtn.fg }};cursor:pointer;border-radius:0">Usar desenho enviado</button></div>
+  </section>
+</aside>
+</div>
+
+<section style="flex:0 0 auto;display:grid;gap:12px;justify-items:center;position:sticky;top:12px;align-self:flex-start">
+  <div style="padding:30px;background:{{ mesaBg }}">
+    <div data-screen-label="prancheta" onPointerDown="{{ pranchetaDown }}" style="width:480px;height:600px;position:relative;overflow:hidden;background:{{ c.bg }};box-shadow:0 30px 44px -30px rgba(29,26,22,.75)">
+
+      <sc-if value="{{ is.selo }}" hint-placeholder-val="{{ true }}"><div data-base="selo" style="position:absolute;inset:0">
+        <div style="position:absolute;inset:-70px;background:repeating-conic-gradient(from 0deg at 50% 47%,{{ c.acc }} 0 2.4deg,transparent 2.4deg 9deg)"></div>
+        <div style="position:absolute;left:84px;top:126px;width:312px;height:312px;border-radius:50%;background:{{ c.acc2 }}"></div>
+        <div style="position:absolute;left:70px;top:112px;width:340px;height:340px;border-radius:50%;border:1.5px solid {{ c.fg }}"></div>
+        <div style="position:absolute;left:145px;top:177px;width:190px;height:210px;filter:{{ dieFx }}">{{ art }}</div>
+        <div style="position:absolute;left:0;right:0;top:0;height:72px;background:{{ c.bg }}"></div><div style="position:absolute;left:0;right:0;bottom:0;height:72px;background:{{ c.bg }}"></div><div style="position:absolute;left:0;top:0;bottom:0;width:64px;background:{{ c.bg }}"></div><div style="position:absolute;right:0;top:0;bottom:0;width:64px;background:{{ c.bg }}"></div>
+        <div style="position:absolute;inset:14px;border:2px solid {{ c.fg }}"></div><div style="position:absolute;inset:20px;border:1px solid {{ c.fg }}"></div>
+        <span style="position:absolute;left:0;right:0;top:22px;height:50px;display:flex;align-items:center;justify-content:center;font:800 {{ fs.topo }}/1 'Archivo',sans-serif;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.titulo }}</span>
+        <span style="position:absolute;left:0;right:0;bottom:22px;height:50px;display:flex;align-items:center;justify-content:center;font:800 {{ fs.base }}/1 'Archivo',sans-serif;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.apoio }}</span>
+        <span style="position:absolute;left:22px;top:72px;bottom:72px;width:42px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font:800 {{ fs.ladoE }}/1 'Archivo',sans-serif;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.ladoE }}</span>
+        <span style="position:absolute;right:22px;top:72px;bottom:72px;width:42px;display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;font:800 {{ fs.ladoD }}/1 'Archivo',sans-serif;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.ladoD }}</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.moldura }}" hint-placeholder-val="{{ false }}"><div data-base="moldura" style="position:absolute;inset:0">
+        <div style="position:absolute;inset:22px;border:5px solid {{ c.fg }};filter:url(#cn-rough)"></div><div style="position:absolute;inset:86px 66px;border:2.5px solid {{ c.fg }};filter:url(#cn-rough)"></div>
+        <div style="position:absolute;left:32px;top:90px;bottom:90px;width:28px;background:repeating-linear-gradient(45deg,{{ c.fg }} 0 4px,transparent 4px 13px)"></div><div style="position:absolute;right:32px;top:90px;bottom:90px;width:28px;background:repeating-linear-gradient(-45deg,{{ c.fg }} 0 4px,transparent 4px 13px)"></div>
+        <span style="position:absolute;left:0;right:0;top:30px;height:54px;display:flex;align-items:center;justify-content:center;font:800 {{ fs.topo }}/1 'Archivo',sans-serif;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.titulo }}</span>
+        <span style="position:absolute;left:0;right:0;bottom:30px;height:54px;display:flex;align-items:center;justify-content:center;font:800 {{ fs.base }}/1 'Archivo',sans-serif;letter-spacing:.3em;text-indent:.3em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.apoio }}</span>
+        <div style="position:absolute;left:138px;top:198px;width:204px;height:204px;transform:rotate(45deg);background:{{ c.acc }};filter:url(#cn-rough)"></div>
+        <div style="position:absolute;left:156px;top:216px;width:168px;height:168px;border-radius:50%;background:{{ c.acc2 }};filter:url(#cn-rough)"></div>
+        <div style="position:absolute;left:185px;top:240px;width:110px;height:120px;filter:{{ dieFx }}">{{ art }}</div>
+      </div></sc-if>
+
+      <sc-if value="{{ is.rotulo }}" hint-placeholder-val="{{ false }}"><div data-base="rotulo" style="position:absolute;inset:0">
+        <div style="position:absolute;left:44px;right:44px;top:42px;height:88px;background:{{ c.fg }};border-radius:6px;filter:url(#cn-rough)"></div>
+        <span style="position:absolute;left:44px;right:44px;top:42px;height:88px;display:flex;align-items:center;justify-content:center;font:800 {{ fs.rot }}/1 'Archivo',sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:{{ c.bg }}">{{ t.titulo }}</span>
+        <span style="position:absolute;left:0;right:0;top:150px;text-align:center;font:800 {{ fs.base }}/1 'Archivo',sans-serif;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ t.apoio }}</span>
+        <div style="position:absolute;left:54px;right:54px;top:200px;height:312px;background:{{ c.acc2 }};border:6px solid {{ c.fg }};border-radius:8px;filter:url(#cn-rough)"></div>
+        <div style="position:absolute;left:150px;top:226px;width:180px;height:260px;filter:{{ dieFx }}">{{ art }}</div>
+        <span style="position:absolute;left:0;right:0;bottom:36px;text-align:center;font:700 14px/1 'Archivo',sans-serif;letter-spacing:.3em;text-transform:uppercase;color:{{ c.fg }}">{{ t.assina }}</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.postal }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:{{ c.mesaPostal }}">
+        <div data-base="postal" style="position:absolute;left:60px;top:58px;width:360px;height:484px;background:#FBF5E8;border:11px dotted {{ c.mesaPostal }};transform:rotate(-3deg)">
+          <div style="position:absolute;left:14px;right:14px;top:14px;height:292px;background:{{ c.acc2 }};overflow:hidden"><i style="position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.16) 1px,transparent 1.3px) 0 0/6px 6px"></i><i style="position:absolute;right:26px;top:24px;width:104px;height:104px;border-radius:50%;background:{{ c.acc }}"></i><div style="position:absolute;left:40px;top:40px;width:190px;height:226px;filter:{{ dieFx }}">{{ art }}</div></div>
+          <span style="position:absolute;left:14px;right:14px;top:318px;font:800 {{ fs.post }}/1 'Archivo',sans-serif;letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;color:#1D1A16">{{ t.titulo }}</span>
+          <span style="position:absolute;left:14px;right:14px;top:388px;font:800 19px/1.1 'Archivo',sans-serif;letter-spacing:-.02em;color:{{ c.accP }}">{{ t.apoio }}</span>
+          <span style="position:absolute;left:14px;right:14px;bottom:14px;font:500 11px/1.3 'Archivo',sans-serif;color:#1D1A16">{{ t.assina }} · {{ t.ladoE }}</span>
+        </div>
+      </div></sc-if>
+
+      <sc-if value="{{ is.colagem }}" hint-placeholder-val="{{ false }}"><div data-base="colagem" style="position:absolute;inset:0">
+        <i style="position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.16) 1px,transparent 1.3px) 0 0/6px 6px"></i>
+        <div style="position:absolute;left:36px;right:36px;top:38px;font:800 {{ fs.h400 }}/.9 'Archivo',sans-serif;letter-spacing:-.05em;text-transform:uppercase;filter:url(#cn-ink-s)"><div style="color:{{ c.fg }}">{{ t.titulo }}</div><div style="color:{{ c.acc }}">{{ t.apoio }}</div></div>
+        <i style="position:absolute;left:-80px;bottom:-128px;width:430px;height:290px;background:{{ c.acc }};transform:rotate(16deg);filter:url(#cn-torn)"></i>
+        <div style="position:absolute;left:28px;bottom:84px;width:190px;height:190px;transform:rotate(-8deg);filter:url(#cn-torn)">{{ art }}</div>
+        <div style="position:absolute;right:-12px;bottom:-12px;width:270px;height:342px;border-radius:135px 135px 0 0;overflow:hidden;background:#8F8A80;filter:url(#cn-torn)"><image-slot id="hubd-colagem" shape="rect" placeholder="[foto recortada de membro]" style="position:absolute;inset:0;width:270px;height:342px"></image-slot></div>
+      </div></sc-if>
+
+      <sc-if value="{{ is.foto }}" hint-placeholder-val="{{ false }}"><div data-base="foto" style="position:absolute;inset:0;background:linear-gradient(160deg,#8F8A80,#2B2925)">
+        <div style="position:absolute;inset:0;filter:grayscale(1) contrast(1.1)"><image-slot id="hubd-foto" shape="rect" placeholder="[foto P&amp;B: gente, rua, lugar de verdade]" style="position:absolute;inset:0;width:480px;height:600px"></image-slot></div>
+        <i style="position:absolute;left:0;right:0;bottom:0;height:300px;background:linear-gradient(transparent,#1D1A16);pointer-events:none"></i>
+        <div style="position:absolute;left:60px;top:40px;width:360px;height:340px;filter:url(#cn-rough);pointer-events:none">{{ artLinha }}</div>
+        <div style="position:absolute;left:30px;right:30px;bottom:44px;font:800 {{ fs.h420 }}/1.24 'Archivo',sans-serif;letter-spacing:-.04em;pointer-events:none"><span style="background:#1D1A16;color:#FBF5E8;padding:3px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone">{{ t.titulo }}</span><br><span style="background:{{ c.acc }};color:{{ c.on1 }};padding:3px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone">{{ t.apoio }}</span></div>
+        <span style="position:absolute;left:30px;bottom:20px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#FBF5E8;pointer-events:none">{{ t.assina }}</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.recorte }}" hint-placeholder-val="{{ false }}"><div data-base="recorte" style="position:absolute;inset:0">
+        <div style="position:absolute;left:30px;top:30px;width:120px;height:120px">{{ artSol }}</div>
+        <div style="position:absolute;left:170px;top:56px;width:260px;height:264px;filter:drop-shadow(8px 8px 0 {{ c.sombra }})">{{ art }}</div>
+        <i style="position:absolute;left:0;right:0;bottom:0;height:300px;background:{{ c.acc2 }};clip-path:polygon(0 52%,12% 52%,12% 30%,30% 30%,30% 60%,44% 60%,44% 12%,64% 12%,64% 46%,80% 46%,80% 24%,100% 24%,100% 100%,0 100%)"></i>
+        <i style="position:absolute;left:0;right:0;bottom:0;height:210px;background:{{ c.sombra }};clip-path:polygon(0 30%,16% 30%,16% 54%,26% 54%,26% 8%,40% 8%,48% 0,48% 62%,60% 62%,60% 34%,76% 34%,76% 58%,88% 58%,88% 20%,100% 20%,100% 100%,0 100%)"></i>
+        <i style="position:absolute;left:134px;bottom:150px;width:16px;height:16px;background:{{ c.acc }}"></i><i style="position:absolute;left:162px;bottom:150px;width:16px;height:16px;background:{{ c.acc }}"></i><i style="position:absolute;left:308px;bottom:108px;width:16px;height:16px;background:{{ c.acc }}"></i><i style="position:absolute;left:436px;bottom:136px;width:16px;height:16px;background:{{ c.acc }}"></i>
+        <div style="position:absolute;left:30px;right:30px;bottom:26px;font:800 {{ fs.h420s }}/1 'Archivo',sans-serif;letter-spacing:-.04em;color:#FBF5E8">{{ t.titulo }} {{ t.apoio }}</div>
+      </div></sc-if>
+
+      <sc-if value="{{ is.mapa }}" hint-placeholder-val="{{ false }}"><div data-base="mapa" style="position:absolute;inset:0">
+        <div style="position:absolute;left:34px;right:34px;top:34px;font:800 {{ fs.h410 }}/.9 'Archivo',sans-serif;letter-spacing:-.05em"><div style="color:{{ c.fg }}">{{ t.titulo }}</div><div style="color:{{ c.acc }}">{{ t.apoio }}</div></div>
+        <div style="position:absolute;left:150px;top:226px;width:300px;height:344px;filter:{{ dieFx }}"><div style="width:100%;height:100%;filter:drop-shadow(0 6px 5px rgba(0,0,0,.28))">{{ art }}</div></div>
+        <span style="position:absolute;left:34px;bottom:30px;width:110px;font:600 10px/1.4 'Archivo',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:{{ c.fg }}">{{ t.assina }}</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.estado }}" hint-placeholder-val="{{ false }}"><div data-base="estado" style="position:absolute;inset:0">
+        <span style="position:absolute;left:34px;top:30px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.24em;text-transform:uppercase;color:{{ c.fg }}">Um de nove · {{ ufSigla }}</span>
+        <div style="position:absolute;left:70px;top:52px;width:340px;height:330px;transform:rotate(-4deg);filter:url(#cn-die)"><div style="position:absolute;inset:0">{{ artEstado }}</div><div style="position:absolute;left:115px;top:105px;width:110px;height:120px">{{ artIcone }}</div></div>
+        <div style="position:absolute;left:34px;right:34px;top:412px;font:800 {{ fs.uf }}/.9 'Archivo',sans-serif;letter-spacing:-.05em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }}">{{ ufNome }}</div>
+        <div style="position:absolute;left:34px;right:34px;top:486px;font:800 21px/1.1 'Archivo',sans-serif;letter-spacing:-.03em;color:{{ c.acc }}">{{ t.titulo }} {{ t.apoio }}</div>
+        <span style="position:absolute;left:34px;bottom:24px;font:600 10px/1.2 'Archivo',sans-serif;letter-spacing:.08em;text-transform:uppercase;background:#1D1A16;color:#FBF5E8;padding:4px 6px">[ícone provisório: confirmar com quem é de lá]</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.gravura }}" hint-placeholder-val="{{ false }}"><div data-base="gravura" style="position:absolute;inset:0">
+        <div style="position:absolute;inset:24px;border:9px solid {{ c.fg }};filter:url(#cn-rough)"></div><div style="position:absolute;inset:40px;border:2px solid {{ c.fg }};filter:url(#cn-rough)"></div>
+        <span style="position:absolute;left:56px;right:56px;top:58px;text-align:center;font:800 {{ fs.grav }}/1 'Archivo',sans-serif;letter-spacing:-.03em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }};filter:url(#cn-ink-s)">{{ t.titulo }}</span>
+        <i style="position:absolute;left:60px;right:60px;top:112px;height:12px;background:repeating-linear-gradient(90deg,{{ c.fg }} 0 5px,transparent 5px 13px);filter:url(#cn-rough)"></i>
+        <i style="position:absolute;left:114px;top:176px;width:270px;height:270px;border-radius:50%;background:{{ c.acc }}"></i>
+        <div style="position:absolute;left:112px;top:148px;width:256px;height:290px">{{ artGrav }}</div>
+        <i style="position:absolute;left:60px;right:60px;bottom:112px;height:12px;background:repeating-linear-gradient(90deg,{{ c.fg }} 0 5px,transparent 5px 13px);filter:url(#cn-rough)"></i>
+        <span style="position:absolute;left:56px;right:56px;bottom:62px;text-align:center;font:800 {{ fs.base }}/1 'Archivo',sans-serif;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;color:{{ c.fg }};filter:url(#cn-ink-s)">{{ t.apoio }}</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.areia }}" hint-placeholder-val="{{ false }}"><div data-base="areia" style="position:absolute;inset:0">
+        <i style="position:absolute;right:30px;top:52px;width:112px;height:112px;border-radius:50%;background:{{ c.acc }}"></i>
+        <div style="position:absolute;left:34px;top:34px;width:300px;font:800 {{ fs.h300 }}/.9 'Archivo',sans-serif;letter-spacing:-.05em"><div style="color:{{ c.fg }}">{{ t.titulo }}</div><div style="color:{{ c.acc }}">{{ t.apoio }}</div></div>
+        <i style="position:absolute;left:-150px;bottom:-200px;width:560px;height:340px;border-radius:50%;background:{{ c.acc2 }}"></i>
+        <i style="position:absolute;right:-190px;bottom:-232px;width:600px;height:360px;border-radius:50%;background:{{ c.acc }}"></i>
+        <i style="position:absolute;left:0;right:0;bottom:0;height:150px;background-image:var(--tx-speck);background-size:120px;opacity:.9"></i>
+        <div style="position:absolute;left:150px;top:176px;width:190px;height:290px;filter:{{ dieFx }}">{{ art }}</div>
+        <span style="position:absolute;left:34px;bottom:26px;font:600 10px/1 'Archivo',sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#1D1A16;background:#FBF5E8;padding:4px 6px">{{ t.assina }}</span>
+      </div></sc-if>
+
+      <sc-if value="{{ is.galeria }}" hint-placeholder-val="{{ false }}"><div data-base="galeria" style="position:absolute;inset:0">
+        <i style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 30%,rgba(255,255,255,.2),transparent 70%)"></i>
+        <div style="position:absolute;left:80px;top:40px;width:320px;height:404px;background:#FBF5E8;border:7px solid {{ c.sombra }};box-shadow:inset 0 0 0 1.5px #F2B441,0 30px 34px -20px rgba(0,0,0,.6)"></div>
+        <div style="position:absolute;left:127px;top:87px;width:226px;height:286px;background:{{ c.acc2 }};box-shadow:inset 0 3px 7px rgba(0,0,0,.35),0 0 0 1px rgba(29,26,22,.2),0 0 0 4px #FFFDF8"></div>
+        <div style="position:absolute;left:160px;top:125px;width:160px;height:210px;filter:{{ dieFx }}">{{ art }}</div>
+        <div style="position:absolute;left:127px;top:387px;width:226px;display:flex;justify-content:space-between;gap:12px;font:600 8.5px/1.2 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#4A443A"><span>{{ t.ladoE }}</span><span>{{ t.assina }}</span></div>
+        <div style="position:absolute;left:80px;top:476px;width:226px;padding:13px 15px 12px;background:#FBF5E8;color:#1D1A16;box-shadow:0 10px 14px -10px rgba(0,0,0,.55)"><div style="font:800 17px/1.05 'Archivo',sans-serif;letter-spacing:-.04em">{{ t.titulo }}</div><div style="margin-top:3px;font:500 12px/1.3 'Archivo',sans-serif">{{ t.apoio }}</div><div style="margin-top:9px;padding-top:7px;border-top:1px solid rgba(29,26,22,.3);font:600 8.5px/1.3 'Archivo',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#4A443A">{{ t.ladoD }}</div></div>
+      </div></sc-if>
+
+      <sc-if value="{{ is.livre }}" hint-placeholder-val="{{ false }}"><div data-base="livre" style="position:absolute;inset:0"><sc-if value="{{ livreVazio }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:60px;right:60px;top:270px;text-align:center;font:600 13px/1.5 'Archivo',sans-serif;color:{{ c.fg }}">Página em branco. Solte elementos, textos e riscos para montar a sua.</span></sc-if></div></sc-if>
+
+      <sc-if value="{{ upload }}" hint-placeholder-val="{{ false }}"><image-slot id="hubd-desenho" shape="rect" fit="contain" placeholder="[solte aqui o desenho final em PNG]" style="position:absolute;left:120px;top:150px;width:240px;height:300px"></image-slot></sc-if>
+
+      <sc-for list="{{ soltos }}" as="s" hint-placeholder-count="0"><div onPointerDown="{{ s.down }}" style="position:absolute;left:{{ s.left }};top:{{ s.top }};width:{{ s.w }};height:{{ s.hh }};transform:rotate({{ s.rot }});cursor:grab;outline:{{ s.outline }};outline-offset:5px;touch-action:none;filter:{{ s.fx }}">{{ s.art }}</div></sc-for>
+
+      <div onPointerDown="{{ pincelDown }}" style="position:absolute;inset:0;pointer-events:{{ pincelPE }};cursor:crosshair;touch-action:none">{{ riscosSvg }}</div>
+      <i style="position:absolute;inset:0;pointer-events:none;background-image:{{ tx.img }};background-size:{{ tx.size }};opacity:{{ tx.op }}"></i>
+      <i style="position:absolute;inset:36px;pointer-events:none;border:{{ guiaCss }}"></i>
+    </div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:540px">
+    <button onClick="{{ sortear }}" style="font:700 12px/1 'Archivo',sans-serif;padding:11px 14px;border:1px solid #1D1A16;background:#1D1A16;color:#FBF5E8;cursor:pointer;border-radius:0">Sortear variação</button>
+    <button onClick="{{ salvar }}" style="font:700 12px/1 'Archivo',sans-serif;padding:11px 14px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0">Guardar esta</button>
+    <button onClick="{{ limparColagem }}" style="font:700 12px/1 'Archivo',sans-serif;padding:11px 14px;border:1px solid #1D1A16;background:transparent;color:#1D1A16;cursor:pointer;border-radius:0">Limpar soltos e riscos</button>
+  </div>
+  <sc-if value="{{ temSalvos }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:540px"><sc-for list="{{ salvos }}" as="g" hint-placeholder-count="0"><span style="display:inline-flex;border:1px solid rgba(29,26,22,.4);background:#FBF5E8;border-radius:999px;overflow:hidden"><button onClick="{{ g.pick }}" style="font:500 11px/1.2 'Archivo',sans-serif;padding:6px 6px 6px 10px;border:0;background:transparent;color:#1D1A16;cursor:pointer" style-hover="color:#C63A22">{{ g.n }}</button><button onClick="{{ g.del }}" aria-label="Remover" style="font:600 12px/1 'Archivo',sans-serif;padding:6px 9px 6px 4px;border:0;background:transparent;color:#4A443A;cursor:pointer" style-hover="color:#C63A22">×</button></span></sc-for></div></sc-if>
+</section>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;guias&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prancheta&quot;},&quot;mesa&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;clara&quot;,&quot;escura&quot;],&quot;default&quot;:&quot;clara&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Prancheta&quot;}}">
+class Component extends DCLogic {
+  state = Object.assign({
+    map: window.NE_MAP || null, base: 'selo', pal: 'anil', el: 'mapa', uf: 'CE', traco: 'chapado', contorno: 1.5,
+    tex: 'papel', texI: 50, tam: 100, die: false, upload: false, modo: 'central', soltos: [], sel: null,
+    riscos: [], pCor: 'acc', pW: 6, salvos: [], off: {}, selLay: null, trocar: false,
+    t: { titulo: 'O Nordeste', apoio: 'por conta própria', ladoE: 'nove estados', ladoD: 'sem figurino', assina: '[nome do coletivo]' }
+  }, this.load());
+  load() { try { return JSON.parse(localStorage.getItem('cn-hub-design-v1')) || {}; } catch (e) { return {}; } }
+  save() { try { const s = Object.assign({}, this.state); delete s.map; localStorage.setItem('cn-hub-design-v1', JSON.stringify(s)); } catch (e) {} }
+  up(p) { this.setState(p, () => this.save()); }
+  componentDidMount() {
+    this._key = e => this.key(e); window.addEventListener('keydown', this._key); this.applyLayers();
+    if (this.state.map) return;
+    const s = document.createElement('script');
+    s.src = './ne-map.js';
+    s.onload = () => this.setState({ map: window.NE_MAP });
+    document.head.appendChild(s);
+  }
+  componentDidUpdate() { this.applyLayers(); }
+  componentWillUnmount() { window.removeEventListener('keydown', this._key); }
+  layers() {
+    return {
+      selo: ['Raios', 'Disco', 'Anel', 'Ilustração', 'Moldura', 'Moldura', 'Moldura', 'Moldura', 'Fios', 'Fios', 'Texto de cima', 'Texto de baixo', 'Texto esquerdo', 'Texto direito'],
+      galeria: ['Luz', 'Moldura', 'Janela', 'Ilustração', 'Legenda a lápis', 'Plaqueta'],
+      moldura: ['Moldura', 'Moldura interna', 'Hachuras', 'Hachuras', 'Texto de cima', 'Texto de baixo', 'Losango', 'Disco', 'Ilustração'],
+      rotulo: ['Título', 'Título', 'Apoio', 'Quadro', 'Ilustração', 'Assinatura'],
+      postal: ['Janela', 'Título', 'Apoio', 'Assinatura'],
+      colagem: ['Retícula', 'Título', 'Papel rasgado', 'Ilustração', 'Foto'],
+      foto: ['Foto', 'Sombra', 'Mapa em linha', 'Título', 'Assinatura'],
+      recorte: ['Sol', 'Ilustração', 'Cidade ao fundo', 'Cidade', 'Janelas', 'Janelas', 'Janelas', 'Janelas', 'Título'],
+      mapa: ['Título', 'Ilustração', 'Assinatura'],
+      estado: ['Chamada', 'Adesivo', 'Nome do estado', 'Frase', 'Aviso'],
+      gravura: ['Moldura', 'Moldura', 'Título', 'Dentes', 'Disco', 'Ilustração', 'Dentes', 'Apoio'],
+      areia: ['Sol', 'Título', 'Dunas', 'Dunas', 'Dunas', 'Ilustração', 'Assinatura'],
+      livre: []
+    };
+  }
+  applyLayers() {
+    const root = document.querySelector('[data-screen-label="prancheta"] [data-base]');
+    if (!root) return;
+    const base = root.getAttribute('data-base'), labs = this.layers()[base] || [], off = this.state.off || {}, selLay = this.state.selLay;
+    Array.from(root.children).forEach((el, i) => {
+      const lab = labs[i] || 'Camada ' + (i + 1), on = selLay === lab;
+      el.setAttribute('data-lay', lab);
+      el.style.visibility = off[base + '|' + lab] ? 'hidden' : '';
+      el.style.outline = on ? '1.5px dashed #E0109A' : '';
+      el.style.outlineOffset = on ? '3px' : '';
+    });
+  }
+  downPrancheta(e) {
+    if (this.state.modo === 'pincel') return;
+    const root = document.querySelector('[data-screen-label="prancheta"] [data-base]');
+    const x = e.clientX, y = e.clientY, tol = 5, seen = [];
+    const oco = el => {
+      if (el.children.length || (el.textContent || '').trim()) return false;
+      const cs = getComputedStyle(el), bw = parseFloat(cs.borderTopWidth) || 0;
+      if (!bw || cs.backgroundImage !== 'none' || !/^(transparent|rgba\(0, 0, 0, 0\))$/.test(cs.backgroundColor)) return false;
+      const r = el.getBoundingClientRect();
+      if (cs.borderTopLeftRadius.indexOf('50%') === 0) { const d = Math.hypot(x - r.left - r.width / 2, y - r.top - r.height / 2), R = r.width / 2; return d < R - bw - tol || d > R + tol; }
+      return Math.min(x - r.left, r.right - x, y - r.top, r.bottom - y) > bw + tol;
+    };
+    let lab = null;
+    const pilha = root && document.elementsFromPoint ? document.elementsFromPoint(x, y) : [];
+    for (let i = 0; i < pilha.length; i++) {
+      const el = pilha[i].closest ? pilha[i].closest('[data-lay]') : null;
+      if (!el || !root.contains(el) || seen.indexOf(el) >= 0) continue;
+      seen.push(el);
+      if (oco(el)) continue;
+      lab = el.getAttribute('data-lay'); break;
+    }
+    this.setState({ selLay: lab, sel: null, trocar: false });
+  }
+  dupSel() {
+    const s = this.state, it = s.soltos.find(q => q.id === s.sel); if (!it) return;
+    const id = Date.now();
+    this.up({ soltos: s.soltos.concat([Object.assign({}, it, { id, x: it.x + 18, y: it.y + 18 })]), sel: id });
+  }
+  key(e) {
+    const g = e.target, tn = g && g.tagName;
+    if (tn === 'INPUT' || tn === 'TEXTAREA' || tn === 'SELECT' || (g && g.isContentEditable)) return;
+    const s = this.state, it = s.soltos.find(q => q.id === s.sel);
+    if (e.key === 'Escape') { if (it || s.selLay) this.setState({ sel: null, selLay: null, trocar: false }); return; }
+    if (e.key === 'Delete' || e.key === 'Backspace') {
+      if (it) { e.preventDefault(); this.up({ soltos: s.soltos.filter(q => q.id !== s.sel), sel: null, trocar: false }); }
+      else if (s.selLay) { e.preventDefault(); this.up({ off: Object.assign({}, s.off, { [s.base + '|' + s.selLay]: true }), selLay: null }); }
+      return;
+    }
+    if (!it) return;
+    const d = ({ ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] })[e.key];
+    if (d) { e.preventDefault(); const k = e.shiftKey ? 10 : 1; this.up({ soltos: s.soltos.map(q => q.id === s.sel ? Object.assign({}, q, { x: q.x + d[0] * k, y: q.y + d[1] * k }) : q) }); }
+    else if ((e.ctrlKey || e.metaKey) && (e.key || '').toLowerCase() === 'd') { e.preventDefault(); this.dupSel(); }
+  }
+  track(mv) {
+    const end = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', end); this.save(); };
+    window.addEventListener('pointermove', mv); window.addEventListener('pointerup', end);
+  }
+  downSolto(id, e) {
+    e.preventDefault(); e.stopPropagation();
+    const it = this.state.soltos.find(s => s.id === id); if (!it) return;
+    const sx = e.clientX, sy = e.clientY, ox = it.x, oy = it.y;
+    this.setState({ sel: id, selLay: null });
+    this.track(ev => this.setState(s => ({ soltos: s.soltos.map(q => q.id === id ? Object.assign({}, q, { x: ox + ev.clientX - sx, y: oy + ev.clientY - sy }) : q) })));
+  }
+  downPincel(e) {
+    e.preventDefault();
+    const r = e.currentTarget.getBoundingClientRect(), k = 480 / r.width;
+    const pt = ev => [Math.round((ev.clientX - r.left) * k), Math.round((ev.clientY - r.top) * k)];
+    const id = Date.now(), p0 = pt(e);
+    this.setState(s => ({ riscos: s.riscos.concat([{ id, cor: s.pCor, w: s.pW, pts: [p0] }]) }));
+    this.track(ev => this.setState(s => ({ riscos: s.riscos.map(q => q.id === id ? Object.assign({}, q, { pts: q.pts.concat([pt(ev)]) }) : q) })));
+  }
+  lib() {
+    if (this._E) return this._E;
+    const SOL = 'M50 22l20 8 8 20-8 20-20 8-20-8-8-20 8-20zM50 2l6 12H44zM50 98l-6-12h12zM2 50l12-6v12zM98 50l-12 6V44zM16 16l13 5-8 8zM84 16l-5 13-8-8zM16 84l5-13 8 8zM84 84l-13-5 8-8z';
+    const PA = 'M50 36C45.5 30 45 14 49.2 2C52.6 10 54 26 50 36Z';
+    const FR = 'M58 42C46 30 30 27 15 35C30 35 44 39 55 47Z', MI = ' translate(116 0) scale(-1 1)';
+    const PT = 'M50 50C39 40 39 24 50 15C61 24 61 40 50 50Z', PT2 = 'M50 50C45 43 45 34 50 28C55 34 55 43 50 50Z', CT = 'M13 13h15a15 15 0 0 1-15 15Z';
+    const BOT = 'M40 12H60V32C60 42 82 46 82 62V122a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8V62C18 46 40 42 40 32Z';
+    const rot = (d, role, angs, cx, cy, extra) => angs.map(a => [d, role, { t: 'rotate(' + a + ' ' + cx + ' ' + cy + ')' + (extra || '') }]);
+    const RA = Array.from({ length: 20 }, (_, i) => { const a = i * Math.PI / 10, f = n => (50 + 50 * Math.cos(n)).toFixed(1) + ' ' + (50 + 50 * Math.sin(n)).toFixed(1); return 'M50 50L' + f(a - .075) + 'L' + f(a + .075) + 'Z'; }).join('');
+    this._E = {
+      sol: { n: 'Sol', L: [[SOL, 'm'], ['M50 35l10.5 4.5L65 50l-4.5 10.5L50 65l-10.5-4.5L35 50l4.5-10.5Z', 'a']] },
+      estrela: { n: 'Estrela', L: [['M50 4L61 36L96 34L68 55L80 92L50 70L18 94L31 56L4 38L39 37Z', 'm']] },
+      lua: { n: 'Lua', L: [['M60 6A45 45 0 1 0 94 66A37 37 0 1 1 60 6Z', 'm'], ['M76 18l3.4 9 9.6.2-7.6 5.8 2.8 9.2-8.2-5.4-8 5.4 2.8-9.2-7.6-5.8 9.6-.2Z', 'a']] },
+      jangada: { n: 'Jangada', L: [['M2 90q6-5 12 0t12 0 12 0 12 0 12 0 12 0 12 0 12 0v10H2Z', 'a'], ['M10 76H90L84 86H16Z', 'm'], ['M46 8h3v68h-3Z', 'm'], ['M52 10C68 26 80 48 84 70H52Z', 'm'], ['M43 20C36 38 28 54 18 70H43Z', 'a'], ['M88 70l8 16-3 1-8-15Z', 'm']] },
+      catavento: { n: 'Cata-vento', L: [['M48.4 41L51.6 41L54 96L46 96Z', 'm']].concat(rot(PA, 'm', [0, 120, 240], 50, 36), [['M50 31.6a4.4 4.4 0 1 0 .01 0Z', 'a'], ['M4 96C22 88 36 93 50 95C66 97 80 90 96 94V100H4Z', 'a']]) },
+      coqueiro: { n: 'Coqueiro', L: [['M45 97C47 78 50 60 56 42l5 2C56 61 54 79 53 97Z', 'm']].concat(rot(FR, 'm', [-28, 8, 46], 58, 42), rot(FR, 'm', [28, -8, -46], 58, 42, MI), [['M53 44a3.4 3.4 0 1 0 .01 0ZM60 47a3.4 3.4 0 1 0 .01 0Z', 'a'], ['M30 97h44v3H30Z', 'm']]) },
+      mandacaru: { n: 'Mandacaru', L: [['M44 92V18a6 6 0 0 1 12 0V92Z', 'm'], ['M44 62H32a6 6 0 0 1-6-6V38a6 6 0 0 1 12 0V50h6Z', 'm'], ['M56 74H70a6 6 0 0 0 6-6V46a6 6 0 0 0-12 0V62h-8Z', 'm'], ['M49.2 20h1.6v70h-1.6ZM31.2 38h1.6v14h-1.6ZM69.2 46h1.6v18h-1.6Z', 'p'], ['M50 4a5 5 0 1 0 .01 0ZM32 24a4 4 0 1 0 .01 0Z', 'a'], ['M18 92h64v4H18Z', 'm']] },
+      caju: { n: 'Caju', L: [['M50 34C67 32 77 46 75 63C73 81 62 95 50 95C38 95 27 81 25 63C23 46 33 32 50 34Z', 'm'], ['M37 30C33 18 42 8 54 10C63 12 66 21 59 24C54 26 52 22 47 25C43 27 43 31 39 33Z', 'a'], ['M63 24C70 11 84 8 93 13C89 26 76 31 63 24Z', 'm'], ['M35 52c1-6 4-9 8-11l1 3c-3 2-5 5-6 9Z', 'p']] },
+      garrafa: { n: 'Garrafa de areia', vb: '0 0 100 140', fixo: true, clip: BOT, L: [
+        ['M10 0H90V60H10Z', '#FBF5E8', { clip: 1, o: .35 }], ['M10 50H90V140H10Z', '#2A4BA0', { clip: 1 }], ['M62 58a7 7 0 1 0 .01 0Z', '#F2B441', { clip: 1 }],
+        ['M10 86Q32 70 52 83T90 78V140H10Z', '#F2B441', { clip: 1 }],
+        ['M33 82C34.5 76 34.5 71 32.5 66l2-.6C37 71 37 77 35.8 82.6ZM33.5 66l-10-2 8-1.5-6-6.5 7.5 4.5 1-8.5 2 8.5 7-4-4.5 6.5 8.5.5-9.5 3Z', '#1D1A16', { clip: 1 }],
+        ['M10 95Q30 89 50 96T90 93V140H10Z', '#C63A22', { clip: 1 }], ['M10 104Q30 109 50 103T90 105V140H10Z', '#FBF5E8', { clip: 1 }],
+        ['M10 111Q30 107 50 112T90 110V140H10Z', '#2A4BA0', { clip: 1 }], ['M10 119Q30 123 50 118T90 120V140H10Z', '#F2B441', { clip: 1 }],
+        ['M10 126Q30 123 50 127T90 125V140H10Z', '#C63A22', { clip: 1 }],
+        ['M27 68v42', 'p', { line: '#FBF5E8', sw: 3, o: .6 }], [BOT, 'm', { line: 'm', sw: 3 }], ['M42 2h16v12H42Z', 'a']] },
+      azulejo: { n: 'Azulejo', L: [['M6 6H94V94H6ZM13 13V87H87V13Z', 'm']].concat(rot(CT, 'a', [0, 90, 180, 270], 50, 50), rot(PT, 'm', [0, 90, 180, 270], 50, 50), rot(PT2, 'a', [45, 135, 225, 315], 50, 50), [['M50 44a6 6 0 1 0 .01 0Z', 'p']]) },
+      casa: { n: 'Platibanda', L: [['M14 40H86V94H14Z', 'm'], ['M10 42V32H24V23H38V14H62V23H76V32H90V42Z', 'a'], ['M43 94V68a7 7 0 0 1 14 0V94Z', 'p'], ['M22 54h13v18H22ZM65 54h13v18H65Z', 'p'], ['M50 20l6 7-6 7-6-7Z', 'p'], ['M6 94h88v4H6Z', 'm']] },
+      cadeira: { n: 'Cadeira', L: [['M28 10h44a6 6 0 0 1 6 6v38H22V16a6 6 0 0 1 6-6zM34 20h6v26h-6zM47 20h6v26h-6zM60 20h6v26h-6zM10 40h9v14h-9zM81 40h9v14h-9zM14 56h72v10H14zM18 66h9l-4 30h-7zM73 66h9l2 30h-7z', 'm']] },
+      filtro: { n: 'Filtro', L: [['M44 2h12v8H44zM30 10h40l7 34H23zM21 48h58l-4 36H25zM78 62h10v8H78zM34 88h32v10H34z', 'm']] },
+      predio: { n: 'Prédio', L: [['M8 30h36v68H8zM52 8h40v90H52zM16 40h8v8h-8zM28 40h8v8h-8zM16 56h8v8h-8zM28 56h8v8h-8zM16 72h8v8h-8zM28 72h8v8h-8zM60 18h8v8h-8zM76 18h8v8h-8zM60 34h8v8h-8zM76 34h8v8h-8zM60 50h8v8h-8zM76 50h8v8h-8zM60 66h8v8h-8zM76 66h8v8h-8z', 'm']] },
+      mic: { n: 'Microfone', L: [['M38 4h24a8 8 0 0 1 8 8v32a8 8 0 0 1-8 8H38a8 8 0 0 1-8-8V12a8 8 0 0 1 8-8zM46 56h8v30h-8zM28 86h44v8H28z', 'm']] },
+      disco: { n: 'Disco', L: [['M50 2a48 48 0 1 0 .01 0Z', 'm']] },
+      anel: { n: 'Anel', L: [['M50 2a48 48 0 1 0 .01 0ZM50 7a43 43 0 1 1-.01 0Z', 'm']] },
+      raios: { n: 'Raios', L: [[RA, 'm']] },
+      faixa: { n: 'Faixa', L: [['M0 34H100V66H0Z', 'm']] },
+      moldura: { n: 'Moldura', L: [['M2 2H98V98H2ZM7 7V93H93V7ZM10 10H90V90H10ZM11 11V89H89V11Z', 'm']] },
+      duna: { n: 'Duna', L: [['M0 100C12 62 30 44 50 44S88 62 100 100Z', 'm']] },
+      livro: { n: 'Livro', L: [['M4 18l42 8v62L4 80zM96 18l-42 8v62l42-8z', 'm']] }
+    };
+    return this._E;
+  }
+  renderVals() {
+    const st = this.state, h = React.createElement, E = this.lib();
+    const R = '#C63A22', B = '#2A4BA0', Y = '#F2B441', K = '#1D1A16', P = '#FBF5E8', S = '#E4DCCB';
+    const PAL = {
+      anil: { n: 'Anil', bg: B, fg: P, acc: Y, acc2: R, on1: K, on2: P, accP: R },
+      barro: { n: 'Barro', bg: R, fg: P, acc: Y, acc2: B, on1: K, on2: P, accP: B },
+      sol: { n: 'Sol', bg: Y, fg: K, acc: R, acc2: B, on1: P, on2: P, accP: R },
+      papel: { n: 'Papel', bg: P, fg: K, acc: R, acc2: B, on1: P, on2: P, accP: R },
+      nanquim: { n: 'Nanquim', bg: K, fg: P, acc: Y, acc2: R, on1: K, on2: P, accP: R },
+      areia: { n: 'Areia', bg: S, fg: K, acc: B, acc2: R, on1: P, on2: P, accP: B }
+    };
+    const c = Object.assign({}, PAL[st.pal] || PAL.anil);
+    c.mesaPostal = (c.bg === P || c.bg === S) ? c.acc2 : c.bg;
+    c.sombra = c.bg === K ? '#3B362E' : K;
+    const UFS = ['MA', 'PI', 'CE', 'RN', 'PB', 'PE', 'AL', 'SE', 'BA'];
+    const MAP9 = [R, Y, B, Y, R, P, B, Y, R];
+    const UFICON = { MA: 'azulejo', PI: 'mandacaru', CE: 'jangada', RN: 'catavento', PB: 'sol', PE: 'estrela', AL: 'coqueiro', SE: 'caju', BA: 'casa' };
+    const map = st.map, ufD = {};
+    if (map) map.states.forEach(s => { ufD[s.uf] = s; });
+    const neD = map ? map.states.map(s => s.d).join('') : '';
+    this._bb = this._bb || {};
+    const bb = uf => {
+      if (this._bb[uf]) return this._bb[uf];
+      const n = (ufD[uf].d.match(/-?\d+(\.\d+)?/g) || []).map(Number);
+      let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+      for (let i = 0; i + 1 < n.length; i += 2) { x0 = Math.min(x0, n[i]); x1 = Math.max(x1, n[i]); y0 = Math.min(y0, n[i + 1]); y1 = Math.max(y1, n[i + 1]); }
+      return (this._bb[uf] = [x0, y0, x1 - x0, y1 - y0]);
+    };
+    let n = 0;
+    const art = (key, col, o) => {
+      o = o || {};
+      const traco = o.traco || st.traco, sw = Math.max(1.2, st.contorno);
+      let vb = '0 0 100 100', L = [], fixo = false, clipD = null;
+      if (key === 'mapa') { if (!neD) return null; vb = '0 0 1000 1255'; L = [[neD, 'm', { out: col.p }]]; }
+      else if (key === 'mapa9') { if (!neD) return null; vb = '0 0 1000 1255'; fixo = true; L = UFS.map((u, i) => [ufD[u] ? ufD[u].d : '', MAP9[i], { out: K }]); }
+      else if (key === 'estado') { if (!ufD[st.uf]) return null; const b = bb(st.uf); vb = [b[0] - b[2] * .04, b[1] - b[3] * .04, b[2] * 1.08, b[3] * 1.08].join(' '); L = [[ufD[st.uf].d, 'm', {}]]; }
+      else { const e = E[key]; if (!e) return null; L = e.L; vb = e.vb || vb; fixo = !!e.fixo; clipD = e.clip; }
+      const uid = 'hubc' + (n++);
+      const C = r => ({ m: col.m, a: col.a, p: col.p, k: K })[r] || r;
+      const kids = [];
+      if (clipD) kids.push(h('clipPath', { key: 'cp', id: uid }, h('path', { d: clipD })));
+      L.forEach((l, i) => {
+        const d = l[0], role = l[1], q = l[2] || {};
+        if (!d) return;
+        const p = { key: i, d, fillRule: 'evenodd', transform: q.t, opacity: q.o, clipPath: q.clip ? 'url(#' + uid + ')' : undefined };
+        if (q.line) Object.assign(p, { fill: 'none', stroke: C(q.line), strokeWidth: q.sw, strokeLinecap: 'round', strokeLinejoin: 'round' });
+        else if (traco === 'linha' && !fixo) {
+          if (role === 'p') return;
+          Object.assign(p, { fill: 'none', stroke: col.m, strokeWidth: sw, vectorEffect: 'non-scaling-stroke', strokeLinejoin: 'round' });
+        } else {
+          p.fill = (traco === 'gravura' && !fixo && role !== 'p') ? col.m : C(role);
+          if (q.out && st.contorno > 0) Object.assign(p, { stroke: q.out, strokeWidth: st.contorno, vectorEffect: 'non-scaling-stroke', strokeLinejoin: 'round' });
+        }
+        kids.push(h('path', p));
+      });
+      const style = { width: '100%', height: '100%', display: 'block', overflow: 'visible' };
+      if (traco === 'gravura') { const m = 'repeating-linear-gradient(62deg,#000 0 4.2px,transparent 4.2px 5.4px)'; style.WebkitMaskImage = m; style.maskImage = m; style.filter = 'url(#cn-rough)'; }
+      return h('svg', { viewBox: vb, style }, kids);
+    };
+    const base = st.base, on2 = { m: c.on2, a: c.acc, p: c.acc2 };
+    const A = ({
+      selo: on2, moldura: on2, rotulo: on2, postal: on2,
+      colagem: { m: c.acc2, a: c.fg, p: c.bg }, foto: { m: c.acc, a: c.acc, p: c.bg }, recorte: { m: c.fg, a: c.acc2, p: c.bg },
+      mapa: { m: c.fg, a: c.acc, p: c.bg }, gravura: { m: c.fg, a: c.fg, p: c.bg }, areia: { m: c.fg, a: c.acc2, p: c.bg }
+    })[base] || on2;
+    const semArt = ['mapa', 'mapa9', 'estado', 'vazio'];
+    const sel = (on) => ({ bg: on ? K : 'transparent', fg: on ? P : K });
+    const set = (k, v) => () => this.up({ [k]: v });
+    const num = k => e => this.up({ [k]: +e.target.value });
+    const txt = k => e => this.up({ t: Object.assign({}, this.state.t, { [k]: e.target.value }) });
+    const t = st.t, tam = st.tam / 100;
+    const fit = (s, max, w, k) => Math.round(Math.max(9, Math.min(max, w / (Math.max(1, (s || '').length) * k))) * tam * 10) / 10 + 'px';
+    const longo = (t.titulo || '').length > (t.apoio || '').length ? t.titulo : t.apoio;
+    const ufNome = ufD[st.uf] ? ufD[st.uf].name : st.uf;
+    const fs = {
+      topo: fit(t.titulo, 22, 330, .98), base: fit(t.apoio, 22, 330, .98), ladoE: fit(t.ladoE, 16, 400, .98), ladoD: fit(t.ladoD, 16, 400, .98),
+      rot: fit(t.titulo, 54, 356, .76), post: fit(t.titulo, 62, 312, .64), grav: fit(t.titulo, 42, 360, .66),
+      h400: fit(longo, 60, 400, .6), h410: fit(longo, 66, 410, .54), h300: fit(longo, 48, 300, .54), h420: fit(longo, 36, 400, .56),
+      h420s: fit(t.titulo + ' ' + t.apoio, 32, 760, .54), uf: fit(ufNome, 70, 412, .64)
+    };
+    const BASES = [['selo', 'Selo com raios'], ['galeria', 'Galeria · premium'], ['moldura', 'Selo de moldura'], ['rotulo', 'Rótulo'], ['postal', 'Selo postal'], ['colagem', 'Colagem recortada'], ['foto', 'Foto P&B + mapa'], ['recorte', 'Papel cortado'], ['mapa', 'Lettering e mapa'], ['estado', 'Adesivo por estado'], ['gravura', 'Gravura'], ['areia', 'Areia e garrafa'], ['livre', 'Em branco']];
+    const is = {}; BASES.forEach(b => { is[b[0]] = b[0] === base; });
+    if (!BASES.some(b => b[0] === base)) is.selo = true;
+    const FR = [
+      ['O Nordeste', 'por conta própria', 'nove estados', 'sem figurino'], ['Sotaque', 'não é figurino', 'de quem é de lá', 'por conta própria'],
+      ['Quem cresceu lá', 'conta melhor', 'nove estados', 'uma conversa só'], ['Nós somos', 'assunto e autoria', 'feito à mão', 'por quem é de lá'],
+      ['Capital também', 'é Nordeste', 'nove estados', 'no plural'], ['Nordeste', '(não é uma ficção)', 'Nordeste', 'sempre houve'],
+      ['Juntos', 'e cada um do seu jeito', 'nove estados', 'um mapa só']
+    ];
+    const TEX = {
+      papel: { n: 'Papel', img: 'var(--tx-speck),var(--tx-grain),var(--tx-fiber)', size: '260px,300px,640px', k: 1 },
+      reticula: { n: 'Retícula', img: 'radial-gradient(circle,rgba(29,26,22,.6) 1px,transparent 1.4px)', size: '7px 7px', k: .7 },
+      fibra: { n: 'Fibra', img: 'var(--tx-fiber),var(--tx-fiber)', size: '640px,380px', k: 1.6 },
+      areia: { n: 'Areia', img: 'var(--tx-speck),var(--tx-speck),var(--tx-grain)', size: '130px,90px,150px', k: 1.2 },
+      linho: { n: 'Linho', img: 'repeating-linear-gradient(0deg,rgba(29,26,22,.3) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(251,245,232,.34) 0 1px,transparent 1px 4px)', size: 'auto', k: 1 },
+      gravura: { n: 'Hachura', img: 'repeating-linear-gradient(58deg,rgba(29,26,22,.4) 0 1px,transparent 1px 6px)', size: 'auto', k: .8 },
+      limpo: { n: 'Limpo', img: 'none', size: 'auto', k: 0 }
+    };
+    const tx0 = TEX[st.tex] || TEX.papel;
+    const escuro = x => [K, B, R].indexOf(x) >= 0;
+    const roles = { fg: c.fg, acc: c.acc, acc2: c.acc2, ink: K, paper: P };
+    const roleList = [['fg', 'Tinta da paleta'], ['acc', 'Destaque'], ['acc2', 'Segundo destaque'], ['ink', 'Nanquim'], ['paper', 'Papel']];
+    const selIt = st.soltos.find(s => s.id === st.sel);
+    const updSel = patch => this.up({ soltos: this.state.soltos.map(q => q.id === this.state.sel ? Object.assign({}, q, patch) : q) });
+    const addSolto = key => { const id = Date.now(); this.up({ soltos: this.state.soltos.concat([{ id, el: key, x: 150 + Math.round(Math.random() * 120), y: 190 + Math.round(Math.random() * 160), s: 110, r: 0, cor: 'acc' }]), sel: id, selLay: null }); };
+    const addTexto = estilo => { const id = Date.now(); this.up({ soltos: this.state.soltos.concat([{ id, kind: 'txt', estilo, txt: estilo === 'etiqueta' ? 'sua etiqueta' : 'Seu texto', x: 60, y: 250 + Math.round(Math.random() * 80), s: 110, r: 0, cor: estilo === 'tarja' ? 'acc' : 'fg' }]), sel: id, selLay: null }); };
+    const LIB = [['mapa', 'Nove estados'], ['mapa9', 'Nove recortes'], ['estado', 'Estado']].concat(Object.keys(E).map(k => [k, E[k].n]), [['vazio', 'Sem nada']]);
+    const tk = { m: K, a: R, p: P };
+    const pick = a => a[Math.floor(Math.random() * a.length)];
+    const labs = (this.layers()[base] || []).filter((x, i, a) => a.indexOf(x) === i);
+    const nomeDe = s => (BASES.find(b => b[0] === s.base) || ['', ''])[1] + ' · ' + (PAL[s.pal] || PAL.anil).n + ' · ' + (LIB.find(l => l[0] === s.el) || ['', ''])[1];
+    return {
+      c, t, fs, is, ufNome, ufSigla: st.uf,
+      v: { tam: st.tam, texI: st.texI, contorno: st.contorno, pW: st.pW },
+      on: { titulo: txt('titulo'), apoio: txt('apoio'), ladoE: txt('ladoE'), ladoD: txt('ladoD'), assina: txt('assina'), tam: num('tam'), texI: num('texI'), contorno: num('contorno'), pW: num('pW') },
+      art: art(st.el, A), artLinha: art(st.el, A, { traco: 'linha' }), artGrav: art(st.el, A, { traco: 'gravura' }),
+      artSol: art('sol', { m: c.acc, a: c.bg, p: c.bg }, { traco: 'chapado' }),
+      artEstado: art('estado', { m: c.acc, a: c.acc2, p: c.bg }, { traco: 'chapado' }),
+      artIcone: art(semArt.indexOf(st.el) >= 0 ? UFICON[st.uf] : st.el, { m: c.on1, a: c.acc2, p: c.acc }),
+      dieFx: st.die ? 'url(#cn-die)' : 'none', upload: !!st.upload,
+      tx: { img: tx0.img, size: tx0.size, op: Math.min(1, (st.texI / 100) * tx0.k) },
+      guiaCss: (this.props.guias ?? false) ? '1.5px dashed #E0109A' : 'none',
+      mesaBg: (this.props.mesa ?? 'clara') === 'escura' ? '#2B2925' : '#E4DCCB',
+      bases: BASES.map(b => Object.assign({ n: b[1], pick: () => this.up(Object.assign({ base: b[0], selLay: null }, b[0] === 'areia' && st.el === 'mapa' ? { el: 'garrafa' } : {})) }, sel(b[0] === base))),
+      frases: FR.map(f => ({ n: f[0] + ' ' + f[1], pick: () => this.up({ t: Object.assign({}, this.state.t, { titulo: f[0], apoio: f[1], ladoE: f[2], ladoD: f[3] }) }) })),
+      pals: Object.keys(PAL).map(k => ({ n: PAL[k].n, bg: PAL[k].bg, acc: PAL[k].acc, acc2: PAL[k].acc2, fgc: PAL[k].fg, pick: set('pal', k), selBg: k === st.pal ? K : 'transparent', selFg: k === st.pal ? P : K })),
+      texs: Object.keys(TEX).map(k => Object.assign({ n: TEX[k].n, pick: set('tex', k) }, sel(k === st.tex))),
+      modos: [['central', 'Central'], ['solto', 'Solto'], ['pincel', 'Pincel']].map(m => Object.assign({ n: m[1], pick: set('modo', m[0]) }, sel(m[0] === st.modo))),
+      modoDica: st.trocar && selIt ? 'Clique no elemento que entra no lugar do selecionado.' : ({ central: 'Clique para trocar a ilustração principal da base.', solto: 'Clique para soltar um elemento na peça. Depois arraste, gire e mude a cor.', pincel: 'Desenhe direto sobre a peça com o cursor.' })[st.modo],
+      naoPincel: st.modo !== 'pincel', ehPincel: st.modo === 'pincel',
+      lib: LIB.map(l => ({ n: l[1], thumb: art(l[0], tk, { traco: 'chapado' }), bg: st.modo === 'central' && st.el === l[0] ? Y : P, bd: st.modo === 'central' && st.el === l[0] ? K : 'rgba(29,26,22,.3)', pick: () => { const s = this.state; if (s.trocar && l[0] !== 'vazio' && s.soltos.some(q => q.id === s.sel)) this.up({ soltos: s.soltos.map(q => q.id === s.sel ? Object.assign({}, q, { el: l[0], kind: null }) : q), trocar: false }); else if (s.modo === 'solto' && l[0] !== 'vazio') addSolto(l[0]); else this.up({ el: l[0] }); } })),
+      ufs: UFS.map(u => Object.assign({ uf: u, nome: ufD[u] ? ufD[u].name : u, pick: set('uf', u) }, sel(u === st.uf))),
+      tracos: [['chapado', 'Chapado'], ['linha', 'Linha'], ['gravura', 'Gravura']].map(m => Object.assign({ n: m[1], pick: set('traco', m[0]) }, sel(m[0] === st.traco))),
+      dieBtn: sel(st.die), upBtn: sel(st.upload), toggleDie: () => this.up({ die: !this.state.die }), toggleUpload: () => this.up({ upload: !this.state.upload }),
+      soltos: st.soltos.map(s => {
+        const m = roles[s.cor] || c.acc, isT = s.kind === 'txt', fz = Math.round(s.s * .36);
+        const ts = !isT ? null : s.estilo === 'tarja' ? { font: "800 " + fz + "px/1 'Archivo',sans-serif", letterSpacing: '-.04em', color: escuro(m) ? P : K, background: m, padding: '.16em .34em .12em' }
+          : s.estilo === 'etiqueta' ? { font: "700 " + Math.max(9, Math.round(fz * .42)) + "px/1 'Archivo',sans-serif", letterSpacing: '.3em', textTransform: 'uppercase', color: m }
+          : { font: "800 " + fz + "px/.9 'Archivo',sans-serif", letterSpacing: '-.05em', color: m };
+        return { left: s.x + 'px', top: s.y + 'px', w: isT ? 'auto' : s.s + 'px', hh: isT ? 'auto' : s.s + 'px', rot: s.r + 'deg', outline: s.id === st.sel ? '1.5px dashed #E0109A' : 'none', fx: st.die && !isT ? 'url(#cn-die)' : 'none',
+          art: isT ? h('div', { style: Object.assign({ whiteSpace: 'nowrap' }, ts) }, s.txt || ' ') : art(s.el, { m, a: m === c.acc ? c.acc2 : c.acc, p: c.bg }), down: e => this.downSolto(s.id, e) };
+      }),
+      temSel: !!selIt, selTxt: !!(selIt && selIt.kind === 'txt'), selTxtV: selIt ? selIt.txt || '' : '', selV: { s: selIt ? selIt.s : 110, r: selIt ? selIt.r : 0 },
+      selOn: { s: e => updSel({ s: +e.target.value }), r: e => updSel({ r: +e.target.value }), txt: e => updSel({ txt: e.target.value }) },
+      selCores: roleList.map(r => ({ n: r[1], cor: roles[r[0]], outline: selIt && selIt.cor === r[0] ? '2px solid #E0109A' : 'none', pick: () => updSel({ cor: r[0] }) })),
+      selFrente: () => { const s = this.state, it = s.soltos.find(q => q.id === s.sel); if (it) this.up({ soltos: s.soltos.filter(q => q.id !== s.sel).concat([it]) }); },
+      selRemover: () => this.up({ soltos: this.state.soltos.filter(q => q.id !== this.state.sel), sel: null, trocar: false }),
+      selTras: () => { const s = this.state, it = s.soltos.find(q => q.id === s.sel); if (it) this.up({ soltos: [it].concat(s.soltos.filter(q => q.id !== s.sel)) }); },
+      selDup: () => this.dupSel(),
+      trocarBtn: sel(st.trocar), toggleTrocar: () => this.setState(s => ({ trocar: !s.trocar, modo: s.modo === 'pincel' ? 'solto' : s.modo })),
+      textosNovos: [['titulo', '+ Título'], ['tarja', '+ Tarja'], ['etiqueta', '+ Etiqueta']].map(x => ({ n: x[1], pick: () => addTexto(x[0]) })),
+      pranchetaDown: e => this.downPrancheta(e),
+      livreVazio: !st.soltos.length && !st.riscos.length,
+      camadas: labs.map(n => { const k = base + '|' + n, off = !!(st.off || {})[k], on = st.selLay === n; return { n, pick: () => this.setState({ selLay: on ? null : n, sel: null }), toggle: () => this.up({ off: Object.assign({}, this.state.off, { [k]: !off }), selLay: null }), ico: off ? '+' : '×', aria: (off ? 'Restaurar ' : 'Apagar ') + n, deco: off ? 'line-through' : 'none', fg: off ? '#6B6457' : K, bg: on ? Y : P, bd: on ? '#E0109A' : 'rgba(29,26,22,.4)' }; }),
+      restaurarCamadas: () => { const o = {}; Object.keys(this.state.off || {}).forEach(k => { if (k.indexOf(base + '|') !== 0) o[k] = this.state.off[k]; }); this.up({ off: o, selLay: null }); },
+      pincelDown: e => this.downPincel(e), pincelPE: st.modo === 'pincel' ? 'auto' : 'none',
+      pCores: roleList.map(r => ({ n: r[1], cor: roles[r[0]], outline: st.pCor === r[0] ? '2px solid #E0109A' : 'none', pick: set('pCor', r[0]) })),
+      riscosSvg: h('svg', { viewBox: '0 0 480 600', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', filter: 'url(#cn-ink-s)' } },
+        st.riscos.map(q => h('path', { key: q.id, d: 'M' + q.pts.map(p => p.join(' ')).join('L') + (q.pts.length < 2 ? 'l.01 0' : ''), fill: 'none', stroke: roles[q.cor] || c.acc, strokeWidth: q.w, strokeLinecap: 'round', strokeLinejoin: 'round' }))),
+      desfazer: () => this.up({ riscos: this.state.riscos.slice(0, -1) }),
+      limparColagem: () => this.up({ soltos: [], riscos: [], sel: null }),
+      sortear: () => { const f = pick(FR); this.up({ selLay: null, base: pick(BASES.slice(0, -1))[0], pal: pick(Object.keys(PAL)), el: pick(LIB.slice(0, -1))[0], uf: pick(UFS), t: Object.assign({}, this.state.t, { titulo: f[0], apoio: f[1], ladoE: f[2], ladoD: f[3] }) }); },
+      salvar: () => { const s = this.state, g = { base: s.base, pal: s.pal, el: s.el, uf: s.uf, traco: s.traco, tex: s.tex, texI: s.texI, contorno: s.contorno, die: s.die, t: s.t, off: s.off }; this.up({ salvos: s.salvos.concat([{ id: Date.now(), g }]).slice(-12) }); },
+      temSalvos: st.salvos.length > 0,
+      salvos: st.salvos.map(x => ({ n: nomeDe(x.g), pick: () => this.up(x.g), del: () => this.up({ salvos: this.state.salvos.filter(q => q.id !== x.id) }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
