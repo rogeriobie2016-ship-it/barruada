@@ -2,7 +2,9 @@
 
 import bibliotecaJson from '../data/biblioteca.json';
 import glossarioJson from '../data/glossario.json';
+import forroJson from '../data/forro-ingles.json';
 import jogosJson from '../data/jogos.json';
+import kitJson from '../data/kit.json';
 import membrosJson from '../data/membros.json';
 import pautasJson from '../data/pautas.json';
 import seriesJson from '../data/series.json';
@@ -16,6 +18,8 @@ export const biblioteca = bibliotecaJson as SecaoBiblioteca[];
 export const glossario = glossarioJson as Termo[];
 export const jogos = jogosJson as Jogos;
 export const membros = membrosJson as Membro[];
+export const kit = kitJson as { titulo: string; area: string; ano: string; tempo: string; objetivo: string }[];
+export const forroIngles = forroJson;
 
 // Caminho interno respeitando BASE_PATH (publicação em subpasta).
 export function rota(caminho: string): string {

@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { acertou, embaralhar, placar, veredito, type Escolha } from '../lib/quiz.ts';
 import { dominio } from '../lib/texto.ts';
 import type { QuizItem } from '../lib/types.ts';
+import Compartilhar from './Compartilhar.tsx';
+import Festa from './Festa.tsx';
 
 export default function Quiz({ itens }: { itens: QuizItem[] }) {
   const [ordem, setOrdem] = useState(itens);
@@ -58,6 +60,17 @@ export default function Quiz({ itens }: { itens: QuizItem[] }) {
             Jogar de novo
           </button>
         </div>
+        <Compartilhar
+          arquivo="barruada-novela-ou-nordeste"
+          descricao={`Cartão do jogo Novela ou Nordeste?: ${acertos} de ${total} acertos.`}
+          cartao={{
+            fundo: 'anil',
+            rotulo: 'Novela ou Nordeste?',
+            titulo: `Fiz ${acertos} de ${total}`,
+            linhas: ['Sei separar o Nordeste de verdade da coisa de novela.', 'E você?'],
+            caneta: veredito(acertos, total),
+          }}
+        />
         <h3 className="mt-8 text-xl">O que era o quê</h3>
         <ol className="m-0 mt-3 grid list-none gap-3 p-0">
           {ordem.map((q, i) => (
@@ -85,7 +98,8 @@ export default function Quiz({ itens }: { itens: QuizItem[] }) {
   const certo = vendoResposta && acertou(item, escolhas[atual]);
 
   return (
-    <div className="border border-linha bg-fundo-alto p-5 md:p-8" data-tela="pergunta" data-pronto={pronto}>
+    <div className="relative border border-linha bg-fundo-alto p-5 md:p-8" data-tela="pergunta" data-pronto={pronto}>
+      <Festa vez={certo ? escolhas.length : 0} />
       <p className="rotulo m-0 text-sol" aria-live="polite">
         Afirmação {atual + 1} de {ordem.length}
       </p>

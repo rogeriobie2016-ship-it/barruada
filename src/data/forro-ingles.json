@@ -1,0 +1,50 @@
+{
+ "aviso": "Protótipo. As traduções foram escritas para o jogo e precisam da revisão das professoras de inglês do grupo antes de ir para a sala. Não há letra de música aqui: só palavras soltas e títulos.",
+ "vocabulario": [
+  { "pt": "sanfona", "en": "accordion", "grupo": "Instrumentos" },
+  { "pt": "zabumba", "en": "bass drum", "grupo": "Instrumentos" },
+  { "pt": "triângulo", "en": "triangle", "grupo": "Instrumentos" },
+  { "pt": "pandeiro", "en": "tambourine", "grupo": "Instrumentos" },
+  { "pt": "sanfoneiro", "en": "accordion player", "grupo": "Instrumentos" },
+  { "pt": "dançar", "en": "to dance", "grupo": "Na festa" },
+  { "pt": "par", "en": "dance partner", "grupo": "Na festa" },
+  { "pt": "fogueira", "en": "bonfire", "grupo": "Na festa" },
+  { "pt": "bandeirinhas", "en": "bunting", "grupo": "Na festa" },
+  { "pt": "festa junina", "en": "June festival", "grupo": "Na festa" },
+  { "pt": "milho", "en": "corn", "grupo": "Na festa" },
+  { "pt": "saudade", "en": "longing", "grupo": "O que a música canta" },
+  { "pt": "xodó", "en": "sweetheart", "grupo": "O que a música canta" },
+  { "pt": "sertão", "en": "backlands", "grupo": "O que a música canta" },
+  { "pt": "chuva", "en": "rain", "grupo": "O que a música canta" },
+  { "pt": "lua", "en": "moon", "grupo": "O que a música canta" },
+  { "pt": "estrada", "en": "road", "grupo": "O que a música canta" },
+  { "pt": "coração", "en": "heart", "grupo": "O que a música canta" },
+  { "pt": "janela", "en": "window", "grupo": "O que a música canta" },
+  { "pt": "feira", "en": "street market", "grupo": "O que a música canta" }
+ ],
+ "titulos": [
+  { "pt": "Asa Branca", "en": "White Wing" },
+  { "pt": "Eu Só Quero um Xodó", "en": "All I Want Is a Sweetheart" },
+  { "pt": "Esperando na Janela", "en": "Waiting at the Window" },
+  { "pt": "O Xote das Meninas", "en": "The Girls' Xote" },
+  { "pt": "Feira de Mangaio", "en": "Mangaio Street Market" },
+  { "pt": "Riacho do Navio", "en": "Navio Creek" }
+ ],
+ "dicionario": [
+  { "pt": "arretado", "en": "awesome" },
+  { "pt": "massa", "en": "cool" },
+  { "pt": "oxente", "en": "wow, what?" },
+  { "pt": "mainha e painho", "en": "mom and dad" },
+  { "pt": "aperreado", "en": "worried, in a rush" },
+  { "pt": "abestado", "en": "silly" },
+  { "pt": "brocado", "en": "starving" },
+  { "pt": "estribado", "en": "loaded with money" },
+  { "pt": "liso", "en": "broke" },
+  { "pt": "jerimum", "en": "pumpkin" },
+  { "pt": "macaxeira", "en": "cassava" },
+  { "pt": "muriçoca", "en": "mosquito" },
+  { "pt": "zoada", "en": "noise" },
+  { "pt": "mangar", "en": "to make fun of" },
+  { "pt": "gaiato", "en": "funny, playful" }
+ ]
+}

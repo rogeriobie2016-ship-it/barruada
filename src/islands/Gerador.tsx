@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { medirCliche, montarSinopse, sortear, type Escolhas, type Sinopse } from '../lib/gerador.ts';
 import { maiuscula } from '../lib/texto.ts';
 import type { Gerador as DadosGerador } from '../lib/types.ts';
+import Compartilhar from './Compartilhar.tsx';
 
 const CAMPOS = [
   { chave: 'lugar', nome: 'Lugar' },
@@ -45,7 +46,7 @@ export default function Gerador({ dados }: { dados: DadosGerador }) {
 
   if (sinopse) {
     return (
-      <div className="capa--sol sobre-claro bg-sol p-5 text-nanquim md:p-8" data-tela="sinopse">
+      <div className="faixa faixa--sol grao sobre-claro p-5 md:p-8" data-tela="sinopse">
         <p className="rotulo m-0">Ei, Globo. Toma essa sinopse.</p>
         <h2 ref={resultado} tabIndex={-1} className="mt-3 text-4xl md:text-6xl" data-titulo>
           {sinopse.titulo}
@@ -75,6 +76,18 @@ export default function Gerador({ dados }: { dados: DadosGerador }) {
             Montar outra
           </button>
         </div>
+        <Compartilhar
+          claro
+          arquivo="barruada-minha-novela"
+          descricao={`Cartão com a sinopse da novela ${sinopse.titulo}.`}
+          cartao={{
+            fundo: 'sol',
+            rotulo: 'Ei, Globo. Toma essa sinopse.',
+            titulo: sinopse.titulo,
+            linhas: sinopse.frases,
+            caneta: medida.comentario || undefined,
+          }}
+        />
         <p className="m-0 mt-2 min-h-6 text-sm font-bold" role="status" aria-live="polite">
           {copiado ? 'Sinopse copiada. Agora é só colar.' : ''}
         </p>
