@@ -1,0 +1,48 @@
+/*
+  TOKENS DA BARRUADA
+  Único lugar do site com cor e fonte fixas. Para trocar o design system, edite só este arquivo
+  (e, se a forma da marca mudar, os componentes de src/components/marca).
+
+  Fonte dos valores: projeto "Sistema visual coletivo nordestino" no Claude Design
+  (paleta aprovada: barro, anil, sol, nanquim, papel, areia; Archivo 800 apertado).
+  Anil-noite e barro escuro vêm do design system v1 (seed/data/site.json).
+*/
+
+:root {
+  /* Paleta */
+  --barro: #C63A22;
+  --barro-escuro: #8A1F12;
+  --anil: #2A4BA0;
+  --anil-noite: #172A5E;
+  --sol: #F2B441;
+  --nanquim: #1D1A16;
+  --papel: #FBF5E8;
+  --areia: #E4DCCB;
+  --cinza-quente: #4A443A;
+
+  /* Papéis de cor. Vermelho corrige (pilar Resposta), azul afirma (pilar Afirmação). */
+  --fundo: var(--anil-noite);
+  --fundo-alto: color-mix(in srgb, var(--anil) 38%, var(--anil-noite));
+  --texto: var(--papel);
+  --texto-suave: color-mix(in srgb, var(--papel) 80%, var(--anil-noite));
+  --linha: color-mix(in srgb, var(--papel) 30%, transparent);
+  --cor-resposta: var(--barro);
+  --cor-afirmacao: var(--anil);
+  --destaque: var(--sol);
+  --foco: var(--sol);
+  --raios: var(--sol); /* raios só sobre azul, atrás do mapa */
+
+  /* Tipografia */
+  --fonte-titulo: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --fonte-texto: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --fonte-caneta: 'Covered By Your Grace', 'Comic Sans MS', cursive; /* só em frases de até 12 palavras */
+  --peso-titulo: 800;
+  --peso-texto: 500;
+  --aperto-titulo: -0.05em;
+  --aperto-rotulo: 0.2em;
+
+  /* Forma */
+  --raio: 0px;
+  --traco: 1px;
+  --traco-mapa: 1.5px;
+}

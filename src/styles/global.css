@@ -1,0 +1,228 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/archivo/wght.css';
+@import '@fontsource/covered-by-your-grace/latin-400.css';
+@import './tokens.css';
+
+/* O Tailwind só conhece as cores e fontes de tokens.css. */
+@theme inline {
+  --color-*: initial;
+  --color-barro: var(--barro);
+  --color-barro-escuro: var(--barro-escuro);
+  --color-anil: var(--anil);
+  --color-anil-noite: var(--anil-noite);
+  --color-sol: var(--sol);
+  --color-nanquim: var(--nanquim);
+  --color-papel: var(--papel);
+  --color-areia: var(--areia);
+  --color-cinza-quente: var(--cinza-quente);
+  --color-fundo: var(--fundo);
+  --color-fundo-alto: var(--fundo-alto);
+  --color-texto: var(--texto);
+  --color-texto-suave: var(--texto-suave);
+  --color-linha: var(--linha);
+  --font-titulo: var(--fonte-titulo);
+  --font-texto: var(--fonte-texto);
+  --font-caneta: var(--fonte-caneta);
+}
+
+@layer base {
+  html {
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    font-weight: var(--peso-texto);
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    line-height: 1.5;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    letter-spacing: var(--aperto-titulo);
+    line-height: 0.95;
+    text-wrap: balance;
+    margin: 0;
+  }
+  p { text-wrap: pretty; }
+  a { color: inherit; text-underline-offset: 3px; }
+  ::selection { background: var(--sol); color: var(--nanquim); }
+  :focus-visible {
+    outline: 3px solid var(--foco);
+    outline-offset: 3px;
+  }
+  /* Sobre fundo amarelo o foco amarelo some: troca por nanquim. */
+  .sobre-claro :focus-visible, .sobre-claro:focus-visible { outline-color: var(--nanquim); }
+  button, select, input, textarea { font: inherit; color: inherit; border-radius: var(--raio); }
+  button { cursor: pointer; }
+  summary { cursor: pointer; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Rótulo pequeno em caixa alta, como nos hubs do design system. */
+  .rotulo {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: var(--aperto-rotulo);
+    text-transform: uppercase;
+  }
+
+  /* A caneta: letra de mão que risca e corrige. Só em frases curtas. */
+  .caneta {
+    font-family: var(--fonte-caneta);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1;
+  }
+  .riscado {
+    text-decoration: line-through;
+    text-decoration-color: var(--barro);
+    text-decoration-thickness: 0.14em;
+  }
+
+  /* Botões */
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.75rem 1.25rem;
+    border: var(--traco) solid transparent;
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.12s ease, background-color 0.12s ease;
+  }
+  .botao:active { transform: translateY(2px); }
+  .botao[disabled] { opacity: 0.55; cursor: not-allowed; }
+  .botao-sol { background: var(--sol); color: var(--nanquim); }
+  .botao-sol:hover { background: var(--papel); }
+  .botao-anil { background: var(--anil); color: var(--papel); border-color: var(--papel); }
+  .botao-anil:hover { background: var(--anil-noite); }
+  .botao-barro { background: var(--barro); color: var(--papel); border-color: var(--papel); }
+  .botao-barro:hover { background: var(--barro-escuro); }
+  .botao-linha { background: transparent; color: var(--texto); border-color: var(--texto); }
+  .botao-linha:hover { background: var(--papel); color: var(--nanquim); }
+  .botao-tinta { background: var(--nanquim); color: var(--papel); }
+  .botao-tinta:hover { background: var(--anil-noite); }
+
+  /* Campos de formulário sobre o fundo escuro */
+  .campo {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.65rem 0.75rem;
+    background: var(--papel);
+    color: var(--nanquim);
+    border: var(--traco) solid var(--nanquim);
+    font-weight: 600;
+  }
+  .campo::placeholder { color: var(--cinza-quente); opacity: 1; }
+
+  /* Capa tipográfica: cor chapada, Archivo apertado e uma forma da marca. Nada de foto. */
+  .capa {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    container-type: inline-size;
+    padding: 9%;
+    background: var(--capa-fundo);
+    color: var(--capa-texto);
+  }
+  .capa-larga { aspect-ratio: 16 / 10; padding: 5%; }
+  .capa-rotulo {
+    position: relative;
+    font-size: max(5cqw, 0.5625rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .capa-larga .capa-rotulo { font-size: max(2.6cqw, 0.5625rem); }
+  .capa-titulo {
+    position: relative;
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    letter-spacing: var(--aperto-titulo);
+    line-height: 0.9;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  .capa-forma {
+    position: absolute;
+    width: 78%;
+    right: -20%;
+    top: 12%;
+    fill: var(--capa-forma);
+  }
+  .capa-larga .capa-forma { width: 44%; right: -8%; top: -18%; }
+  .capa--barro { --capa-fundo: var(--barro); --capa-texto: var(--papel); --capa-forma: var(--barro-escuro); }
+  .capa--anil { --capa-fundo: var(--anil); --capa-texto: var(--papel); --capa-forma: var(--sol); }
+  .capa--sol { --capa-fundo: var(--sol); --capa-texto: var(--nanquim); --capa-forma: var(--barro); }
+  .capa--papel { --capa-fundo: var(--papel); --capa-texto: var(--nanquim); --capa-forma: var(--sol); }
+  .capa--areia { --capa-fundo: var(--areia); --capa-texto: var(--nanquim); --capa-forma: var(--anil); }
+  .capa--nanquim { --capa-fundo: var(--nanquim); --capa-texto: var(--papel); --capa-forma: var(--barro); }
+
+  /* Trilho horizontal */
+  .trilho {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 1rem;
+    padding: 0.25rem 1rem 1rem;
+    margin: 0;
+    list-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--linha) transparent;
+  }
+  .trilho > li {
+    flex: none;
+    width: min(44vw, 11.5rem);
+    scroll-snap-align: start;
+  }
+  .cartao-link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.15s ease;
+  }
+  .cartao-link:hover { transform: translateY(-4px); }
+  .cartao-link:focus-visible { outline-offset: 4px; }
+
+  /* Giro lento dos raios atrás do mapa */
+  .giro { animation: giro 90s linear infinite; transform-origin: 50% 50%; transform-box: fill-box; }
+  @keyframes giro { to { transform: rotate(360deg); } }
+
+  .so-leitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 768px) {
+  .trilho { padding-inline: 2rem; scroll-padding-inline: 2rem; gap: 1rem; }
+  .trilho > li { width: 12.5rem; }
+}

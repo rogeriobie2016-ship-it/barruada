@@ -1,0 +1,28 @@
+---
+// Trilho horizontal de cartões. Quem chama só renderiza se houver itens (trilho vazio não aparece).
+interface Props {
+  titulo: string;
+  id: string;
+  verTudo?: { href: string; texto: string };
+}
+const { titulo, id, verTudo } = Astro.props;
+---
+
+<section aria-labelledby={`trilho-${id}`} class="mt-10" data-trilho={id}>
+  <div class="mx-auto flex max-w-6xl items-end justify-between gap-4 px-4 pb-3 md:px-8">
+    <h2 id={`trilho-${id}`} class="text-2xl md:text-3xl">{titulo}</h2>
+    {
+      verTudo && (
+        <a href={verTudo.href} class="rotulo inline-flex min-h-11 items-center whitespace-nowrap text-sol">
+          {verTudo.texto}
+          <span class="so-leitor">: {titulo}</span>
+        </a>
+      )
+    }
+  </div>
+  <div class="mx-auto max-w-6xl">
+    <ul class="trilho" tabindex="0" aria-label={`${titulo}: role para o lado para ver mais`}>
+      <slot />
+    </ul>
+  </div>
+</section>

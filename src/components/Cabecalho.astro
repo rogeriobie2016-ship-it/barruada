@@ -1,0 +1,16 @@
+---
+// Cabeçalho de página interna: rótulo, título e texto de apoio.
+interface Props {
+  rotulo?: string;
+  titulo: string;
+  texto?: string;
+}
+const { rotulo, titulo, texto } = Astro.props;
+---
+
+<header class="mx-auto max-w-6xl px-4 pt-10 md:px-8 md:pt-14">
+  {rotulo && <p class="rotulo m-0 text-sol">{rotulo}</p>}
+  <h1 class="mt-3 text-5xl md:text-7xl">{titulo}</h1>
+  {texto && <p class="mt-4 max-w-2xl text-lg text-texto-suave">{texto}</p>}
+  <slot />
+</header>

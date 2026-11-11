@@ -1,0 +1,109 @@
+---
+import '../styles/global.css';
+import Logo from '../components/marca/Logo.astro';
+import { rota, site } from '../lib/dados.ts';
+
+interface Props {
+  titulo?: string;
+  descricao?: string;
+  noindex?: boolean;
+}
+
+const { titulo, descricao = site.assinatura, noindex = false } = Astro.props;
+const tituloPagina = titulo ? `${titulo} | ${site.nome}` : `${site.nome}: ${site.assinatura}`;
+
+const menu = [
+  { nome: 'Em cartaz', href: '/em-cartaz/' },
+  { nome: 'Biblioteca', href: '/biblioteca/' },
+  { nome: 'Jogos', href: '/jogos/' },
+  { nome: 'Dicionário', href: '/glossario/' },
+  { nome: 'Manifesto', href: '/manifesto/' },
+];
+const aqui = Astro.url.pathname;
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloPagina}</title>
+    <meta name="description" content={descricao} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:title" content={tituloPagina} />
+    <meta property="og:description" content={descricao} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href={rota('/favicon.svg')} />
+  </head>
+  <body>
+    <a href="#conteudo" class="pular botao botao-sol">Pular para o conteúdo</a>
+    <header class="border-b border-linha">
+      <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 pt-4 md:flex-row md:items-center md:justify-between md:px-8 md:pb-4">
+        <a href={rota('/')} class="self-start no-underline" aria-label={`${site.nome}, página inicial`}><Logo /></a>
+        <nav aria-label="Principal" class="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+          <ul class="m-0 flex list-none gap-1 p-0 pb-3 md:pb-0">
+            {
+              menu.map((item) => {
+                const ativo = aqui.startsWith(rota(item.href));
+                return (
+                  <li>
+                    <a
+                      href={rota(item.href)}
+                      aria-current={ativo ? 'page' : undefined}
+                      class:list={[
+                        'inline-flex min-h-11 items-center whitespace-nowrap px-3 font-titulo text-sm font-bold no-underline',
+                        ativo ? 'bg-sol text-nanquim sobre-claro' : 'text-texto hover:bg-fundo-alto',
+                      ]}
+                    >
+                      {item.nome}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" tabindex="-1">
+      <slot />
+    </main>
+
+    <footer class="mt-16 border-t border-linha">
+      <div class="mx-auto grid max-w-6xl gap-6 px-4 py-10 md:grid-cols-[2fr_1fr_1fr] md:px-8">
+        <div>
+          <Logo />
+          <p class="mt-3 max-w-sm text-sm text-texto-suave">{site.significado}</p>
+        </div>
+        <ul class="m-0 grid list-none gap-2 p-0 text-sm">
+          {menu.map((item) => <li><a href={rota(item.href)}>{item.nome}</a></li>)}
+        </ul>
+        <div class="text-sm text-texto-suave">
+          {
+            redes.length > 0 && (
+              <ul class="m-0 mb-3 grid list-none gap-2 p-0">
+                {redes.map(([nome, url]) => (
+                  <li><a href={url} rel="noopener" class="capitalize">{nome}</a></li>
+                ))}
+              </ul>
+            )
+          }
+          <p class="m-0">Mapa: {site.mapa_credito}.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .pular {
+    position: absolute;
+    left: 0.5rem;
+    top: -6rem;
+    z-index: 50;
+  }
+  .pular:focus { top: 0.5rem; }
+  main:focus { outline: none; }
+</style>

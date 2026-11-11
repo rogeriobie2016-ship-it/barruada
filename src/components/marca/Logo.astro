@@ -1,0 +1,25 @@
+---
+// Assinatura provisória: Archivo firme e apertado, na linha da proposta "Registro" do design system.
+// Quando o logo final for escolhido, a troca acontece só aqui.
+import { site } from '../../lib/dados.ts';
+const nome = site.nome.toUpperCase();
+const a = nome.slice(0, 3);
+const b = nome.slice(3, 6);
+const c = nome.slice(6);
+---
+
+<span class="logo"><span class="so-leitor">{site.nome}</span>
+  <span aria-hidden="true"><span class="logo-a">{a}</span><span class="logo-b">{b}</span><span class="logo-a">{c}</span></span>
+</span>
+
+<style>
+  .logo {
+    font-family: var(--fonte-titulo);
+    font-weight: var(--peso-titulo);
+    letter-spacing: var(--aperto-titulo);
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .logo-a { color: var(--sol); }
+  .logo-b { color: var(--papel); }
+</style>
