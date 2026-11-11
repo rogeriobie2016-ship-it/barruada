@@ -1,0 +1,48 @@
+---
+// Um texto do blog, escrito em Markdown em src/textos/.
+import { Ilustra } from '../../../components/marca/Ilustra.tsx';
+import Base from '../../../layouts/Base.astro';
+import { rota } from '../../../lib/dados.ts';
+import { lerTextos, type TextoCompleto } from '../../../lib/textos.ts';
+
+export function getStaticPaths() {
+  return lerTextos().map((texto) => ({ params: { slug: texto.slug }, props: { texto } }));
+}
+
+interface Props {
+  texto: TextoCompleto;
+}
+const { texto } = Astro.props;
+const { Content } = texto;
+const [ano, mes, dia] = texto.data.split('-');
+---
+
+<Base titulo={texto.titulo} descricao={texto.resumo || texto.titulo}>
+  <header class="faixa faixa--papel grao sobre-claro relative overflow-hidden">
+    <Ilustra nome="livro" className="solta right-[-1rem] top-6 w-32 rotate-6 md:right-[8%] md:w-52" />
+    <div class="relative mx-auto max-w-3xl px-4 py-10 md:px-8 md:py-14">
+      <p class="etiqueta etiqueta-sol m-0 text-sm">{texto.serie || 'Blog'}</p>
+      <h1 class="mt-4 text-5xl md:text-6xl">{texto.titulo}</h1>
+      {texto.resumo && <p class="mt-4 text-xl">{texto.resumo}</p>}
+      <p class="mt-4 text-sm text-cinza-quente">
+        {[texto.autoria, `${dia}/${mes}/${ano}`].filter(Boolean).join(' · ')}
+      </p>
+    </div>
+  </header>
+  <article class="texto mx-auto max-w-3xl px-4 pt-8 md:px-8" data-texto>
+    <Content />
+  </article>
+  <p class="mx-auto mt-8 max-w-3xl px-4 md:px-8">
+    <a href={rota('/em-cartaz/#texto')} class="botao botao-linha">Voltar para Em cartaz</a>
+  </p>
+</Base>
+
+<style>
+  .texto :global(p) { margin: 0 0 1.1em; font-size: 1.125rem; line-height: 1.65; }
+  .texto :global(h2) { margin: 1.6em 0 0.5em; font-size: 2rem; }
+  .texto :global(h3) { margin: 1.4em 0 0.4em; font-size: 1.5rem; }
+  .texto :global(a) { color: var(--sol); }
+  .texto :global(ul), .texto :global(ol) { margin: 0 0 1.1em; padding-left: 1.4em; font-size: 1.125rem; line-height: 1.6; }
+  .texto :global(blockquote) { margin: 0 0 1.1em; padding-left: 1rem; border-left: 4px solid var(--sol); }
+  .texto :global(strong) { font-weight: 800; }
+</style>
