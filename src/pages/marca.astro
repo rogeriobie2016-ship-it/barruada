@@ -14,7 +14,7 @@ const hub = (arquivo: string) => rota(`/hub/${encodeURIComponent(arquivo)}`);
 const ferramentas = [
   {
     nome: 'Hub de Design',
-    texto: 'Peças estáticas para feed e story. Escolha uma base, troque palavras, cor e ilustração.',
+    texto: 'Peças estáticas para feed e story. Escolha uma base, troque palavras, cor e ilustração, e baixe em PNG.',
     arquivo: 'Coletivo Nordeste - Hub de Design.dc.html',
     esquema: 'anil',
     arte: 'sol',
@@ -27,8 +27,15 @@ const ferramentas = [
     arte: 'mic',
   },
   {
+    nome: 'Hub de Animações',
+    texto: 'Animações autorais em quatro formatos. Baixe um quadro em PNG ou SVG, ou copie o código para incorporar.',
+    arquivo: 'Coletivo Nordeste - Hub de Animações.dc.html',
+    esquema: 'nanquim',
+    arte: 'lua',
+  },
+  {
     nome: 'Kit Rede Social',
-    texto: 'Foto de perfil, destaques e capas no mesmo sistema das peças.',
+    texto: 'Foto de perfil, destaques e capas no mesmo sistema das peças. Cada uma baixa em PNG.',
     arquivo: 'Coletivo Nordeste - Kit Rede Social.dc.html',
     esquema: 'sol',
     arte: 'estrela',
@@ -37,7 +44,7 @@ const ferramentas = [
     nome: 'Propostas de logo',
     texto: 'As propostas em estudo. O logo ainda não foi escolhido.',
     arquivo: 'Barruada - Propostas de Logo.dc.html',
-    esquema: 'nanquim',
+    esquema: 'areia',
     arte: 'azulejo',
   },
   {
@@ -76,7 +83,7 @@ const regrasNao = [
   <Cabecalho
     rotulo="Hub de marca"
     titulo="Pegue a marca e produza."
-    texto="Livro aberto, de uso livre para quem cria conteúdo sobre o Nordeste. As ferramentas rodam no navegador e exportam a peça pronta."
+    texto="Livro aberto, de uso livre para quem cria conteúdo sobre o Nordeste. As ferramentas rodam no navegador. No Hub de Design e no Kit Rede Social, o botão Baixar PNG fica no canto da tela."
     tom="sol"
     arte="garrafa"
   />

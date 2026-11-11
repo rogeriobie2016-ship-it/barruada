@@ -10,6 +10,7 @@
     "dev": "astro dev",
     "sync": "node scripts/sync.ts",
     "validate": "node scripts/validate.ts",
+    "og": "node scripts/og.ts",
     "build": "npm run sync && npm run validate && astro build",
     "preview": "astro preview",
     "test": "npm run build && vitest run",
@@ -30,6 +31,7 @@
     "@playwright/test": "^1.65.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "html-to-image": "^1.11.13",
     "typescript": "^7.0.2",
     "vitest": "^5.1.0"
   }
