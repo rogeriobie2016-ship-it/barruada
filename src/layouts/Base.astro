@@ -1,7 +1,9 @@
 ---
 import '../styles/global.css';
 import Logo from '../components/marca/Logo.astro';
+import { existsSync } from 'node:fs';
 import { rota, site } from '../lib/dados.ts';
+import { nomeOg } from '../lib/og.ts';
 
 interface Props {
   titulo?: string;
@@ -22,6 +24,12 @@ const menu = [
   { nome: 'Hub de marca', href: '/marca/' },
 ];
 const aqui = Astro.url.pathname;
+
+// Imagem de compartilhamento da página (public/og, gerada por npm run og). Sem arquivo, usa a da página inicial.
+const base = rota('');
+const caminho = base !== '' && aqui.startsWith(base) ? aqui.slice(base.length) : aqui;
+const arquivoOg = existsSync(`public/og/${nomeOg(caminho)}.png`) ? nomeOg(caminho) : 'inicio';
+const imagemOg = new URL(rota(`/og/${arquivoOg}.png`), Astro.site).href;
 const redes = Object.entries(site.redes).filter(([, url]) => url);
 ---
 
@@ -36,6 +44,11 @@ const redes = Object.entries(site.redes).filter(([, url]) => url);
     <meta property="og:title" content={tituloPagina} />
     <meta property="og:description" content={descricao} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content={imagemOg} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={imagemOg} />
     <link rel="icon" type="image/svg+xml" href={rota('/favicon.svg')} />
   </head>
   <body>
@@ -81,6 +94,7 @@ const redes = Object.entries(site.redes).filter(([, url]) => url);
         </div>
         <ul class="m-0 grid list-none gap-2 p-0 text-sm">
           {menu.map((item) => <li><a href={rota(item.href)}>{item.nome}</a></li>)}
+          <li><a href={rota('/mural/')}>Mural</a></li>
         </ul>
         <div class="text-sm text-texto-suave">
           {
