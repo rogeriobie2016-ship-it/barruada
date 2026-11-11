@@ -48,7 +48,7 @@ export const JOGOS: Jogo[] = [
   {
     id: 'a-jornada-desmontada',
     nome: 'A jornada desmontada',
-    descricao: 'As doze etapas do herói sertanejo, viradas uma a uma.',
+    descricao: 'Escreva a história em doze cenas e descubra se caiu no estereótipo da TV.',
     esquema: 'nanquim',
     arte: 'jangada',
     pronto: true,

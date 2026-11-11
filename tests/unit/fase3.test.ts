@@ -205,3 +205,28 @@ describe('palavras cruzadas', async () => {
     }
   });
 });
+
+describe('jornada narrativa', async () => {
+  const { montarPassos, veredito } = await import('../../src/lib/jornada.ts');
+  const jogos = (await import('../../src/data/jogos.json')).default;
+
+  it('cada cena tem um clichê e uma troca, vindos dos dados', () => {
+    const passos = montarPassos(jogos.jornada);
+    expect(passos).toHaveLength(12);
+    passos.forEach((p, i) => {
+      expect(p.opcoes.map((o) => o.tipo).sort()).toEqual(['cliche', 'troca']);
+      expect(p.opcoes.find((o) => o.tipo === 'cliche')!.texto).toBe(jogos.jornada[i].cliche);
+      expect(p.opcoes.find((o) => o.tipo === 'troca')!.texto).toBe(jogos.jornada[i].troca);
+    });
+  });
+
+  it('o resultado depende de quantos clichês a pessoa escolheu', () => {
+    const doze = (n: number) => Array.from({ length: 12 }, (_, i) => (i < n ? 'cliche' : 'troca')) as ('cliche' | 'troca')[];
+    expect(veredito(doze(12)).lado).toBe('tv');
+    expect(veredito(doze(8)).lado).toBe('tv');
+    expect(veredito(doze(5)).lado).toBe('meio');
+    expect(veredito(doze(3)).lado).toBe('verdade');
+    expect(veredito(doze(0)).lado).toBe('verdade');
+    expect(veredito(doze(0)).cliches).toBe(0);
+  });
+});

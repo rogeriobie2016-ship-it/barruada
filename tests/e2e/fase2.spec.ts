@@ -61,7 +61,7 @@ test('Dicionário em modo jogo: oito palavras só com teclado', async ({ page })
 });
 
 test('A jornada desmontada: vira as doze cartas e mostra a história reescrita', async ({ page }) => {
-  await page.goto('/jogos/a-jornada-desmontada/');
+  await page.goto('/jogos/a-jornada-desmontada/?modo=cartas');
   await tabAte(page, '[data-carta="0"]');
   for (let i = 0; i < jogos.jornada.length; i++) {
     await expect(page.locator(`[data-carta="${i}"]`)).toBeFocused();
@@ -213,3 +213,38 @@ for (const jogo of ['cruzadinha', 'palavras-cruzadas']) {
     await conferirCartao(page);
   });
 }
+
+test('jornada narrativa: só clichê cai no estereótipo da TV', async ({ page }) => {
+  await page.goto('/jogos/a-jornada-desmontada/?ordem=fixa');
+  for (let i = 0; i < jogos.jornada.length; i++) {
+    await expect(page.locator('[data-etapa]')).toHaveText(jogos.jornada[i].etapa);
+    await page.locator('[data-opcao="0"]').focus();
+    await page.keyboard.press('Enter');
+  }
+  const fim = page.locator('[data-tela="veredito"]');
+  await expect(fim).toHaveAttribute('data-lado', 'tv');
+  await expect(page.locator('[data-veredito]')).toBeFocused();
+  await expect(page.locator('[data-contagem]')).toContainText('12 de 12');
+  await expect(page.locator('[data-cena-final="cliche"]')).toHaveCount(12);
+});
+
+test('jornada narrativa: escolhe o Nordeste de hoje, volta uma cena e gera cartão', async ({ page }) => {
+  await page.goto('/jogos/a-jornada-desmontada/?ordem=fixa');
+  for (let i = 0; i < jogos.jornada.length; i++) {
+    await page.locator('[data-opcao="1"]').focus();
+    await page.keyboard.press('Enter');
+  }
+  await expect(page.locator('[data-tela="veredito"]')).toHaveAttribute('data-lado', 'verdade');
+  await expect(page.locator('[data-contagem]')).toContainText('0 de 12');
+
+  // Volta na cena 3 pela trilha, troca a escolha e vê o resultado mudar.
+  await page.locator('[data-tela="veredito"] button', { hasText: 'Rever as escolhas' }).click();
+  await page.locator('[data-cena-atalho="2"]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('[data-etapa]')).toHaveText(jogos.jornada[2].etapa);
+  await expect(page.locator('[data-opcao="1"]')).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('[data-opcao="0"]').click();
+  await page.locator('[data-ver-resultado]').click();
+  await expect(page.locator('[data-contagem]')).toContainText('1 de 12');
+  await conferirCartao(page);
+});

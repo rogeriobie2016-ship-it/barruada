@@ -1,14 +1,14 @@
 ---
 import Cabecalho from '../../components/Cabecalho.astro';
-import Jornada from '../../islands/Jornada.tsx';
+import JornadaNarrativa from '../../islands/JornadaNarrativa.tsx';
 import Base from '../../layouts/Base.astro';
 import { jogos, rota } from '../../lib/dados.ts';
 ---
 
 <Base titulo="A jornada desmontada" descricao="As doze etapas da jornada do herói reescritas para o Nordeste de hoje.">
-  <Cabecalho rotulo="Jogo" titulo="A jornada desmontada" texto="As doze etapas da jornada do herói, do jeito que a novela conta. Toque em cada carta para virar e ver a versão de hoje." tom="nanquim" arte="jangada" />
+  <Cabecalho rotulo="Jogo" titulo="A jornada desmontada" texto="Escreva a sua história em doze cenas. Em cada uma, dois caminhos. No fim você descobre se caiu no estereótipo da televisão ou se contou o Nordeste de verdade." tom="nanquim" arte="jangada" />
   <div class="mx-auto max-w-4xl px-4 pt-8 md:px-8">
-    <Jornada etapas={jogos.jornada} client:load />
+    <JornadaNarrativa etapas={jogos.jornada} client:load />
     <p class="mt-6"><a href={rota('/jogos/')} class="inline-flex min-h-11 items-center text-sol">Todos os jogos</a></p>
   </div>
 </Base>
