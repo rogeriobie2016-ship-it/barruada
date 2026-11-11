@@ -264,3 +264,69 @@ describe('vídeos da biblioteca', async () => {
     expect(validarVideos((await import('../../src/data/videos.json')).default)).toEqual([]);
   });
 });
+
+describe('estúdio de animação', async () => {
+  const a = await import('../../src/lib/animacao.ts');
+
+  it('toda peça chega inteira ao lugar no fim, em qualquer movimento', () => {
+    for (const m of a.MOVIMENTOS) {
+      for (const peca of ['raios', 'disco', 'arte', 'moldura', 'titulo', 'apoio', 'laterais', 'estrelas', 'assinatura'] as const) {
+        const e = a.estadoDa(peca, m.id, 5.9, 6);
+        expect(e.alpha, `${m.id}/${peca}`).toBeCloseTo(1, 2);
+        expect(e.escala, `${m.id}/${peca}`).toBeGreaterThan(0.8);
+        expect(Math.abs(e.dx), `${m.id}/${peca}`).toBeLessThan(0.01);
+        expect(Math.abs(e.dy), `${m.id}/${peca}`).toBeLessThan(0.01);
+        expect(e.letras).toBe(1);
+      }
+    }
+  });
+
+  it('as peças entram em sequência: no instante zero nada está assentado', () => {
+    expect(a.estadoDa('titulo', 'girar', 0, 6).alpha).toBe(0);
+    expect(a.estadoDa('titulo', 'crescer', 0, 6).escala).toBe(0);
+    expect(a.estadoDa('disco', 'queda', 0, 6).dy).toBeLessThan(-0.5);
+  });
+
+  it('na barruada as duas metades vêm de lados opostos e se encontram no impacto', () => {
+    const antes = [a.estadoDa('disco', 'barruada', 0.2, 6).dx, a.estadoDa('arte', 'barruada', 0.2, 6).dx];
+    expect(antes[0]).toBeLessThan(-0.2);
+    expect(antes[1]).toBeGreaterThan(0.2);
+    expect(Math.abs(a.estadoDa('disco', 'barruada', a.IMPACTO, 6).dx)).toBeLessThan(0.001);
+    expect(a.estadoDa('estrelas', 'barruada', a.IMPACTO - 0.1, 6).alpha).toBe(0);
+    expect(a.estadoDa('estrelas', 'barruada', a.IMPACTO + 0.6, 6).alpha).toBe(1);
+  });
+
+  it('o título se escreve aos poucos no movimento de digitar', () => {
+    const meio = a.estadoDa('titulo', 'digitar', 1.5, 6).letras;
+    expect(meio).toBeGreaterThan(0);
+    expect(meio).toBeLessThan(1);
+  });
+
+  it('os raios giram com o tempo', () => {
+    expect(a.estadoDa('raios', 'girar', 4, 6).giro).toBeGreaterThan(a.estadoDa('raios', 'girar', 1, 6).giro);
+  });
+
+  it('lê as transformações do acervo', () => {
+    expect(a.lerTransformacao(undefined)).toEqual([1, 0, 0, 1, 0, 0]);
+    expect(a.lerTransformacao('translate(10 20)')).toEqual([1, 0, 0, 1, 10, 20]);
+    expect(a.lerTransformacao('scale(-1 1)')).toEqual([-1, 0, 0, 1, 0, 0]);
+    const giro = a.lerTransformacao('rotate(90 50 50)');
+    // (50, 0) gira 90 graus em volta de (50, 50) e vai para (100, 50).
+    expect(giro[0] * 50 + giro[2] * 0 + giro[4]).toBeCloseTo(100);
+    expect(giro[1] * 50 + giro[3] * 0 + giro[5]).toBeCloseTo(50);
+  });
+
+  it('começar do zero desliga tudo', () => {
+    expect(Object.values(a.DO_ZERO.camadas).every((x) => x === false)).toBe(true);
+    expect(a.DO_ZERO.titulo).toBe('');
+    expect(a.DO_ZERO.arte).toBe('nada');
+  });
+
+  it('raios amarelos só sobre azul, e todo papel de cor é um token', () => {
+    for (const e of a.ESQUEMAS) {
+      if (e !== 'anil') expect(a.PAPEIS[e].raios).not.toBe('sol');
+      for (const token of Object.values(a.PAPEIS[e])) expect(token).toMatch(/^[a-z-]+$/);
+    }
+    expect(a.PAPEIS.anil.raios).toBe('sol');
+  });
+});

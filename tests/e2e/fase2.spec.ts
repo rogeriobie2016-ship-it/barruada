@@ -147,9 +147,9 @@ test('sala de aula: atividades do kit e versão para projetar sem placar', async
 
 test('hub de marca abre as ferramentas do design system', async ({ page }) => {
   await page.goto('/marca/');
-  await expect(page.locator('[data-hub]')).toHaveCount(6);
+  await expect(page.locator('[data-hub]')).toHaveCount(7);
   await expect(page.locator('[data-cor="barro"]')).toHaveText(/^#[0-9A-F]{6}$/);
-  await page.locator('[data-hub]').first().click();
+  await page.locator('[data-hub]').nth(1).click();
   await expect(page.getByRole('heading', { name: 'Hub de Design' })).toBeVisible({ timeout: 15000 });
 });
 
@@ -247,4 +247,47 @@ test('jornada narrativa: escolhe o Nordeste de hoje, volta uma cena e gera cart�
   await page.locator('[data-ver-resultado]').click();
   await expect(page.locator('[data-contagem]')).toContainText('1 de 12');
   await conferirCartao(page);
+});
+
+test('estúdio de animação: monta do zero, troca opções e baixa PNG e vídeo', async ({ page }) => {
+  await page.goto('/marca/animacao/?parado');
+  await expect(page.locator('[data-estudio][data-pronto="true"]')).toBeVisible();
+  const tela = page.locator('[data-tela-animacao]');
+  const pintado = () => tela.evaluate((c: HTMLCanvasElement) => c.toDataURL('image/jpeg', 0.3).length);
+
+  await expect(tela).toHaveAttribute('width', '1080');
+  await expect(tela).toHaveAttribute('height', '1350');
+  const cheio = await pintado();
+
+  // Do zero: a tela fica bem mais simples.
+  await page.locator('[data-do-zero]').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('[data-palavra="titulo"]')).toHaveValue('');
+  await expect.poll(pintado).toBeLessThan(cheio * 0.6);
+
+  // Monta de novo pelo teclado.
+  await page.locator('[data-base="colagem"]').focus();
+  await page.keyboard.press('Enter');
+  await page.locator('[data-palavra="titulo"]').focus();
+  await page.keyboard.type('Capital');
+  await page.locator('[data-palavra="apoio"]').fill('também é Nordeste');
+  await page.locator('[data-esquema="sol"]').click();
+  await page.locator('[data-arte]').selectOption('jangada');
+  await page.locator('[data-camada="raios"]').check();
+  await page.locator('[data-camada="disco"]').check();
+  await page.locator('[data-movimento="barruada"]').click();
+  await page.locator('[data-formato="sq"]').click();
+  await expect(tela).toHaveAttribute('height', '1080');
+  await expect.poll(pintado).toBeGreaterThan(20000);
+
+  const [png] = await Promise.all([page.waitForEvent('download'), page.locator('[data-exportar-png]').click()]);
+  expect(png.suggestedFilename()).toBe('barruada-animacao-1080x1080.png');
+
+  await page.locator('[data-duracao]').fill('2');
+  const [video] = await Promise.all([page.waitForEvent('download', { timeout: 30000 }), page.locator('[data-exportar-video]').click()]);
+  expect(video.suggestedFilename()).toMatch(/^barruada-animacao-1080x1080\.(webm|mp4)$/);
+  const caminho = await video.path();
+  const { statSync } = await import('node:fs');
+  expect(statSync(caminho).size).toBeGreaterThan(20000);
+  await expect(page.locator('[data-aviso-estudio]')).toContainText('Vídeo baixado');
 });

@@ -160,6 +160,16 @@ Antes de publicar recado com nome de pessoa, confirme a autorização dela no pr
 - Cada página tem uma imagem de compartilhamento 1200x630 em `public/og/`. A lista de páginas e títulos fica em `src/lib/og.ts`.
 - As imagens ficam no repositório. Mudou um título, criou página ou trocou o design system? Rode `npm run og` e faça commit. O gerador usa o Chromium do Playwright.
 
+## Estúdio de animação
+
+`/marca/animacao/` monta uma animação da marca do zero ou a partir de uma base, com as mesmas escolhas do Hub de Design e mais o movimento:
+
+- Base (selo com raios, selo de moldura, colagem recortada, papel cortado, lettering e mapa, em branco), palavras, cor, ilustração do acervo ou mapa (os nove ou um estado em destaque), camadas, traço das divisas, movimento, duração e formato (16:9, 9:16, 1:1, 4:5).
+- Baixar vídeo grava uma volta da animação no próprio navegador (MP4 onde o navegador grava MP4, senão WebM). Baixar quadro em PNG salva o instante parado na prévia.
+- O desenho é em canvas (`src/lib/animacao.ts`) e as cores vêm de `tokens.css`. Para criar uma base ou um movimento novo, é nesse arquivo.
+
+Funciona melhor no computador, com Chrome, Edge ou Firefox. Em navegador sem gravação de vídeo, o botão avisa.
+
 ## Exportar peças dos hubs
 
 - Hub de Design e Kit Rede Social: o botão Baixar PNG fica no canto de baixo da tela (`public/hub/exportar.js`). Clique na peça, escolha o tamanho (1080 px de largura é o padrão) e baixe.

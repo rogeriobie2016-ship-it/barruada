@@ -31,6 +31,7 @@ export const PAGINAS_OG: PaginaOg[] = [
   { caminho: '/sala-de-aula/projetar/', rotulo: 'Para projetar', titulo: 'Novela ou Nordeste? para a turma', tom: 'nanquim' },
   { caminho: '/quem-somos/', rotulo: 'Quem somos', titulo: 'Gente de cada estado', tom: 'barro' },
   { caminho: '/marca/', rotulo: 'Hub de marca', titulo: 'Pegue a marca e produza.', tom: 'sol' },
+  { caminho: '/marca/animacao/', rotulo: 'Hub de marca', titulo: 'Estúdio de animação', tom: 'nanquim' },
   { caminho: '/mural/', rotulo: 'Mural', titulo: 'Me mostra na novela', tom: 'barro' },
   ...JOGOS.map((j, n) => ({ caminho: `/jogos/${j.id}/`, rotulo: 'Jogo', titulo: j.nome, tom: tonsDosJogos[n % tonsDosJogos.length] })),
   ...ESTADOS.filter((e) => e.uf !== 'NE' && e.uf !== 'BR').map((e) => ({

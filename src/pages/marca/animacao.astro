@@ -1,0 +1,20 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import EstudioAnimacao from '../../islands/EstudioAnimacao.tsx';
+import Base from '../../layouts/Base.astro';
+import { rota } from '../../lib/dados.ts';
+---
+
+<Base titulo="Estúdio de animação" descricao="Monte uma animação da marca do zero: base, palavras, cor, ilustração, camadas, traço e movimento. Baixe em vídeo ou em PNG.">
+  <Cabecalho
+    rotulo="Hub de marca"
+    titulo="Estúdio de animação"
+    texto="Comece do zero ou de uma base. Troque palavras, cor, ilustração, camadas, traço e movimento, escolha o formato e baixe o vídeo."
+    tom="nanquim"
+    arte="lua"
+  />
+  <div class="mx-auto max-w-6xl px-4 pt-8 md:px-8">
+    <EstudioAnimacao client:load />
+    <p class="mt-8"><a href={rota('/marca/')} class="inline-flex min-h-11 items-center text-sol">Voltar para o hub de marca</a></p>
+  </div>
+</Base>

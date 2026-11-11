@@ -13,6 +13,13 @@ const hub = (arquivo: string) => rota(`/hub/${encodeURIComponent(arquivo)}`);
 
 const ferramentas = [
   {
+    nome: 'Estúdio de animação',
+    texto: 'Monte uma animação do zero: base, palavras, cor, ilustração, camadas, traço e movimento. Baixa em vídeo e em PNG.',
+    arquivo: '',
+    esquema: 'barro',
+    arte: 'catavento',
+  },
+  {
     nome: 'Hub de Design',
     texto: 'Peças estáticas para feed e story. Escolha uma base, troque palavras, cor e ilustração, e baixe em PNG.',
     arquivo: 'Coletivo Nordeste - Hub de Design.dc.html',
@@ -95,7 +102,7 @@ const regrasNao = [
         {
           ferramentas.map((f) => (
             <li>
-              <a href={hub(f.arquivo)} class="cartao-link" data-hub>
+              <a href={f.arquivo ? hub(f.arquivo) : rota('/marca/animacao/')} class="cartao-link" data-hub>
                 <Capa titulo={f.nome} rotulo="Abrir" esquema={f.esquema} arte={f.arte} larga />
                 <span class="mt-2 block text-texto-suave">{f.texto}</span>
               </a>
