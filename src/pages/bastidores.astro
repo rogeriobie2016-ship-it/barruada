@@ -1,0 +1,21 @@
+---
+// BASTIDORES: área de trabalho do coletivo.
+// AVISO: isto NÃO é segurança de verdade. A página fica fora do menu, tem noindex e não entra no sitemap,
+// mas qualquer pessoa com o endereço consegue abrir. Nada sigiloso deve morar aqui.
+// Os roteiros ficam no Drive, com permissão própria: o botão só abre para quem tem acesso lá.
+import Cabecalho from '../components/Cabecalho.astro';
+import Bastidores from '../islands/Bastidores.tsx';
+import Base from '../layouts/Base.astro';
+import { biblioteca, pautas, series, site } from '../lib/dados.ts';
+---
+
+<Base titulo="Bastidores" descricao="Área de trabalho do coletivo." noindex>
+  <Cabecalho
+    rotulo="Bastidores"
+    titulo="Sala de trabalho"
+    texto="Pautas, séries e a biblioteca inteira. O status vem da planilha Banco de pautas."
+  />
+  <div class="mx-auto max-w-6xl px-4 pt-8 md:px-8">
+    <Bastidores pautas={pautas} series={series} biblioteca={biblioteca} drive={site.drive} client:load />
+  </div>
+</Base>

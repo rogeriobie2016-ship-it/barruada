@@ -1,0 +1,55 @@
+---
+import Cabecalho from '../components/Cabecalho.astro';
+import { MapaNE } from '../components/marca/MapaNE.tsx';
+import Base from '../layouts/Base.astro';
+import { rota, site } from '../lib/dados.ts';
+
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+---
+
+<Base titulo="Manifesto" descricao={site.manifesto[0]}>
+  <Cabecalho rotulo="Manifesto" titulo={site.assinatura} />
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 pt-8 md:grid-cols-[1.4fr_1fr] md:px-8">
+    <div>
+      <div class="grid gap-5 text-2xl md:text-3xl">
+        {site.manifesto.map((frase) => <p class="m-0 font-titulo font-bold tracking-[-0.03em]">{frase}</p>)}
+      </div>
+
+      <h2 class="mt-12 text-3xl">Quem somos</h2>
+      <p class="mt-3 max-w-xl text-lg text-texto-suave">
+        Um coletivo de comunicadores, professores e educadores nordestinos. {site.significado}
+      </p>
+
+      {
+        redes.length > 0 && (
+          <>
+            <h2 class="mt-10 text-3xl">Redes e contato</h2>
+            <ul class="m-0 mt-3 flex list-none flex-wrap gap-3 p-0">
+              {redes.map(([nome, url]) => (
+                <li><a href={url} rel="noopener" class="botao botao-linha capitalize">{nome}</a></li>
+              ))}
+            </ul>
+          </>
+        )
+      }
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a href={rota('/jogos/')} class="botao botao-sol sobre-claro">Jogar</a>
+        <a href={rota('/biblioteca/')} class="botao botao-linha">Abrir a biblioteca</a>
+      </div>
+    </div>
+    <div class="mapa-manifesto" aria-hidden="true">
+      <MapaNE />
+    </div>
+  </div>
+</Base>
+
+<style>
+  .mapa-manifesto {
+    --mapa-preenchimento: var(--anil);
+    --mapa-divisa: var(--papel);
+    max-width: 22rem;
+    justify-self: center;
+    width: 100%;
+  }
+</style>

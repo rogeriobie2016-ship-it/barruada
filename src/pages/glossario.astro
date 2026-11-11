@@ -1,0 +1,17 @@
+---
+import Cabecalho from '../components/Cabecalho.astro';
+import GlossarioBusca from '../islands/GlossarioBusca.tsx';
+import Base from '../layouts/Base.astro';
+import { glossario } from '../lib/dados.ts';
+---
+
+<Base titulo="Dicionário da Barruada" descricao="Palavras do Nordeste, com significado, exemplo e onde se ouve.">
+  <Cabecalho
+    rotulo="Dicionário da Barruada"
+    titulo="Oxe, que palavra é essa?"
+    texto="Significado, exemplo e onde se ouve. Nove estados, mais de um sotaque."
+  />
+  <div class="mx-auto max-w-6xl px-4 pt-8 md:px-8">
+    <GlossarioBusca termos={glossario} client:load />
+  </div>
+</Base>

@@ -1,0 +1,30 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import GradePautas from '../../islands/GradePautas.tsx';
+import Base from '../../layouts/Base.astro';
+import { pautas, rota } from '../../lib/dados.ts';
+
+const publicadas = pautas.filter((p) => p.status === 'Postado');
+---
+
+<Base titulo="Em cartaz" descricao="As peças que o coletivo já publicou.">
+  <Cabecalho rotulo="Em cartaz" titulo="O que já foi pro ar" texto="Vídeos e carrosséis do coletivo, com link para o post original." />
+  <div class="mx-auto max-w-6xl px-4 pt-8 md:px-8">
+    {
+      publicadas.length > 0 ? (
+        <GradePautas pautas={publicadas} base={rota('')} client:load />
+      ) : (
+        <div class="border border-linha bg-fundo-alto p-6 md:p-10" data-vazio>
+          <p class="caneta m-0 -rotate-1 text-4xl text-sol">A estreia tá no forno.</p>
+          <p class="mt-4 max-w-xl text-lg">
+            Nenhuma peça publicada ainda. Enquanto a primeira não sai, dá para jogar e fuçar a biblioteca.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href={rota('/jogos/')} class="botao botao-sol sobre-claro">Jogar</a>
+            <a href={rota('/biblioteca/')} class="botao botao-linha">Abrir a biblioteca</a>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</Base>

@@ -1,0 +1,30 @@
+---
+import Cabecalho from '../../components/Cabecalho.astro';
+import { Capa } from '../../components/marca/Capa.tsx';
+import Base from '../../layouts/Base.astro';
+import { rota } from '../../lib/dados.ts';
+import { JOGOS } from '../../lib/lista-jogos.ts';
+---
+
+<Base titulo="Jogos" descricao="Jogos rápidos para desmontar estereótipo sobre o Nordeste.">
+  <Cabecalho rotulo="Jogos" titulo="Pra jogar com uma mão só" texto="Rápidos, com fonte e feitos para o celular. Funcionam também só com o teclado." />
+  <ul class="mx-auto mt-8 grid max-w-6xl list-none gap-5 px-4 md:grid-cols-2 md:px-8">
+    {
+      JOGOS.map((j) => (
+        <li>
+          {j.pronto ? (
+            <a href={rota(`/jogos/${j.id}/`)} class="cartao-link">
+              <Capa titulo={j.nome} rotulo="Jogo" esquema={j.esquema} forma={j.forma} larga />
+              <span class="mt-2 block text-texto-suave">{j.descricao}</span>
+            </a>
+          ) : (
+            <div class="opacity-80">
+              <Capa titulo={j.nome} rotulo="Em breve" esquema={j.esquema} forma={j.forma} larga />
+              <span class="mt-2 block text-texto-suave">{j.descricao}</span>
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</Base>

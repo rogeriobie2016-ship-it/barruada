@@ -1,0 +1,21 @@
+---
+import Cabecalho from '../components/Cabecalho.astro';
+import BibliotecaExplorer from '../islands/BibliotecaExplorer.tsx';
+import Base from '../layouts/Base.astro';
+import { bibliotecaPublica } from '../lib/biblioteca.ts';
+import { biblioteca } from '../lib/dados.ts';
+
+// Regra do projeto: a área pública só recebe itens com checagem "ok".
+const publica = bibliotecaPublica(biblioteca);
+---
+
+<Base titulo="Biblioteca" descricao="Estudos, livros, música e dados para contar outro Nordeste, cada um com fonte.">
+  <Cabecalho
+    rotulo="Biblioteca"
+    titulo="Tudo aqui tem fonte."
+    texto="Referências que o coletivo usa para responder e para afirmar. Só entra na vitrine o que já foi checado."
+  />
+  <div class="mx-auto max-w-6xl px-4 pt-8 md:px-8">
+    <BibliotecaExplorer secoes={publica} client:load />
+  </div>
+</Base>

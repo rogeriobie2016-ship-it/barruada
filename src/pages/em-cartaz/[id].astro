@@ -1,0 +1,47 @@
+---
+import { Capa } from '../../components/marca/Capa.tsx';
+import Base from '../../layouts/Base.astro';
+import { pautas, rota } from '../../lib/dados.ts';
+import { slug } from '../../lib/texto.ts';
+import type { Pauta } from '../../lib/types.ts';
+
+// Só peça com status Postado ganha página.
+export function getStaticPaths() {
+  return pautas
+    .filter((p) => p.status === 'Postado')
+    .map((p) => ({ params: { id: slug(p.id) }, props: { pauta: p } }));
+}
+
+interface Props {
+  pauta: Pauta;
+}
+const { pauta } = Astro.props;
+---
+
+<Base titulo={pauta.titulo} descricao={pauta.gancho || pauta.serie}>
+  <article class="mx-auto grid max-w-6xl gap-8 px-4 pt-10 md:grid-cols-[18rem_1fr] md:px-8 md:pt-14">
+    <div class="max-w-[14rem] md:max-w-none">
+      <Capa titulo={pauta.titulo} rotulo={pauta.serie} pilar={pauta.pilar} />
+    </div>
+    <div>
+      <p class="rotulo m-0 text-sol">{pauta.serie} · {pauta.formato}</p>
+      <h1 class="mt-3 text-5xl md:text-7xl">{pauta.titulo}</h1>
+      {pauta.gancho && <p class="mt-5 max-w-2xl text-2xl">{pauta.gancho}</p>}
+      <p class="mt-4">
+        <span class:list={['rotulo px-2 py-1 text-papel', pauta.pilar === 'Resposta' ? 'bg-barro' : 'bg-anil']}>
+          Pilar: {pauta.pilar}
+        </span>
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        {
+          pauta.post_url && (
+            <a href={pauta.post_url} target="_blank" rel="noopener noreferrer" class="botao botao-sol sobre-claro">
+              Ver o post original
+            </a>
+          )
+        }
+        <a href={rota('/em-cartaz/')} class="botao botao-linha">Voltar para Em cartaz</a>
+      </div>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,162 @@
+---
+import Trilho from '../components/Trilho.astro';
+import { Capa } from '../components/marca/Capa.tsx';
+import { Forma } from '../components/marca/Formas.tsx';
+import { MapaNE } from '../components/marca/MapaNE.tsx';
+import Base from '../layouts/Base.astro';
+import { biblioteca, glossario, pautas, rota, site } from '../lib/dados.ts';
+import { JOGOS } from '../lib/lista-jogos.ts';
+import { slug } from '../lib/texto.ts';
+import { montarTrilhos } from '../lib/trilhos.ts';
+
+const t = montarTrilhos(pautas, biblioteca, glossario);
+const jogosProntos = JOGOS.filter((j) => j.pronto);
+
+// Frase de abertura: primeira linha do manifesto, com a caneta riscando o fim.
+const frase = site.manifesto[0];
+const trechoRiscado = 'um jeito só.';
+const temRisco = frase.endsWith(trechoRiscado);
+const inicio = temRisco ? frase.slice(0, -trechoRiscado.length) : frase;
+---
+
+<Base>
+  <section class="hero">
+    <div class="mx-auto grid max-w-6xl items-center gap-6 px-4 py-10 md:grid-cols-[1.15fr_1fr] md:px-8 md:py-16">
+      <div>
+        <p class="rotulo m-0 text-papel">{site.significado}</p>
+        <h1 class="mt-4 text-[2.6rem] md:text-6xl">
+          {inicio}{temRisco && <span class="riscado">{trechoRiscado}</span>}
+        </h1>
+        {temRisco && <p class="caneta m-0 mt-3 -rotate-2 text-4xl text-sol md:text-5xl">nove jeitos, no mínimo</p>}
+        <p class="mt-5 max-w-md text-lg text-texto">{site.manifesto[3]}</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href={rota('/em-cartaz/')} class="botao botao-sol sobre-claro">Ver o que está em cartaz</a>
+          <a href={rota('/jogos/')} class="botao botao-linha">Jogar</a>
+        </div>
+      </div>
+      <div class="hero-arte" aria-hidden="true">
+        <Forma nome="raios" className="hero-raios giro" />
+        <MapaNE className="hero-mapa" />
+      </div>
+    </div>
+  </section>
+
+  {
+    t.emCartaz.length > 0 && (
+      <Trilho titulo="Em cartaz" id="em-cartaz" verTudo={{ href: rota('/em-cartaz/'), texto: 'Ver tudo' }}>
+        {t.emCartaz.map((p) => (
+          <li>
+            <a href={rota(`/em-cartaz/${slug(p.id)}/`)} class="cartao-link">
+              <Capa titulo={p.titulo} rotulo={p.serie} pilar={p.pilar} />
+              <span class="mt-2 block text-sm text-texto-suave">{p.formato}</span>
+            </a>
+          </li>
+        ))}
+      </Trilho>
+    )
+  }
+
+  {
+    t.emBreve.length > 0 && (
+      <Trilho titulo="Em breve" id="em-breve">
+        {t.emBreve.map((p) => (
+          <li>
+            <Capa titulo={p.titulo} rotulo={p.serie} pilar={p.pilar} />
+            <span class="mt-2 block text-sm text-texto-suave">{p.formato}</span>
+          </li>
+        ))}
+      </Trilho>
+    )
+  }
+
+  {
+    jogosProntos.length > 0 && (
+      <Trilho titulo="Pra jogar" id="jogar" verTudo={{ href: rota('/jogos/'), texto: 'Todos os jogos' }}>
+        {jogosProntos.map((j) => (
+          <li>
+            <a href={rota(`/jogos/${j.id}/`)} class="cartao-link">
+              <Capa titulo={j.nome} rotulo="Jogo" esquema={j.esquema} forma={j.forma} />
+              <span class="mt-2 block text-sm text-texto-suave">{j.descricao}</span>
+            </a>
+          </li>
+        ))}
+      </Trilho>
+    )
+  }
+
+  {
+    (
+      [
+        { id: 'ler', titulo: 'Pra ler', itens: t.ler },
+        { id: 'ver', titulo: 'Pra ver', itens: t.ver },
+        { id: 'ouvir', titulo: 'Pra ouvir', itens: t.ouvir },
+      ] as const
+    ).map(
+      (trilho) =>
+        trilho.itens.length > 0 && (
+          <Trilho titulo={trilho.titulo} id={trilho.id} verTudo={{ href: rota('/biblioteca/'), texto: 'Biblioteca' }}>
+            {trilho.itens.map((i) => (
+              <li>
+                <a href={rota(`/biblioteca/#${slug(i.titulo)}`)} class="cartao-link">
+                  <Capa titulo={i.titulo} rotulo={i.secao} />
+                  <span class="mt-2 block text-sm text-texto-suave">{[i.autoria, i.ano].filter(Boolean).join(', ')}</span>
+                </a>
+              </li>
+            ))}
+          </Trilho>
+        ),
+    )
+  }
+
+  {/* Pra sala de aula: entra na fase 2, quando as atividades do kit chegarem aos dados. */}
+
+  {
+    t.dicionario.length > 0 && (
+      <Trilho titulo="Dicionário da Barruada" id="dicionario" verTudo={{ href: rota('/glossario/'), texto: 'Ver o dicionário' }}>
+        {t.dicionario.map((termo, n) => (
+          <li>
+            <a href={rota(`/glossario/#${slug(termo.termo)}`)} class="cartao-link">
+              <Capa titulo={termo.termo} rotulo={termo.onde} esquema={n % 2 === 0 ? 'sol' : 'papel'} forma="disco" />
+              <span class="mt-2 block text-sm text-texto-suave">{termo.significado}</span>
+            </a>
+          </li>
+        ))}
+      </Trilho>
+    )
+  }
+</Base>
+
+<style>
+  .hero {
+    background: var(--anil);
+    border-bottom: var(--traco) solid var(--linha);
+    overflow: hidden;
+  }
+  .hero-arte {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    justify-self: center;
+    width: min(100%, 26rem);
+    overflow: hidden;
+    padding: 1.25rem;
+  }
+  .hero-arte :global(.hero-raios) {
+    position: absolute;
+    width: 150%;
+    max-width: none;
+    fill: var(--raios);
+  }
+  .hero-arte :global(.hero-mapa) {
+    position: absolute;
+    inset: 1.25rem;
+    width: calc(100% - 2.5rem);
+    height: calc(100% - 2.5rem);
+    --mapa-preenchimento: var(--papel);
+    --mapa-divisa: var(--nanquim);
+  }
+  @media (max-width: 767px) {
+    .hero-arte { width: 100%; aspect-ratio: 16 / 11; }
+  }
+</style>
